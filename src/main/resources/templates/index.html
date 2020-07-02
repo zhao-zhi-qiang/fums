@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Roboto -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+    <style>
+        .nav-item{
+            width: 200px;
+            height: 50px;
+
+        }
+    </style>
+</head>
+<body>
+<!-- Side Navbar -->
+<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="d-flex align-items-center justify-content-center" style="margin-top: 25px;">
+            <!-- User Info-->
+            <div class="sidenav-header-inner text-center">
+                <h2 class="h5">随访管理系统</h2>
+            </div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+            <h5 class="sidenav-heading">Main</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+                <li><a href="#groupingmanagement" aria-expanded="false" data-toggle="collapse"> <i class="icon-home"></i>分组管理</a>
+                    <ul id="groupingmanagement" class="collapse list-unstyled ">
+                        <li><a href="#">建立分组</a></li>
+                    </ul>
+                </li>
+                <li><a href="#management" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>单个随访组管理</a>
+                    <ul id="management" class="collapse list-unstyled ">
+                        <li><a href="#">权限管理</a></li>
+                        <li><a href="#">入组管理</a></li>
+                        <li><a href="#">新建患者</a></li>
+                        <li><a href="#">随访规则设定</a></li>
+                        <li><a href="#">诊疗方案</a></li>
+                        <li><a href="#">节假日管理</a></li>
+                        <li><a href="#">高级检索</a></li>
+                        <li><a href="#">检索模板</a></li>
+                    </ul>
+                </li>
+                <li><a href="#templatesettings" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>模板设置</a>
+                    <ul id="templatesettings" class="collapse list-unstyled ">
+                        <li><a href="#">公共树控件</a></li>
+                        <li><a href="#">控件属性</a></li>
+                        <li><a href="#">自定义控件属性</a></li>
+                        <li><a href="#">组合属性</a></li>
+                        <li><a href="#">模板编辑</a></li>
+                        <li><a href="#">模板列表</a></li>
+                        <li><a href="#">通用模板选择</a></li>
+                        <li><a href="#">术语列表</a></li>
+                        <li><a href="#">规则设定</a></li>
+                        <li><a href="#">自定义控件</a></li>
+                    </ul>
+                </li>
+                <li><a href="tables.html"> <i class="icon-grid"></i>随访进度管理</a></li>
+                <li><a href="#datareview" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>数据复核</a>
+                    <ul id="datareview" class="collapse list-unstyled ">
+                        <li><a href="#">复核明细</a></li>
+                    </ul>
+                </li>
+                <li><a href="#planDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>患者详细画面</a>
+                    <ul id="planDropdown" class="collapse list-unstyled ">
+                        <li><a href="#">随访计划</a></li>
+                    </ul>
+                </li>
+                <li><a href="#systemDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>系统管理</a>
+                    <ul id="systemDropdown" class="collapse list-unstyled ">
+                        <li><a href="#">表单总览</a></li>
+                        <li><a href="#">用户管理</a></li>
+                        <li><a href="#">标准化模板维护</a></li>
+                        <li><a href="#">权限管理</a></li>
+                        <li><a href="#">分类数据项维护</a></li>
+                        <li><a href="#">字典术语维护</a></li>
+                    </ul>
+                </li>
+                <li><a href="#userDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>用户</a>
+                    <ul id="userDropdown" class="collapse list-unstyled ">
+                        <li><a href="#">修改密码</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="page">
+    <!-- navbar-->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+                <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+                    <div class="brand-text d-none d-md-inline-block"><span>收起</span></div></a>
+                </div>
+                <!-- Nav pills -->
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#home">数据复核</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#menu1">分组管理</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">系统设置</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">权限管理</a>
+                                <a class="dropdown-item" href="#">标准化模板维护</a>
+                                <a class="dropdown-item" href="#">表单总览</a>
+                                <a class="dropdown-item" href="#">术语管理</a>
+                                <a class="dropdown-item" href="#">用户管理</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">张三</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="login.html">注销登录</a>
+                            <a class="dropdown-item" href="#">修改密码</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Copyright &copy; 2019.Company name All rights reserved</a></p>
+                </div>
+                <div class="col-sm-6 text-right">
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
