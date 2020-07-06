@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>入组管理</title>
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+		<!--<link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper.js/umd/popper.min.js"> </script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>-->
+		<script type="text/javascript">
+            $(function(){
+                $(".iframe_content tr td a").on("click",function(){
+                    var address =$(this).attr("data-src");
+                    $("iframe").attr("src",address);
+                });
+            });
+		</script>
+	</head>
+	<body>
+		<div class="joingroup_page">
+			<div class="joingroup_head" style="margin-left: 150px;"> 
+				<table >
+					<tr>
+						<td><a href="/toFollowupManagement">返回随访组</a></td>
+						<td><button class="btn btn-primary btn-sm">入组范围</button></td>
+						<td><a class="btn btn-primary btn-sm" href="/joinGroupTime">入组时间</a></td>
+					</tr>
+				</table>
+			</div>
+			<hr />
+			<div class="joingroup_content">
+				<div class="left_content" style="float: left; margin-left: 150px;">
+					<table class="iframe_content">
+						<tr>
+							<td>
+								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingAdministrative">按科室</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingDisease">按病种</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingPerson">按人员</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a class="btn btn-primary btn-sm" href="#" data-src="/customCondition">自定义条件</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingResult">按结果集</a>
+							</td>
+						</tr>
+					</table>
+					
+				</div>
+				<div style="float:left; margin-top: 0px; margin-left: 30px;  width: 2px;height: 300px; background: darkgray;"></div> 
+				<div class="right_content" style="float: right; margin-right: 800px;">
+					<div class="right_head">
+						<table>
+							<tr>
+								<td>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"><span>自动同步患者</span>
+										</label>
+									</div>
+								</td>
+								<td><div class="col-lg-2">
+									</div>
+								</td>
+								<td>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"><span>是否需要确认</span>
+										</label>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div><br /><br />
+                    <div class="right_content" style="width: 100% ; height: auto; margin-top: -400px; margin-left: 300px">
+                        <iframe id="iframe" name = "frame" src="/accordingAdministrative" width="100%" height="600px"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+                    <div>
+				</div>
+			</div>
+		</div>
+            </div>
+        </div>
+	</body>
+</html>
