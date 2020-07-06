@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>随访进度管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <!--<link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>-->
+    <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="css/styles1.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" class="library" href="/bootstarp/css/bootstrap.min.css">
+    <!-- 日历CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/fullcalendar.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css"/> -->
+  
+	<script type="text/javascript" class="library" src="/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" class="library" src="/bootstarp/js/bootstrap.min.js"></script>
+  <!-- 日历js -->
+	<script type="text/javascript" src="/js/moment.min.js" ></script><!-- 日期处理时间工具 -->
+	<script type="text/javascript" src="js/fullcalendar.min.js" ></script>
+	<script type="text/javascript" src="js/index.js" ></script>
+	<style type="text/css">
+		.navbar .nav > li .dropdown-menu {
+			margin: 0;
+		}
+		.navbar .nav > li:hover .dropdown-menu {
+			display: block;
+		}
+    </style>
+    <script>
+      function aaa(){
+        $("#calendar").css("display","none");
+        $("#list_view").css("display","block");
+      }
+      function bbb(){
+        $("#list_view").css("display","none");
+        $("#calendar").css("display","block");
+      }
+    </script>
+  </head>
+  <body style="overflow-y: hidden">
+    <div id="base" class="">
+<div id="vague">
+      <div id="u1247" class="ax_default label">
+
+          <p><span>快速筛选</span></p>
+
+      </div>
+      <table id="vague_table">
+        <tr>
+          <td style="width: 40%;">1.科室：</td>
+          <td style="width: 60%;">
+            <select style="width: 100%;">
+              <option value="0">-请选择-</option>
+              <option value="1">科室一</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 40%;">2.随访组：</td>
+          <td style="width: 60%;">
+            <select style="width: 100%;">
+              <option value="0">-请选择-</option>
+              <option value="1">随访组一</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 40%;">3.日期：</td>
+          <td style="width: 60%;">
+            <input style="width: 100%;" type="text">
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 40%;"></td>
+          <td style="width: 60%;text-align: center;">~</td>
+        </tr>
+        <tr>
+          <td style="width: 40%;"></td>
+          <td style="width: 60%">
+            <input style="width: 100%;" type="text">
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 40%;">4.住院号</td>
+          <td style="width: 60%;">
+            <input style="width: 100%;" type="text">
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 40%;">5.姓名</td>
+          <td style="width: 60%;">
+            <input style="width: 100%;" type="text">
+          </td>
+        </tr>
+        <tr><td colspan="2" align="center">
+          <button type="button">筛选</button>
+        </td></tr>
+        
+      </table>
+
+    </div>
+      <div id="table_data">
+        <!-- Unnamed (矩形) -->
+        <div id="u1261" class="ax_default shape">
+          <div id="u1261_div" class=""></div>
+          <div id="u1261_text" class="text ">
+            <p><span style='cursor:pointer;' type="button" onclick="aaa()">列表视图</span> </p>
+          </div>
+        </div>
+        <!-- Unnamed (矩形) -->
+        <div id="u1262" class="ax_default shape">
+          <div id="u1262_div" class=""></div>
+          <div id="u1262_text" class="text ">
+            <p><span style='cursor:pointer;'type="button" onclick="bbb()" >日历视图</span></p>
+          </div>
+        </div>
+<div id="list_view">
+        <div id="yisuifnag" style="position: absolute;top: 40px;left: 20px;">
+          <input type="checkbox">已随访
+        </div>
+        <div id="weisuifnag" style="position: absolute;top: 40px;left: 90px;">
+          <input type="checkbox">未随访
+        </div>
+
+        <table id="tabular_data" class="table table-bordered table-hover">
+          <thead style="background-color: #35B8F1;color: aliceblue;">
+            <tr>
+              <td>
+                门诊号/住院号
+              </td>
+              <td>随访组</td>
+              <td>姓名</td>
+              <td>性别</td>
+              <td>年龄</td>
+              <td>入组日期</td>
+              <td>下次随访日期</td>
+              <td>状态</td>
+              <td>预览</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>00008</td>
+              <td>随访组1</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>23</td>
+              <td>2020-07-03</td>
+              <td>2020-08-03</td>
+              <td>已随访</td>
+              <td><img class="img " src="img/u167.png"/></td>
+            </tr>
+            <tr>
+              <td>00008</td>
+              <td>随访组1</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>23</td>
+              <td>2020-07-03</td>
+              <td>2020-08-03</td>
+              <td>已随访</td>
+              <td><img class="img " src="img/u167.png"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="calendar" style="display: none; position: absolute;top: 40px;height: 1%;"></div>
+
+    </div>    
+    </div>
+  </body>
+</html>

@@ -35,6 +35,8 @@ a {
 
 body {
   overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100px;
 }
 
 i {
@@ -85,6 +87,7 @@ table {
   -webkit-transition: width 0.3s linear;
   transition: width 0.3s linear;
   width: calc(100% - 200px);
+  height: 100%;
   background-color: #F4F7FA;
   min-height: 100vh;
   padding-bottom: 50px;
