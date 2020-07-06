@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
+        <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
+    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--联网引入-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        html{
+            width: 100%;
+        }
+        table{
+            border: 1px solid #80bdff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!--用户管理-->
+<span style="font-size:30px; font-weight:800;color: blue;">用户管理</span>
+
+<table class="table" style="background:beige;" border="0" >
+    <div  class="main-menu" style="text-align: center">
+        <tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+            </td>
+            <td >
+                <input style="height: 34px;width: 55%" class="form-control" id="#">
+            </td>
+
+            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+            </td>
+            <td >
+                <input style="height: 34px;width: 55%" class="form-control" id="1">
+            </td>
+        </tr>
+        <td style="text-align: right">
+            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+        </td>
+        <td>
+            <select style="width: 55%;height: 34px;">
+                <option value="0">请选择</option>
+            </select>
+        </td>
+
+        <td style="text-align: right">
+            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+        </td>
+        <td>
+            <input style="height: 34px;width: 55%" class="form-control" id="2">
+        </td>
+
+        <tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+            </td>
+            <td>
+                <select style="width: 55%;height: 34px;">
+                    <option value="0">请选择</option>
+                </select>
+            </td>
+        </tr>
+    </div>
+
+</table>
+
+<div style="text-align: center;padding-top: 0px">
+    <button type="button" class="btn btn-success btn-sm" onclick="">检索</button>
+    <button type="button" class="btn btn-success btn-sm" onclick="">清空</button>
+</div>
+
+
+<br><br>
+<!--    <button class="btn btn-info">创建模板</button>-->
+<div style="text-align: left;padding-top: 0px">
+    <button type="button" class="btn btn-success btn-sm" onclick="">新增</button>
+    <button type="button" class="btn btn-success btn-sm" onclick="">修改</button>
+    <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+</div>
+<table class="table table-bordered" style="text-align: center;">
+    <thead >
+    <tr class="info" >
+        <th><input type="checkbox" id="checkboxMain" onclick="" value=''></th>
+        <th style="text-align: center;">用户ID</th>
+        <th style="text-align: center;">用户姓名</th>
+        <th style="text-align: center;">性别</th>
+        <th style="text-align: center;">电话</th>
+        <th style="text-align: center;">邮箱</th>
+        <th style="text-align: center;">科室</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="active">
+        <th><input type="checkbox" id="checkboxMain2" onclick="" value=''></th>
+
+        <td>122132</td>
+        <td>赵四</td>
+        <td>男</td>
+        <td>123232323</td>
+        <td>test@263.net</td>
+        <td>内分泌科</td>
+    </tr>
+    <tr class="active">
+        <th><input type="checkbox" id="checkboxMain1" onclick="" value=''></th>
+        <td>123456</td>
+        <td>赵四</td>
+        <td>女</td>
+        <td>赵四</td>
+        <td>test@263.net</td>
+        <td>内分泌科</td>
+    </tr>
+    </tbody>
+</table>
+<div style="text-align: center">
+    <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+</div>
+</table>
+</body>
+</html>
