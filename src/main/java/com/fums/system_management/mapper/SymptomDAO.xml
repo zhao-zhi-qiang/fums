@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.SymptomDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.Symptom">
+    <id column="sym_id" jdbcType="INTEGER" property="symId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="symptoms_name" jdbcType="VARCHAR" property="symptomsName" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sym_id, patient_id, symptoms_name, details
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from symptom
+    where sym_id = #{symId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from symptom
+    where sym_id = #{symId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.Symptom">
+    insert into symptom (sym_id, patient_id, symptoms_name, 
+      details)
+    values (#{symId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{symptomsName,jdbcType=VARCHAR}, 
+      #{details,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.Symptom">
+    insert into symptom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="symId != null">
+        sym_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="symptomsName != null">
+        symptoms_name,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="symId != null">
+        #{symId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="symptomsName != null">
+        #{symptomsName,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.Symptom">
+    update symptom
+    <set>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="symptomsName != null">
+        symptoms_name = #{symptomsName,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sym_id = #{symId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.Symptom">
+    update symptom
+    set patient_id = #{patientId,jdbcType=INTEGER},
+      symptoms_name = #{symptomsName,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR}
+    where sym_id = #{symId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.HomeInformationDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.HomeInformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="main_diagnosis" jdbcType="VARCHAR" property="mainDiagnosis" />
+    <result column="outpatient_diagnosis" jdbcType="VARCHAR" property="outpatientDiagnosis" />
+    <result column="other_diagnostics" jdbcType="VARCHAR" property="otherDiagnostics" />
+    <result column="admission_mode" jdbcType="VARCHAR" property="admissionMode" />
+    <result column="admission_time" jdbcType="DATE" property="admissionTime" />
+    <result column="admission_department" jdbcType="VARCHAR" property="admissionDepartment" />
+    <result column="admission_diagnosis" jdbcType="VARCHAR" property="admissionDiagnosis" />
+    <result column="admission_doctor" jdbcType="VARCHAR" property="admissionDoctor" />
+    <result column="attending_physician" jdbcType="VARCHAR" property="attendingPhysician" />
+    <result column="discharge_time" jdbcType="DATE" property="dischargeTime" />
+    <result column="discharge_department" jdbcType="VARCHAR" property="dischargeDepartment" />
+    <result column="discharge_state" jdbcType="INTEGER" property="dischargeState" />
+    <result column="discharge_diagnosis" jdbcType="VARCHAR" property="dischargeDiagnosis" />
+    <result column="hospitalization_day" jdbcType="INTEGER" property="hospitalizationDay" />
+    <result column="leaving_hospital" jdbcType="VARCHAR" property="leavingHospital" />
+    <result column="death" jdbcType="INTEGER" property="death" />
+    <result column="hospital_way" jdbcType="INTEGER" property="hospitalWay" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, main_diagnosis, outpatient_diagnosis, other_diagnostics, admission_mode, admission_time, 
+    admission_department, admission_diagnosis, admission_doctor, attending_physician, 
+    discharge_time, discharge_department, discharge_state, discharge_diagnosis, hospitalization_day, 
+    leaving_hospital, death, hospital_way
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from home_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from home_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.HomeInformation">
+    insert into home_information (id, main_diagnosis, outpatient_diagnosis, 
+      other_diagnostics, admission_mode, admission_time, 
+      admission_department, admission_diagnosis, 
+      admission_doctor, attending_physician, discharge_time, 
+      discharge_department, discharge_state, discharge_diagnosis, 
+      hospitalization_day, leaving_hospital, death, 
+      hospital_way)
+    values (#{id,jdbcType=INTEGER}, #{mainDiagnosis,jdbcType=VARCHAR}, #{outpatientDiagnosis,jdbcType=VARCHAR}, 
+      #{otherDiagnostics,jdbcType=VARCHAR}, #{admissionMode,jdbcType=VARCHAR}, #{admissionTime,jdbcType=DATE}, 
+      #{admissionDepartment,jdbcType=VARCHAR}, #{admissionDiagnosis,jdbcType=VARCHAR}, 
+      #{admissionDoctor,jdbcType=VARCHAR}, #{attendingPhysician,jdbcType=VARCHAR}, #{dischargeTime,jdbcType=DATE}, 
+      #{dischargeDepartment,jdbcType=VARCHAR}, #{dischargeState,jdbcType=INTEGER}, #{dischargeDiagnosis,jdbcType=VARCHAR}, 
+      #{hospitalizationDay,jdbcType=INTEGER}, #{leavingHospital,jdbcType=VARCHAR}, #{death,jdbcType=INTEGER}, 
+      #{hospitalWay,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.HomeInformation">
+    insert into home_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mainDiagnosis != null">
+        main_diagnosis,
+      </if>
+      <if test="outpatientDiagnosis != null">
+        outpatient_diagnosis,
+      </if>
+      <if test="otherDiagnostics != null">
+        other_diagnostics,
+      </if>
+      <if test="admissionMode != null">
+        admission_mode,
+      </if>
+      <if test="admissionTime != null">
+        admission_time,
+      </if>
+      <if test="admissionDepartment != null">
+        admission_department,
+      </if>
+      <if test="admissionDiagnosis != null">
+        admission_diagnosis,
+      </if>
+      <if test="admissionDoctor != null">
+        admission_doctor,
+      </if>
+      <if test="attendingPhysician != null">
+        attending_physician,
+      </if>
+      <if test="dischargeTime != null">
+        discharge_time,
+      </if>
+      <if test="dischargeDepartment != null">
+        discharge_department,
+      </if>
+      <if test="dischargeState != null">
+        discharge_state,
+      </if>
+      <if test="dischargeDiagnosis != null">
+        discharge_diagnosis,
+      </if>
+      <if test="hospitalizationDay != null">
+        hospitalization_day,
+      </if>
+      <if test="leavingHospital != null">
+        leaving_hospital,
+      </if>
+      <if test="death != null">
+        death,
+      </if>
+      <if test="hospitalWay != null">
+        hospital_way,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mainDiagnosis != null">
+        #{mainDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="outpatientDiagnosis != null">
+        #{outpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDiagnostics != null">
+        #{otherDiagnostics,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionMode != null">
+        #{admissionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionTime != null">
+        #{admissionTime,jdbcType=DATE},
+      </if>
+      <if test="admissionDepartment != null">
+        #{admissionDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDiagnosis != null">
+        #{admissionDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDoctor != null">
+        #{admissionDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingPhysician != null">
+        #{attendingPhysician,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeTime != null">
+        #{dischargeTime,jdbcType=DATE},
+      </if>
+      <if test="dischargeDepartment != null">
+        #{dischargeDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeState != null">
+        #{dischargeState,jdbcType=INTEGER},
+      </if>
+      <if test="dischargeDiagnosis != null">
+        #{dischargeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalizationDay != null">
+        #{hospitalizationDay,jdbcType=INTEGER},
+      </if>
+      <if test="leavingHospital != null">
+        #{leavingHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="death != null">
+        #{death,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalWay != null">
+        #{hospitalWay,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.HomeInformation">
+    update home_information
+    <set>
+      <if test="mainDiagnosis != null">
+        main_diagnosis = #{mainDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="outpatientDiagnosis != null">
+        outpatient_diagnosis = #{outpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDiagnostics != null">
+        other_diagnostics = #{otherDiagnostics,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionMode != null">
+        admission_mode = #{admissionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionTime != null">
+        admission_time = #{admissionTime,jdbcType=DATE},
+      </if>
+      <if test="admissionDepartment != null">
+        admission_department = #{admissionDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDiagnosis != null">
+        admission_diagnosis = #{admissionDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDoctor != null">
+        admission_doctor = #{admissionDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingPhysician != null">
+        attending_physician = #{attendingPhysician,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeTime != null">
+        discharge_time = #{dischargeTime,jdbcType=DATE},
+      </if>
+      <if test="dischargeDepartment != null">
+        discharge_department = #{dischargeDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeState != null">
+        discharge_state = #{dischargeState,jdbcType=INTEGER},
+      </if>
+      <if test="dischargeDiagnosis != null">
+        discharge_diagnosis = #{dischargeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalizationDay != null">
+        hospitalization_day = #{hospitalizationDay,jdbcType=INTEGER},
+      </if>
+      <if test="leavingHospital != null">
+        leaving_hospital = #{leavingHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="death != null">
+        death = #{death,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalWay != null">
+        hospital_way = #{hospitalWay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.HomeInformation">
+    update home_information
+    set main_diagnosis = #{mainDiagnosis,jdbcType=VARCHAR},
+      outpatient_diagnosis = #{outpatientDiagnosis,jdbcType=VARCHAR},
+      other_diagnostics = #{otherDiagnostics,jdbcType=VARCHAR},
+      admission_mode = #{admissionMode,jdbcType=VARCHAR},
+      admission_time = #{admissionTime,jdbcType=DATE},
+      admission_department = #{admissionDepartment,jdbcType=VARCHAR},
+      admission_diagnosis = #{admissionDiagnosis,jdbcType=VARCHAR},
+      admission_doctor = #{admissionDoctor,jdbcType=VARCHAR},
+      attending_physician = #{attendingPhysician,jdbcType=VARCHAR},
+      discharge_time = #{dischargeTime,jdbcType=DATE},
+      discharge_department = #{dischargeDepartment,jdbcType=VARCHAR},
+      discharge_state = #{dischargeState,jdbcType=INTEGER},
+      discharge_diagnosis = #{dischargeDiagnosis,jdbcType=VARCHAR},
+      hospitalization_day = #{hospitalizationDay,jdbcType=INTEGER},
+      leaving_hospital = #{leavingHospital,jdbcType=VARCHAR},
+      death = #{death,jdbcType=INTEGER},
+      hospital_way = #{hospitalWay,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

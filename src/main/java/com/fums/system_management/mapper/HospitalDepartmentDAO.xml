@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.HospitalDepartmentDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
+    <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
+    <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
+    <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
+    <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hospital_department_id, hospital_department_name, hospital_department_state, hospital_department_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital_department
+    where hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital_department
+    where hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.HospitalDepartment">
+    insert into hospital_department (hospital_department_id, hospital_department_name, 
+      hospital_department_state, hospital_department_code
+      )
+    values (#{hospitalDepartmentId,jdbcType=INTEGER}, #{hospitalDepartmentName,jdbcType=VARCHAR}, 
+      #{hospitalDepartmentState,jdbcType=INTEGER}, #{hospitalDepartmentCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.HospitalDepartment">
+    insert into hospital_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hospitalDepartmentId != null">
+        hospital_department_id,
+      </if>
+      <if test="hospitalDepartmentName != null">
+        hospital_department_name,
+      </if>
+      <if test="hospitalDepartmentState != null">
+        hospital_department_state,
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        hospital_department_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hospitalDepartmentId != null">
+        #{hospitalDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentName != null">
+        #{hospitalDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentState != null">
+        #{hospitalDepartmentState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        #{hospitalDepartmentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.HospitalDepartment">
+    update hospital_department
+    <set>
+      <if test="hospitalDepartmentName != null">
+        hospital_department_name = #{hospitalDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentState != null">
+        hospital_department_state = #{hospitalDepartmentState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        hospital_department_code = #{hospitalDepartmentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.HospitalDepartment">
+    update hospital_department
+    set hospital_department_name = #{hospitalDepartmentName,jdbcType=VARCHAR},
+      hospital_department_state = #{hospitalDepartmentState,jdbcType=INTEGER},
+      hospital_department_code = #{hospitalDepartmentCode,jdbcType=VARCHAR}
+    where hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.OperationInformationDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.OperationInformation">
+    <id column="operation_id" jdbcType="INTEGER" property="operationId" />
+    <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
+    <result column="operation_time" jdbcType="DATE" property="operationTime" />
+    <result column="operation_department" jdbcType="VARCHAR" property="operationDepartment" />
+    <result column="operation_start" jdbcType="DATE" property="operationStart" />
+    <result column="operation_end" jdbcType="DATE" property="operationEnd" />
+    <result column="operation_work" jdbcType="INTEGER" property="operationWork" />
+    <result column="operation_site" jdbcType="VARCHAR" property="operationSite" />
+    <result column="anesthesia_id" jdbcType="INTEGER" property="anesthesiaId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    operation_id, operation_name, operation_time, operation_department, operation_start, 
+    operation_end, operation_work, operation_site, anesthesia_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_information
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from operation_information
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.OperationInformation">
+    insert into operation_information (operation_id, operation_name, operation_time, 
+      operation_department, operation_start, operation_end, 
+      operation_work, operation_site, anesthesia_id
+      )
+    values (#{operationId,jdbcType=INTEGER}, #{operationName,jdbcType=VARCHAR}, #{operationTime,jdbcType=DATE}, 
+      #{operationDepartment,jdbcType=VARCHAR}, #{operationStart,jdbcType=DATE}, #{operationEnd,jdbcType=DATE}, 
+      #{operationWork,jdbcType=INTEGER}, #{operationSite,jdbcType=VARCHAR}, #{anesthesiaId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.OperationInformation">
+    insert into operation_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        operation_id,
+      </if>
+      <if test="operationName != null">
+        operation_name,
+      </if>
+      <if test="operationTime != null">
+        operation_time,
+      </if>
+      <if test="operationDepartment != null">
+        operation_department,
+      </if>
+      <if test="operationStart != null">
+        operation_start,
+      </if>
+      <if test="operationEnd != null">
+        operation_end,
+      </if>
+      <if test="operationWork != null">
+        operation_work,
+      </if>
+      <if test="operationSite != null">
+        operation_site,
+      </if>
+      <if test="anesthesiaId != null">
+        anesthesia_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        #{operationId,jdbcType=INTEGER},
+      </if>
+      <if test="operationName != null">
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        #{operationTime,jdbcType=DATE},
+      </if>
+      <if test="operationDepartment != null">
+        #{operationDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operationStart != null">
+        #{operationStart,jdbcType=DATE},
+      </if>
+      <if test="operationEnd != null">
+        #{operationEnd,jdbcType=DATE},
+      </if>
+      <if test="operationWork != null">
+        #{operationWork,jdbcType=INTEGER},
+      </if>
+      <if test="operationSite != null">
+        #{operationSite,jdbcType=VARCHAR},
+      </if>
+      <if test="anesthesiaId != null">
+        #{anesthesiaId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.OperationInformation">
+    update operation_information
+    <set>
+      <if test="operationName != null">
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        operation_time = #{operationTime,jdbcType=DATE},
+      </if>
+      <if test="operationDepartment != null">
+        operation_department = #{operationDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="operationStart != null">
+        operation_start = #{operationStart,jdbcType=DATE},
+      </if>
+      <if test="operationEnd != null">
+        operation_end = #{operationEnd,jdbcType=DATE},
+      </if>
+      <if test="operationWork != null">
+        operation_work = #{operationWork,jdbcType=INTEGER},
+      </if>
+      <if test="operationSite != null">
+        operation_site = #{operationSite,jdbcType=VARCHAR},
+      </if>
+      <if test="anesthesiaId != null">
+        anesthesia_id = #{anesthesiaId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.OperationInformation">
+    update operation_information
+    set operation_name = #{operationName,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=DATE},
+      operation_department = #{operationDepartment,jdbcType=VARCHAR},
+      operation_start = #{operationStart,jdbcType=DATE},
+      operation_end = #{operationEnd,jdbcType=DATE},
+      operation_work = #{operationWork,jdbcType=INTEGER},
+      operation_site = #{operationSite,jdbcType=VARCHAR},
+      anesthesia_id = #{anesthesiaId,jdbcType=INTEGER}
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+</mapper>

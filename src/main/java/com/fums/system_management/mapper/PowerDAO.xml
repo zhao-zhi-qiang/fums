@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.PowerDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.Power">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="power_id" jdbcType="INTEGER" property="powerId" />
+    <result column="power_state" jdbcType="INTEGER" property="powerState" />
+    <result column="power_name" jdbcType="VARCHAR" property="powerName" />
+    <result column="power_desc" jdbcType="VARCHAR" property="powerDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, power_id, power_state, power_name, power_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from power
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from power
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.Power">
+    insert into power (id, power_id, power_state, 
+      power_name, power_desc)
+    values (#{id,jdbcType=INTEGER}, #{powerId,jdbcType=INTEGER}, #{powerState,jdbcType=INTEGER}, 
+      #{powerName,jdbcType=VARCHAR}, #{powerDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.Power">
+    insert into power
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="powerId != null">
+        power_id,
+      </if>
+      <if test="powerState != null">
+        power_state,
+      </if>
+      <if test="powerName != null">
+        power_name,
+      </if>
+      <if test="powerDesc != null">
+        power_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="powerId != null">
+        #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="powerState != null">
+        #{powerState,jdbcType=INTEGER},
+      </if>
+      <if test="powerName != null">
+        #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDesc != null">
+        #{powerDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.Power">
+    update power
+    <set>
+      <if test="powerId != null">
+        power_id = #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="powerState != null">
+        power_state = #{powerState,jdbcType=INTEGER},
+      </if>
+      <if test="powerName != null">
+        power_name = #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDesc != null">
+        power_desc = #{powerDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.Power">
+    update power
+    set power_id = #{powerId,jdbcType=INTEGER},
+      power_state = #{powerState,jdbcType=INTEGER},
+      power_name = #{powerName,jdbcType=VARCHAR},
+      power_desc = #{powerDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
