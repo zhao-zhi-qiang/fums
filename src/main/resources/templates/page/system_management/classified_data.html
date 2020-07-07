@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类数据项维护</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Roboto -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+
+    <style>
+        html{
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+
+<div style="text-align: center;">
+<span style="font-size:30px; font-weight:800;color: blue;">分类数据项维护（科教处/医务处）</span>
+</div>
+
+<div style="margin-left: 340px;">
+    <table class="table" style="margin-top: 35px;">
+
+        <tbody>
+            <tr class="active">
+                <td rowspan="2" style="text-align: center">提交信息：</td>
+                <td>名称：移动电话</td>
+                <td>类型：文本</td>
+                <td>分类：基本信息</td>
+            </tr>
+            <tr class="active">
+                <td>创建人：张三</td>
+                <td>科室：骨科</td>
+                <td>创建时间：2016-06-01</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 50px;margin-left: 85px;">
+        <table class="table">
+            <tr>
+                <td rowspan="2">修改为：</td>
+                <td>
+                    <span style="white-space: nowrap;display: inline-block;margin-left: -4px;">名称：</span>
+                </td>
+                <td >
+                    <input type="text" style="margin-left: -90px;width: 203px;height: 37px;">
+                </td>
+                <td>
+                    <span style="white-space: nowrap;display: inline-block;margin-right: -33px;">类型：</span>
+                </td>
+                <td>
+                    <select style="height: 40px;width: 204px;margin-top: -20px;margin-left: -19px;">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="white-space: nowrap;display: inline-block;margin-left: -4px;">分类：</span>
+                </td>
+                <td>
+                    <select style="height: 40px;width: 204px;margin-top: -20px;margin-left: -90px;">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="text-align: center;padding-top: 0px">
+        <button type="button" class="btn btn-success btn-sm" onclick="">确定</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="">取消</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
+        <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
+    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--联网引入-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        html{
+            width: 95%;
+        }
+        table{
+            border: 1px solid #80bdff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <!--用户管理-->
+    <span style="font-size:30px; font-weight:800;color: blue;margin-top: 15px;margin-left: 80px;">用户管理</span>
+
+<div style="margin-left: 80px;margin-top: 15px;">
+
+    <table class="table" style="background:beige;" border="0" >
+        <div  class="main-menu" style="text-align: center">
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+                </td>
+                <td >
+                    <input style="height: 34px;width: 55%" class="form-control" id="#">
+                </td>
+
+                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                </td>
+                <td >
+                    <input style="height: 34px;width: 55%" class="form-control" id="1">
+                </td>
+            </tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+            </td>
+            <td>
+                <select style="width: 55%;height: 34px;">
+                    <option value="0">请选择</option>
+                </select>
+            </td>
+
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+            </td>
+            <td>
+                <input style="height: 34px;width: 55%" class="form-control" id="21">
+            </td>
+
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
+                </td>
+                <td>
+                    <input style="height: 34px;width: 55%" class="form-control" id="24">
+                </td>
+
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+                </td>
+                <td>
+                    <input style="height: 34px;width: 55%" class="form-control" id="2">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+                </td>
+                <td>
+                    <select style="width: 55%;height: 34px;">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+            </tr>
+        </div>
+
+    </table>
+
+    <div style="text-align: center;padding-top: 0px">
+        <button type="button" class="btn btn-success btn-sm" onclick="">检索</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="">清空</button>
+    </div>
+
+
+    <br><br>
+    <!--    <button class="btn btn-info">创建模板</button>-->
+    <div style="text-align: left;padding-top: 0px">
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                data-target="#editModal" onclick="">新增</button>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                data-target="#editModa2" onclick="">修改</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+    </div>
+    <table class="table table-bordered" style="text-align: center;">
+        <thead >
+        <tr class="info" >
+            <th><input type="checkbox" id="checkboxMain" onclick="" value=''></th>
+            <th style="text-align: center;">用户ID</th>
+            <th style="text-align: center;">用户姓名</th>
+            <th style="text-align: center;">性别</th>
+            <th style="text-align: center;">电话</th>
+            <th style="text-align: center;">邮箱</th>
+            <th style="text-align: center;">科室</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="active">
+            <th><input type="checkbox" id="checkboxMain2" onclick="" value=''></th>
+
+            <td>122132</td>
+            <td>赵四</td>
+            <td>男</td>
+            <td>123232323</td>
+            <td>test@263.net</td>
+            <td>内分泌科</td>
+        </tr>
+        <tr class="active">
+            <th><input type="checkbox" id="checkboxMain1" onclick="" value=''></th>
+            <td>123456</td>
+            <td>赵四</td>
+            <td>女</td>
+            <td>赵四</td>
+            <td>test@263.net</td>
+            <td>内分泌科</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--新增-->
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">新增用户</h3>
+                </div>
+                <table class="table" style="background:beige;" border="0" >
+                    <div  class="main-menu" style="text-align: center">
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_id" name="userId">
+                            </td>
+
+                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_account" name="userAccount">
+                            </td>
+                        </tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                        </td>
+                        <td>
+                            <select style="width: 55%;height: 34px;" id="user_sex" name="userSex">
+                                <option value="0">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+                        </td>
+                        <td>
+                            <input style="height: 34px;width: 55%" class="form-control" id="user_phone" name="userPhone">
+                        </td>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_email" name="userEmail">
+                            </td>
+
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="password" name="password">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+                            </td>
+                            <td>
+                                <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--修改-->
+
+    <div class="modal fade" id="editModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="bt2" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabe2">修改用户信息</h3>
+                </div>
+                <table class="table" style="background:beige;" border="0" >
+                    <div  class="main-menu" style="text-align: center">
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_id2" name="userId">
+                            </td>
+
+                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_account2" name="userAccount">
+                            </td>
+                        </tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                        </td>
+                        <td>
+                            <select style="width: 55%;height: 34px;" id="user_sex2" name="userSex">
+                                <option value="0">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+                        </td>
+                        <td>
+                            <input style="height: 34px;width: 55%" class="form-control" id="user_phone2" name="userPhone">
+                        </td>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_email2" name="userEmail">
+                            </td>
+
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="password2" name="password">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+                            </td>
+                            <td>
+                                <select style="width: 55%;height: 34px;" id="hospital_department_name2" name="hospitalDepartmentName">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="baoCun()" id="djh" data-dismiss="modal" >保存修改</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div style="text-align: center">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+    </table>
+
+</div>
+</body>
+</html>
