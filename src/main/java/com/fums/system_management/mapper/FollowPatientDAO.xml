@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.FollowPatientDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.FollowPatient">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="date_of_next_follow_up" jdbcType="DATE" property="dateOfNextFollowUp" />
+    <result column="del_state" jdbcType="INTEGER" property="delState" />
+    <result column="set_of_date" jdbcType="DATE" property="setOfDate" />
+    <result column="follow_up_setdate" jdbcType="INTEGER" property="followUpSetdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, follow_up_id, patient_id, date_of_next_follow_up, del_state, set_of_date, follow_up_setdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow_patient
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from follow_patient
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.FollowPatient">
+    insert into follow_patient (id, follow_up_id, patient_id, 
+      date_of_next_follow_up, del_state, set_of_date, 
+      follow_up_setdate)
+    values (#{id,jdbcType=INTEGER}, #{followUpId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, 
+      #{dateOfNextFollowUp,jdbcType=DATE}, #{delState,jdbcType=INTEGER}, #{setOfDate,jdbcType=DATE}, 
+      #{followUpSetdate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.FollowPatient">
+    insert into follow_patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="followUpId != null">
+        follow_up_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        date_of_next_follow_up,
+      </if>
+      <if test="delState != null">
+        del_state,
+      </if>
+      <if test="setOfDate != null">
+        set_of_date,
+      </if>
+      <if test="followUpSetdate != null">
+        follow_up_setdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="followUpId != null">
+        #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        #{dateOfNextFollowUp,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        #{delState,jdbcType=INTEGER},
+      </if>
+      <if test="setOfDate != null">
+        #{setOfDate,jdbcType=DATE},
+      </if>
+      <if test="followUpSetdate != null">
+        #{followUpSetdate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.FollowPatient">
+    update follow_patient
+    <set>
+      <if test="followUpId != null">
+        follow_up_id = #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        date_of_next_follow_up = #{dateOfNextFollowUp,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        del_state = #{delState,jdbcType=INTEGER},
+      </if>
+      <if test="setOfDate != null">
+        set_of_date = #{setOfDate,jdbcType=DATE},
+      </if>
+      <if test="followUpSetdate != null">
+        follow_up_setdate = #{followUpSetdate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.FollowPatient">
+    update follow_patient
+    set follow_up_id = #{followUpId,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      date_of_next_follow_up = #{dateOfNextFollowUp,jdbcType=DATE},
+      del_state = #{delState,jdbcType=INTEGER},
+      set_of_date = #{setOfDate,jdbcType=DATE},
+      follow_up_setdate = #{followUpSetdate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

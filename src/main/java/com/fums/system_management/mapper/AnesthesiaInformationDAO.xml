@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.AnesthesiaInformationDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.AnesthesiaInformation">
+    <id column="anesthesia_id" jdbcType="INTEGER" property="anesthesiaId" />
+    <result column="anesthesia_way" jdbcType="VARCHAR" property="anesthesiaWay" />
+    <result column="hospital_department_child_code" jdbcType="VARCHAR" property="hospitalDepartmentChildCode" />
+    <result column="anesthesia_readiness_time" jdbcType="TIMESTAMP" property="anesthesiaReadinessTime" />
+    <result column="anesthesia_start_time" jdbcType="TIMESTAMP" property="anesthesiaStartTime" />
+    <result column="anesthesia_end_time" jdbcType="TIMESTAMP" property="anesthesiaEndTime" />
+    <result column="anesthesia_dosage" jdbcType="VARCHAR" property="anesthesiaDosage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    anesthesia_id, anesthesia_way, hospital_department_child_code, anesthesia_readiness_time, 
+    anesthesia_start_time, anesthesia_end_time, anesthesia_dosage
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from anesthesia_information
+    where anesthesia_id = #{anesthesiaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from anesthesia_information
+    where anesthesia_id = #{anesthesiaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.AnesthesiaInformation">
+    insert into anesthesia_information (anesthesia_id, anesthesia_way, hospital_department_child_code, 
+      anesthesia_readiness_time, anesthesia_start_time, 
+      anesthesia_end_time, anesthesia_dosage)
+    values (#{anesthesiaId,jdbcType=INTEGER}, #{anesthesiaWay,jdbcType=VARCHAR}, #{hospitalDepartmentChildCode,jdbcType=VARCHAR}, 
+      #{anesthesiaReadinessTime,jdbcType=TIMESTAMP}, #{anesthesiaStartTime,jdbcType=TIMESTAMP}, 
+      #{anesthesiaEndTime,jdbcType=TIMESTAMP}, #{anesthesiaDosage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.AnesthesiaInformation">
+    insert into anesthesia_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="anesthesiaId != null">
+        anesthesia_id,
+      </if>
+      <if test="anesthesiaWay != null">
+        anesthesia_way,
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code,
+      </if>
+      <if test="anesthesiaReadinessTime != null">
+        anesthesia_readiness_time,
+      </if>
+      <if test="anesthesiaStartTime != null">
+        anesthesia_start_time,
+      </if>
+      <if test="anesthesiaEndTime != null">
+        anesthesia_end_time,
+      </if>
+      <if test="anesthesiaDosage != null">
+        anesthesia_dosage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="anesthesiaId != null">
+        #{anesthesiaId,jdbcType=INTEGER},
+      </if>
+      <if test="anesthesiaWay != null">
+        #{anesthesiaWay,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      </if>
+      <if test="anesthesiaReadinessTime != null">
+        #{anesthesiaReadinessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaStartTime != null">
+        #{anesthesiaStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaEndTime != null">
+        #{anesthesiaEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaDosage != null">
+        #{anesthesiaDosage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.AnesthesiaInformation">
+    update anesthesia_information
+    <set>
+      <if test="anesthesiaWay != null">
+        anesthesia_way = #{anesthesiaWay,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      </if>
+      <if test="anesthesiaReadinessTime != null">
+        anesthesia_readiness_time = #{anesthesiaReadinessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaStartTime != null">
+        anesthesia_start_time = #{anesthesiaStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaEndTime != null">
+        anesthesia_end_time = #{anesthesiaEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anesthesiaDosage != null">
+        anesthesia_dosage = #{anesthesiaDosage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where anesthesia_id = #{anesthesiaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.AnesthesiaInformation">
+    update anesthesia_information
+    set anesthesia_way = #{anesthesiaWay,jdbcType=VARCHAR},
+      hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      anesthesia_readiness_time = #{anesthesiaReadinessTime,jdbcType=TIMESTAMP},
+      anesthesia_start_time = #{anesthesiaStartTime,jdbcType=TIMESTAMP},
+      anesthesia_end_time = #{anesthesiaEndTime,jdbcType=TIMESTAMP},
+      anesthesia_dosage = #{anesthesiaDosage,jdbcType=VARCHAR}
+    where anesthesia_id = #{anesthesiaId,jdbcType=INTEGER}
+  </update>
+</mapper>

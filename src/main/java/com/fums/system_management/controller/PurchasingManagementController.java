@@ -12,7 +12,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/system_form")
     public String systemForm() {
-        return "system_management/system_form";
+        return "page/system_management/system_form";
     }
 
     /*
@@ -20,7 +20,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/user_management")
     public String userManagement() {
-        return "system_management/user_management";
+        return "page/system_management/user_management";
     }
 
 
@@ -29,7 +29,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/authority_management")
     public String authorityManagement() {
-        return "system_management/authority_management";
+        return "page/system_management/authority_management";
     }
 
     /*
@@ -37,7 +37,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/standard_template")
     public String standardTemplate() {
-        return "system_management/standard_template";
+        return "page/system_management/standard_template";
     }
 
     /*
@@ -45,7 +45,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/classified_data")
     public String classifiedData() {
-        return "system_management/classified_data";
+        return "page/system_management/classified_data";
     }
 
     /*
@@ -53,7 +53,7 @@ public class PurchasingManagementController {
      */
     @RequestMapping("/dictionary_terms")
     public String dictionaryTerms() {
-        return "system_management/dictionary_terms";
+        return "page/system_management/dictionary_terms";
     }
 
 }
