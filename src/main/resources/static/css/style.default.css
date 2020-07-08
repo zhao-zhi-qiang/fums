@@ -91,6 +91,8 @@ table {
   background-color: #F4F7FA;
   min-height: 100vh;
   padding-bottom: 50px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .page.active {
