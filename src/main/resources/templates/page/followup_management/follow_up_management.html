@@ -6,20 +6,20 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link href="css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
-    <!--<link href="css/axure_rp_page.css" type="text/css" rel="stylesheet"/>-->
     <link href="css/styles.css" type="text/css" rel="stylesheet"/>
     <link href="css/styles1.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" class="library" href="/bootstarp/css/bootstrap.min.css">
     <!-- 日历CSS -->
     <link rel="stylesheet" type="text/css" href="/css/fullcalendar.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="css/index.css"/> -->
-  
+
 	<script type="text/javascript" class="library" src="/js/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" class="library" src="/bootstarp/js/bootstrap.min.js"></script>
+    <script type="text/javascript" class="library" src="/bootstarp/js/bootstrap.min.js"></script>
   <!-- 日历js -->
 	<script type="text/javascript" src="/js/moment.min.js" ></script><!-- 日期处理时间工具 -->
 	<script type="text/javascript" src="js/fullcalendar.min.js" ></script>
 	<script type="text/javascript" src="js/index.js" ></script>
+    <!--引入自己的JS-->
+	<script type="text/javascript" src="js/follow_up_management/follow_up_management.js" ></script>
 	<style type="text/css">
 		.navbar .nav > li .dropdown-menu {
 			margin: 0;
@@ -42,6 +42,7 @@
   <body style="overflow-y: hidden">
     <div id="base" class="">
 <div id="vague">
+  <form method="post" id="form2">
       <div id="u1247" class="ax_default label">
 
           <p><span>快速筛选</span></p>
@@ -99,7 +100,7 @@
         </td></tr>
         
       </table>
-
+  </form>
     </div>
       <div id="table_data">
         <!-- Unnamed (矩形) -->
@@ -140,7 +141,7 @@
               <td>预览</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tbody">
             <tr>
               <td>00008</td>
               <td>随访组1</td>

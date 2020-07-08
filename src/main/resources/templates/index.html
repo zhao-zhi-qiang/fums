@@ -67,16 +67,13 @@
         <div class="main-menu">
             <h5 class="sidenav-heading">Main</h5>
             <ul id="side-main-menu" class="side-menu list-unstyled">
-                <li><a href="#groupingmanagement" aria-expanded="false" data-toggle="collapse"> <i class="icon-home"></i>分组管理</a>
-                    <ul id="groupingmanagement" class="collapse list-unstyled ">
-                        <li><a href="#">建立分组</a></li>
-                    </ul>
+                <li><a onclick="aaa('toGroupManagement')" target="iframe"> <i class="icon-home"></i>分组管理</a>
                 </li>
-                <li><a href="#management" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>单个随访组管理</a>
+                <li><a href="#management" onclick="aaa('toFollowupManagement')" target="iframe" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>单个随访组管理</a>
                     <ul id="management" class="collapse list-unstyled ">
-                        <li><a href="#">权限管理</a></li>
-                        <li><a href="#">入组管理</a></li>
-                        <li><a href="#">新建患者</a></li>
+                        <li><a onclick="aaa('toAuthorityManagement')" target="iframe">权限管理</a></li>
+                        <li><a onclick="aaa('toJoingroupManagement')" target="iframe">入组管理</a></li>
+                        <li><a onclick="aaa('toCreateNewpatient')" target="iframe">新建患者</a></li>
                         <li><a href="#">随访规则设定</a></li>
                         <li><a href="#">诊疗方案</a></li>
                         <li><a href="#">节假日管理</a></li>
@@ -167,7 +164,7 @@
     </header>
      <!--内容区域-->
     <div class="content-wrapper" style="height: 100%">
-        <iframe width="100%" height="100%" id="iframe" name="iframe" large-header="0" src="followUpManagement"></iframe>
+        <iframe width="100%" height="100%" id="iframe" name="iframe" frameborder="0" large-header="0" src="followUpManagement"></iframe>
     </div>
     <!--<iframe width="100%" height="100%" src="page/followup_management/follow_up_management.html"></iframe>-->
     <footer class="main-footer">
@@ -175,10 +172,6 @@
             <div class="row">
                 <div class="col-sm-6">
                     <p>Copyright &copy; 2019.Company name All rights reserved</a></p>
-                </div>
-                <div class="col-sm-6 text-right">
-
-
                 </div>
             </div>
         </div>

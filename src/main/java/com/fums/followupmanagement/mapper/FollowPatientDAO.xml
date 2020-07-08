@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followupmanagement.dao.FollowPatientDAO">
+  <resultMap id="BaseResultMap" type="com.fums.pojo.FollowPatient">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="date_of_next_follow_up" jdbcType="DATE" property="dateOfNextFollowUp" />
+    <result column="del_state" jdbcType="INTEGER" property="delState" />
+    <result column="set_of_date" jdbcType="DATE" property="setOfDate" />
+    <result column="follow_up_setdate" jdbcType="INTEGER" property="followUpSetdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, follow_up_id, patient_id, date_of_next_follow_up, del_state, set_of_date, follow_up_setdate
+  </sql>
+  <select id="selectByExample" parameterType="com.fums.pojo.FollowPatientExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from follow_patient
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectAll" parameterType="com.fums.pojo.FollowPatient" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from follow_patient
+    <where>
+      <if test="record.followUpId != 0">
+        and follow_up_id = #{record.followUpId}
+      </if>
+      <if test="record.patientId != 0">
+        and patient_id = #{record.patientId}
+      </if>
+      <if test="record.dateOfNextFollowUp != null and record.dateOfNextFollowUp != ''">
+        and date_of_next_follow_up like "%"#{record.dateOfNextFollowUp}"%"
+      </if>
+      <if test="record.setOfDate != null">
+        and set_of_date = #{record.setOfDate}
+      </if>
+      <if test="list != null and list.length > 0">
+        and follow_up_setdate in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow_patient
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from follow_patient
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fums.pojo.FollowPatientExample">
+    delete from follow_patient
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fums.pojo.FollowPatient">
+    insert into follow_patient (id, follow_up_id, patient_id, 
+      date_of_next_follow_up, del_state, set_of_date, 
+      follow_up_setdate)
+    values (#{id,jdbcType=INTEGER}, #{followUpId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, 
+      #{dateOfNextFollowUp,jdbcType=DATE}, #{delState,jdbcType=INTEGER}, #{setOfDate,jdbcType=DATE}, 
+      #{followUpSetdate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.pojo.FollowPatient">
+    insert into follow_patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="followUpId != null">
+        follow_up_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        date_of_next_follow_up,
+      </if>
+      <if test="delState != null">
+        del_state,
+      </if>
+      <if test="setOfDate != null">
+        set_of_date,
+      </if>
+      <if test="followUpSetdate != null">
+        follow_up_setdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="followUpId != null">
+        #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        #{dateOfNextFollowUp,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        #{delState,jdbcType=INTEGER},
+      </if>
+      <if test="setOfDate != null">
+        #{setOfDate,jdbcType=DATE},
+      </if>
+      <if test="followUpSetdate != null">
+        #{followUpSetdate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fums.pojo.FollowPatientExample" resultType="java.lang.Long">
+    select count(*) from follow_patient
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update follow_patient
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.followUpId != null">
+        follow_up_id = #{record.followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientId != null">
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dateOfNextFollowUp != null">
+        date_of_next_follow_up = #{record.dateOfNextFollowUp,jdbcType=DATE},
+      </if>
+      <if test="record.delState != null">
+        del_state = #{record.delState,jdbcType=INTEGER},
+      </if>
+      <if test="record.setOfDate != null">
+        set_of_date = #{record.setOfDate,jdbcType=DATE},
+      </if>
+      <if test="record.followUpSetdate != null">
+        follow_up_setdate = #{record.followUpSetdate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update follow_patient
+    set id = #{record.id,jdbcType=INTEGER},
+      follow_up_id = #{record.followUpId,jdbcType=INTEGER},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      date_of_next_follow_up = #{record.dateOfNextFollowUp,jdbcType=DATE},
+      del_state = #{record.delState,jdbcType=INTEGER},
+      set_of_date = #{record.setOfDate,jdbcType=DATE},
+      follow_up_setdate = #{record.followUpSetdate,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.pojo.FollowPatient">
+    update follow_patient
+    <set>
+      <if test="followUpId != null">
+        follow_up_id = #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="dateOfNextFollowUp != null">
+        date_of_next_follow_up = #{dateOfNextFollowUp,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        del_state = #{delState,jdbcType=INTEGER},
+      </if>
+      <if test="setOfDate != null">
+        set_of_date = #{setOfDate,jdbcType=DATE},
+      </if>
+      <if test="followUpSetdate != null">
+        follow_up_setdate = #{followUpSetdate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.pojo.FollowPatient">
+    update follow_patient
+    set follow_up_id = #{followUpId,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      date_of_next_follow_up = #{dateOfNextFollowUp,jdbcType=DATE},
+      del_state = #{delState,jdbcType=INTEGER},
+      set_of_date = #{setOfDate,jdbcType=DATE},
+      follow_up_setdate = #{followUpSetdate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followupmanagement.dao.DataReviewDAO">
+  <resultMap id="BaseResultMap" type="com.fums.pojo.DataReview">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+    <result column="form" jdbcType="VARCHAR" property="form" />
+    <result column="data_item" jdbcType="VARCHAR" property="dataItem" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="patient" jdbcType="VARCHAR" property="patient" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="skeptic" jdbcType="VARCHAR" property="skeptic" />
+    <result column="review" jdbcType="VARCHAR" property="review" />
+    <result column="review_state" jdbcType="INTEGER" property="reviewState" />
+    <result column="proposal_time" jdbcType="TIMESTAMP" property="proposalTime" />
+    <result column="review_date" jdbcType="DATE" property="reviewDate" />
+    <result column="del_state" jdbcType="INTEGER" property="delState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, follow_up_id, form, data_item, patient_id, patient, `value`, skeptic, review, 
+    review_state, proposal_time, review_date, del_state
+  </sql>
+  <select id="selectByExample" parameterType="com.fums.pojo.DataReviewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectAll" parameterType="com.fums.pojo.DataReview" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from data_review
+    <where>
+      del_state = 0
+      <if test="record.followUpId != 0">
+        and follow_up_id = #{record.followUpId}
+      </if>
+      <if test="record.form != 0">
+        and form = #{record.form}
+      </if>
+      <if test="record.dataItem != null and record.dataItem != ''">
+        and data_item like "%"#{record.dataItem}"%"
+      </if>
+      <if test="record.patientId != 0 and record.patientId != null">
+        and patient_id = #{record.patientId}
+      </if>
+      <if test="record.patient != null and record.patient != ''">
+        and patient like "%"#{record.patient}"%"
+      </if>
+      <if test="record.value != null and record.value != ''">
+        and value like "%"#{record.value}"%"
+      </if>
+      <if test="record.skeptic != null and record.skeptic != ''">
+        and skeptic like "%"#{record.skeptic}"%"
+      </if>
+      <if test="record.review != null and record.review != ''">
+        and review like "%"#{record.review}"%"
+      </if>
+      <if test="list != null and list.length > 0">
+        and review_state in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+      <if test="record.reviewDate != null and record.reviewDate != ''">
+        and review_date like "%"#{record.reviewDate}"%"
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from data_review
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from data_review
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fums.pojo.DataReviewExample">
+    delete from data_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fums.pojo.DataReview">
+    insert into data_review (id, follow_up_id, form, 
+      data_item, patient_id, patient, 
+      `value`, skeptic, review, 
+      review_state, proposal_time, review_date, 
+      del_state)
+    values (#{id,jdbcType=INTEGER}, #{followUpId,jdbcType=INTEGER}, #{form,jdbcType=VARCHAR}, 
+      #{dataItem,jdbcType=VARCHAR}, #{patientId,jdbcType=INTEGER}, #{patient,jdbcType=VARCHAR}, 
+      #{value,jdbcType=VARCHAR}, #{skeptic,jdbcType=VARCHAR}, #{review,jdbcType=VARCHAR}, 
+      #{reviewState,jdbcType=INTEGER}, #{proposalTime,jdbcType=TIMESTAMP}, #{reviewDate,jdbcType=DATE}, 
+      #{delState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.pojo.DataReview">
+    insert into data_review
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="followUpId != null">
+        follow_up_id,
+      </if>
+      <if test="form != null">
+        form,
+      </if>
+      <if test="dataItem != null">
+        data_item,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="patient != null">
+        patient,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="skeptic != null">
+        skeptic,
+      </if>
+      <if test="review != null">
+        review,
+      </if>
+      <if test="reviewState != null">
+        review_state,
+      </if>
+      <if test="proposalTime != null">
+        proposal_time,
+      </if>
+      <if test="reviewDate != null">
+        review_date,
+      </if>
+      <if test="delState != null">
+        del_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="followUpId != null">
+        #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="form != null">
+        #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="dataItem != null">
+        #{dataItem,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patient != null">
+        #{patient,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="skeptic != null">
+        #{skeptic,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null">
+        #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewState != null">
+        #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="proposalTime != null">
+        #{proposalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewDate != null">
+        #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        #{delState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fums.pojo.DataReviewExample" resultType="java.lang.Long">
+    select count(*) from data_review
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update data_review
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.followUpId != null">
+        follow_up_id = #{record.followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.form != null">
+        form = #{record.form,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataItem != null">
+        data_item = #{record.dataItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null">
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patient != null">
+        patient = #{record.patient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value != null">
+        `value` = #{record.value,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skeptic != null">
+        skeptic = #{record.skeptic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.review != null">
+        review = #{record.review,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewState != null">
+        review_state = #{record.reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="record.proposalTime != null">
+        proposal_time = #{record.proposalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewDate != null">
+        review_date = #{record.reviewDate,jdbcType=DATE},
+      </if>
+      <if test="record.delState != null">
+        del_state = #{record.delState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update data_review
+    set id = #{record.id,jdbcType=INTEGER},
+      follow_up_id = #{record.followUpId,jdbcType=INTEGER},
+      form = #{record.form,jdbcType=VARCHAR},
+      data_item = #{record.dataItem,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      patient = #{record.patient,jdbcType=VARCHAR},
+      `value` = #{record.value,jdbcType=VARCHAR},
+      skeptic = #{record.skeptic,jdbcType=VARCHAR},
+      review = #{record.review,jdbcType=VARCHAR},
+      review_state = #{record.reviewState,jdbcType=INTEGER},
+      proposal_time = #{record.proposalTime,jdbcType=TIMESTAMP},
+      review_date = #{record.reviewDate,jdbcType=DATE},
+      del_state = #{record.delState,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.pojo.DataReview">
+    update data_review
+    <set>
+      <if test="followUpId != null">
+        follow_up_id = #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="form != null">
+        form = #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="dataItem != null">
+        data_item = #{dataItem,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patient != null">
+        patient = #{patient,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="skeptic != null">
+        skeptic = #{skeptic,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null">
+        review = #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewState != null">
+        review_state = #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="proposalTime != null">
+        proposal_time = #{proposalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewDate != null">
+        review_date = #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        del_state = #{delState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.pojo.DataReview">
+    update data_review
+    set follow_up_id = #{followUpId,jdbcType=INTEGER},
+      form = #{form,jdbcType=VARCHAR},
+      data_item = #{dataItem,jdbcType=VARCHAR},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      patient = #{patient,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
+      skeptic = #{skeptic,jdbcType=VARCHAR},
+      review = #{review,jdbcType=VARCHAR},
+      review_state = #{reviewState,jdbcType=INTEGER},
+      proposal_time = #{proposalTime,jdbcType=TIMESTAMP},
+      review_date = #{reviewDate,jdbcType=DATE},
+      del_state = #{delState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
