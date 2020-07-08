@@ -79,15 +79,7 @@
         })
 
         function retrieval(){
-            $("#tbody").empty();
 
-            var
-
-            $.ajax({
-                url:"",
-
-
-            })
         }
 
 
@@ -255,6 +247,88 @@
         </tr>
         </tbody>
     </table>
+
+
+    <!--想要修改成当前页面的模态框     来获取id和name-->
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">新增用户</h3>
+                </div>
+                <table class="table" style="background:beige;" border="0" >
+                    <div  class="main-menu" style="text-align: center">
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_id" name="userId">
+                            </td>
+
+                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                            </td>
+                            <td >
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_account" name="userAccount">
+                            </td>
+                        </tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                        </td>
+                        <td>
+                            <select style="width: 55%;height: 34px;" id="user_sex" name="userSex">
+                                <option value="0">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+                        </td>
+                        <td>
+                            <input style="height: 34px;width: 55%" class="form-control" id="user_phone" name="userPhone">
+                        </td>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_email" name="userEmail">
+                            </td>
+
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+                            </td>
+                            <td>
+                                <input style="height: 34px;width: 55%" class="form-control" id="password" name="password">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+                            </td>
+                            <td>
+                                <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div style="padding-left: 567px;">
         <ul class="pagination">
