@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.UserDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.User">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_salt" jdbcType="VARCHAR" property="userSalt" />
+    <result column="user_state" jdbcType="INTEGER" property="userState" />
+    <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
+    <result column="user_create_time" jdbcType="DATE" property="userCreateTime" />
+    <result column="user_update_time" jdbcType="DATE" property="userUpdateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.User">
+    insert into user (id, user_id, user_account, 
+      user_name, `password`, user_sex, 
+      user_address, user_phone, user_email, 
+      user_salt, user_state, hospital_department_child_code, 
+      user_create_time, user_update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userSalt,jdbcType=VARCHAR}, #{userState,jdbcType=INTEGER}, #{hospitalDepartmentChildCode,jdbcType=INTEGER}, 
+      #{userCreateTime,jdbcType=DATE}, #{userUpdateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userSalt != null">
+        user_salt,
+      </if>
+      <if test="userState != null">
+        user_state,
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code,
+      </if>
+      <if test="userCreateTime != null">
+        user_create_time,
+      </if>
+      <if test="userUpdateTime != null">
+        user_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSalt != null">
+        #{userSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        #{hospitalDepartmentChildCode,jdbcType=INTEGER},
+      </if>
+      <if test="userCreateTime != null">
+        #{userCreateTime,jdbcType=DATE},
+      </if>
+      <if test="userUpdateTime != null">
+        #{userUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

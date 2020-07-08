@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.FormOverviewDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.FormOverview">
+    <id column="overview_id" jdbcType="INTEGER" property="overviewId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="followup_up_id" jdbcType="INTEGER" property="followupUpId" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+    <result column="update_the" jdbcType="VARCHAR" property="updateThe" />
+    <result column="the_ersion_umber" jdbcType="VARCHAR" property="theErsionUmber" />
+    <result column="the_reator" jdbcType="VARCHAR" property="theReator" />
+    <result column="creation_date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="table_state" jdbcType="VARCHAR" property="tableState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    overview_id, department_id, followup_up_id, template_name, updated_date, update_the, 
+    the_ersion_umber, the_reator, creation_date, `state`, table_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from form_overview
+    where overview_id = #{overviewId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from form_overview
+    where overview_id = #{overviewId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.FormOverview">
+    insert into form_overview (overview_id, department_id, followup_up_id, 
+      template_name, updated_date, update_the, 
+      the_ersion_umber, the_reator, creation_date, 
+      `state`, table_state)
+    values (#{overviewId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{followupUpId,jdbcType=INTEGER}, 
+      #{templateName,jdbcType=VARCHAR}, #{updatedDate,jdbcType=TIMESTAMP}, #{updateThe,jdbcType=VARCHAR}, 
+      #{theErsionUmber,jdbcType=VARCHAR}, #{theReator,jdbcType=VARCHAR}, #{creationDate,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR}, #{tableState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.FormOverview">
+    insert into form_overview
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="overviewId != null">
+        overview_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="followupUpId != null">
+        followup_up_id,
+      </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+      <if test="updateThe != null">
+        update_the,
+      </if>
+      <if test="theErsionUmber != null">
+        the_ersion_umber,
+      </if>
+      <if test="theReator != null">
+        the_reator,
+      </if>
+      <if test="creationDate != null">
+        creation_date,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="tableState != null">
+        table_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="overviewId != null">
+        #{overviewId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="followupUpId != null">
+        #{followupUpId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateThe != null">
+        #{updateThe,jdbcType=VARCHAR},
+      </if>
+      <if test="theErsionUmber != null">
+        #{theErsionUmber,jdbcType=VARCHAR},
+      </if>
+      <if test="theReator != null">
+        #{theReator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationDate != null">
+        #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="tableState != null">
+        #{tableState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.FormOverview">
+    update form_overview
+    <set>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="followupUpId != null">
+        followup_up_id = #{followupUpId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedDate != null">
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateThe != null">
+        update_the = #{updateThe,jdbcType=VARCHAR},
+      </if>
+      <if test="theErsionUmber != null">
+        the_ersion_umber = #{theErsionUmber,jdbcType=VARCHAR},
+      </if>
+      <if test="theReator != null">
+        the_reator = #{theReator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationDate != null">
+        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="tableState != null">
+        table_state = #{tableState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where overview_id = #{overviewId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.FormOverview">
+    update form_overview
+    set department_id = #{departmentId,jdbcType=INTEGER},
+      followup_up_id = #{followupUpId,jdbcType=INTEGER},
+      template_name = #{templateName,jdbcType=VARCHAR},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      update_the = #{updateThe,jdbcType=VARCHAR},
+      the_ersion_umber = #{theErsionUmber,jdbcType=VARCHAR},
+      the_reator = #{theReator,jdbcType=VARCHAR},
+      creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      `state` = #{state,jdbcType=VARCHAR},
+      table_state = #{tableState,jdbcType=VARCHAR}
+    where overview_id = #{overviewId,jdbcType=INTEGER}
+  </update>
+</mapper>

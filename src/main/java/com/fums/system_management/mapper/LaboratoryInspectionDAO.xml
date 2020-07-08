@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.LaboratoryInspectionDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.LaboratoryInspection">
+    <id column="laboratory_inspection_id" jdbcType="INTEGER" property="laboratoryInspectionId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="check_the_name" jdbcType="VARCHAR" property="checkTheName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    laboratory_inspection_id, patient_id, check_the_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from laboratory_inspection
+    where laboratory_inspection_id = #{laboratoryInspectionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from laboratory_inspection
+    where laboratory_inspection_id = #{laboratoryInspectionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.LaboratoryInspection">
+    insert into laboratory_inspection (laboratory_inspection_id, patient_id, 
+      check_the_name)
+    values (#{laboratoryInspectionId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, 
+      #{checkTheName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.LaboratoryInspection">
+    insert into laboratory_inspection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="laboratoryInspectionId != null">
+        laboratory_inspection_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="checkTheName != null">
+        check_the_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="laboratoryInspectionId != null">
+        #{laboratoryInspectionId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="checkTheName != null">
+        #{checkTheName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.LaboratoryInspection">
+    update laboratory_inspection
+    <set>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="checkTheName != null">
+        check_the_name = #{checkTheName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where laboratory_inspection_id = #{laboratoryInspectionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.LaboratoryInspection">
+    update laboratory_inspection
+    set patient_id = #{patientId,jdbcType=INTEGER},
+      check_the_name = #{checkTheName,jdbcType=VARCHAR}
+    where laboratory_inspection_id = #{laboratoryInspectionId,jdbcType=INTEGER}
+  </update>
+</mapper>

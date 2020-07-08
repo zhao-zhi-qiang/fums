@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
+        <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
+    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--联网引入-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        html{
+            width: 70%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!--表单总览-->
+<div style="text-align: center;margin-top: 15px;">
+<span style="font-size:30px; font-weight:800;color: blue;">管理科室权限（医务处）</span>
+</div>
+<table class="table" style="background:beige;margin-top: 15px;" >
+    <div style="text-align: center;">
+        <tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
+            </td>
+            <td>
+                <select style="width: 100%;height: 35px;">
+                    <option value="0">请选择科室</option>
+                </select>
+            </td>
+
+            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">人员名称：</span>
+            </td>
+            <td>
+                <select style="width: 100%;height: 35px;">
+                    <option value="0">请选择人员</option>
+                </select>
+            </td>
+        </tr>
+    </div>
+
+</table>
+
+<div style="text-align: center;padding-top: 0px">
+    <button type="button" class="btn btn-success btn-sm" onclick="">检索</button>
+</div>
+
+<br><br>
+
+<!--    <button class="btn btn-info">创建模板</button>-->
+<div style="margin-left: 10px;padding-top: 0px">
+    <button type="button" class="btn btn-success btn-sm" onclick="">新增</button>
+</div>
+<table class="table table-bordered" >
+    <thead >
+    <tr class="info" >
+        <th style="text-align: center;" >序号</th>
+        <th style="text-align: center;" >科室</th>
+        <th style="text-align: center;" >人员</th>
+        <th style="text-align: center;" >操作</th>
+    </tr>
+    </thead>
+    <tbody  style="text-align: center;">
+    <tr class="active">
+        <td>1</td>
+        <td>肿瘤中心</td>
+        <td>严医生</td>
+        <td>
+            <button type="button" class="btn btn-success btn-sm" onclick="">编辑</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+        </td>
+    </tr>
+    <tr class="active">
+        <td>2</td>
+        <td>心研所</td>
+        <td>冯医生</td>
+        <td>
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#editModal" onclick="">编辑</button>
+
+            <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">权限管理</h3>
+            </div>
+            <div style="text-align: center;">
+                <tr>
+                    <td style="text-align: right">
+                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
+                    </td>
+                    <td>
+                        <select style="width: 100%;height: 35px;">
+                            <option value="0">请选择科室</option>
+                        </select>
+                    </td>
+
+                    <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">人员名称：</span>
+                    </td>
+                    <td>
+                        <select style="width: 100%;height: 35px;">
+                            <option value="0">请选择人员</option>
+                        </select>
+                    </td>
+                </tr>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center">
+    <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+</div>
+</table>
+</body>
+</html>

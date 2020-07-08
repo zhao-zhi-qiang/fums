@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>随访组管理</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <style>
+          #header_style li{
+              float: left;
+              list-style: none;
+              margin: 10px;
+          }
+          #li_style li{
+              float: left;
+              list-style: none;
+          }
+          #checkbox_style{
+              width: 20px;
+              height: 20px;
+          }
+      </style>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div class="group_management">
+        <div id="page_top" style="margin-top: -20px">
+            <ul id="header_style">
+                <li><h4 style="margin-left: -50px; ">随访组管理</h4></li>
+                <li><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">新建随访组</button></li>
+            </ul>
+        </div><br /><br />
+        <div id="header" style="width: 100%; height: 100px; background-color: #B3D7FF; ">
+            <br/>
+        <div class="row" style="margin-left: 100px; margin-top: -22px">
+            <table>
+                <tr id="tr_style">
+                    <td><label>负责人</label></td>
+                    <td >
+                         <div class="form-group">
+                            <input type="text" class="form-control" placeholder="负责人" style="width: 150px ;height: 38px">
+                          </div>
+                    </td>
+                    <td><label style="margin-left: 100px; ">科室</label></td>
+                    <td >
+                        <div class="form-group" style="margin-left: 10px">
+                         <select name="userState" class="form-control" style="width: 150px ;height: 38px"/>
+                         <option value="">请选择科室</option>
+                         <option value="0">内一科</option>
+                         <option value="1">心二科</option>
+                         <option value="1">心二科</option>
+                        </div>
+                    </td>
+                    <td><label style="margin-left: 100px ">状态</label></td>
+                    <td >
+                        <div class="form-group" style="margin-left: 20px;">
+                         <select name="userState" class="form-control" style="width: 150px ;height: 38px" />
+                         <option value="">请选择状态</option>
+                         <option value="0">正常</option>
+                         <option value="1">删除</option>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>创建时间</label></td>
+                    <td >
+                         <div class="form-group">
+                            <input type="text" class="form-control" placeholder="选择开始时间" style="width: 150px ;height: 38px">
+                          </div>
+                    </td>
+                    <td >
+                         <div class="form-group">
+                            <input type="text" class="form-control" placeholder="选择结束时间" style="width: 150px ;height: 38px">
+                          </div>
+                    </td>
+                    <td><div class="col-lg-2">
+                        </div>
+                    </td>
+                    <td><div class="col-lg-2">
+                        </div>
+                    </td>
+                    <td><div class="col-lg-2">
+                        </div>
+                    </td>
+                    <td style="float: right; margin-left: -250px">
+                        <button class="btn btn-primary btn-sm">检索</button>
+                        <button class="btn btn-primary btn-sm">清空</button>
+                    </td>
+                </tr>
+            </table>
+          </div>
+        </div><br />
+        <div id="show_form" style="text-align: center; margin-left: 50px;">
+            <table style="margin-top: -20px">
+                <tr>
+                    <td><button class="btn btn-primary btn-sm">编辑</button></td>
+                    <td><button class="btn btn-primary btn-sm">删除</button></td>
+                </tr>
+            </table>
+            <table class="table table-bordered table-hover " style="width: 1200px; height: 100%;">
+                <thead>
+                  <tr class="table-primary">
+                    <td><input type="checkbox" id="checkbox_style"></td>
+                    <th>名称</th>
+                    <th>入组率</th>
+                    <th>负责人</th>
+                    <th>状态</th>
+                    <th>科室</th>
+                    <th>创建时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" id="checkbox_style"></td>
+                    <td>肿瘤中心随访</td>
+                    <td><span class="badge badge-danger">0%-20%</span></td>
+                    <td>张三</td>
+                    <td><button type="button" class="btn btn-primary">开放</button></td>
+                    <td>肿瘤中心</td>
+                    <td>2020-06-29</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" id="checkbox_style"></td>
+                    <td>内分泌随访</td>
+                    <td><span class="badge badge-warning">20%-40%</span></td>
+                    <td>李四</td>
+                    <td><button type="button" class="btn btn-danger">关闭</button></td>
+                    <td>内分泌科</td>
+                    <td>2020-06-29</td>
+                  </tr>
+                  <tr>
+                     <td><input type="checkbox" id="checkbox_style"></td>
+                    <td>高血压人群随访</td>
+                    <td><span class="badge badge-primary">80%-100%</span></td>
+                    <td>王五</td>
+                    <td><button type="button" class="btn btn-primary">开放</button></td>
+                    <td>心研所</td>
+                    <td>2020-06-29</td>
+                  </tr>
+                  <tr>
+                     <td><input type="checkbox" id="checkbox_style"></td>
+                    <td>心脏病随访</td>
+                    <td><span class="badge badge-info">40%-60%</span></td>
+                    <td>赵柳</td>
+                    <td><button type="button" class="btn btn-primary">开放</button></td>
+                    <td>内一科</td>
+                    <td>2020-06-29</td>
+                  </tr>
+                  <tr>
+                     <td><input type="checkbox" id="checkbox_style"></td>
+                    <td>X光片随访</td>
+                    <td><span class="badge badge-success">60%-80%</span></td>
+                    <td>钱七</td>
+                    <td><button type="button" class="btn btn-primary">开放</button></td>
+                    <td>放射科</td>
+                    <td>2020-06-29</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            新建随访组
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <td><label>责任医院</label></td>
+                                <td >
+                                     <div class="form-group">
+                                       <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
+                                       <option value="">请选择医院</option>
+                                       <option value="0">北京人民医院</option>
+                                       <option value="1">北京协和医院</option>
+                                     </div>
+                                </td>
+                                <td><label>责任科室</label></td>
+                                <td >
+                                     <div class="form-group">
+                                          <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
+                                          <option value="">请选择科室</option>
+                                          <option value="0">心内科</option>
+                                          <option value="1">脑外壳</option>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>负责人</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                                <td><label>级别</label></td>
+                                <td >
+                                     <div class="form-group">
+                                         <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
+                                         <option value="">请选择级别</option>
+                                         <option value="0">I级</option>
+                                         <option value="1">II级</option>
+                                         <option value="1">III级</option>
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>名称</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>创建人</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" type="hidden">
+                                      </div>
+                                </td>
+                                <td><label>创建时间</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" type="hidden">
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>联系电话</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                                <td><label>状态</label></td>
+                                <td >
+                                    <div class="form-group">
+                                        <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
+                                        <option value="">请选择状态</option>
+                                        <option value="0">开放</option>
+                                        <option value="1">关闭</option>
+                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>开始日期</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                                <td><label>结束日期</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>课题编号</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                                <td><label>患者数量</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>对照组</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>背景</label></td>
+                                <td >
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="选择状态">
+                                      </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

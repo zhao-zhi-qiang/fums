@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.PatientDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.Patient">
+    <id column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="patient_unique" jdbcType="VARCHAR" property="patientUnique" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="born_adress" jdbcType="VARCHAR" property="bornAdress" />
+    <result column="born" jdbcType="DATE" property="born" />
+    <result column="culture" jdbcType="VARCHAR" property="culture" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="abo_type" jdbcType="VARCHAR" property="aboType" />
+    <result column="rh_type" jdbcType="VARCHAR" property="rhType" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="relationship_name" jdbcType="VARCHAR" property="relationshipName" />
+    <result column="relationship_sex" jdbcType="VARCHAR" property="relationshipSex" />
+    <result column="relationship_adress" jdbcType="VARCHAR" property="relationshipAdress" />
+    <result column="relationship_email" jdbcType="VARCHAR" property="relationshipEmail" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="account_book_no" jdbcType="VARCHAR" property="accountBookNo" />
+    <result column="passport_no" jdbcType="VARCHAR" property="passportNo" />
+    <result column="officer_number" jdbcType="VARCHAR" property="officerNumber" />
+    <result column="driver_number" jdbcType="VARCHAR" property="driverNumber" />
+    <result column="hong_kong_and_macao_pass_no" jdbcType="VARCHAR" property="hongKongAndMacaoPassNo" />
+    <result column="taiwan_pass_number" jdbcType="VARCHAR" property="taiwanPassNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    patient_id, patient_unique, `name`, sex, born_adress, born, culture, phone, email, 
+    abo_type, rh_type, relationship, relationship_name, relationship_sex, relationship_adress, 
+    relationship_email, idcard, account_book_no, passport_no, officer_number, driver_number, 
+    hong_kong_and_macao_pass_no, taiwan_pass_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from patient
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patient
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.Patient">
+    insert into patient (patient_id, patient_unique, `name`, 
+      sex, born_adress, born, 
+      culture, phone, email, 
+      abo_type, rh_type, relationship, 
+      relationship_name, relationship_sex, relationship_adress, 
+      relationship_email, idcard, account_book_no, 
+      passport_no, officer_number, driver_number, 
+      hong_kong_and_macao_pass_no, taiwan_pass_number
+      )
+    values (#{patientId,jdbcType=INTEGER}, #{patientUnique,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{bornAdress,jdbcType=VARCHAR}, #{born,jdbcType=DATE}, 
+      #{culture,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{aboType,jdbcType=VARCHAR}, #{rhType,jdbcType=VARCHAR}, #{relationship,jdbcType=VARCHAR}, 
+      #{relationshipName,jdbcType=VARCHAR}, #{relationshipSex,jdbcType=VARCHAR}, #{relationshipAdress,jdbcType=VARCHAR}, 
+      #{relationshipEmail,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{accountBookNo,jdbcType=VARCHAR}, 
+      #{passportNo,jdbcType=VARCHAR}, #{officerNumber,jdbcType=VARCHAR}, #{driverNumber,jdbcType=VARCHAR}, 
+      #{hongKongAndMacaoPassNo,jdbcType=VARCHAR}, #{taiwanPassNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.Patient">
+    insert into patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="patientUnique != null">
+        patient_unique,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="bornAdress != null">
+        born_adress,
+      </if>
+      <if test="born != null">
+        born,
+      </if>
+      <if test="culture != null">
+        culture,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="aboType != null">
+        abo_type,
+      </if>
+      <if test="rhType != null">
+        rh_type,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="relationshipName != null">
+        relationship_name,
+      </if>
+      <if test="relationshipSex != null">
+        relationship_sex,
+      </if>
+      <if test="relationshipAdress != null">
+        relationship_adress,
+      </if>
+      <if test="relationshipEmail != null">
+        relationship_email,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="accountBookNo != null">
+        account_book_no,
+      </if>
+      <if test="passportNo != null">
+        passport_no,
+      </if>
+      <if test="officerNumber != null">
+        officer_number,
+      </if>
+      <if test="driverNumber != null">
+        driver_number,
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        hong_kong_and_macao_pass_no,
+      </if>
+      <if test="taiwanPassNumber != null">
+        taiwan_pass_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientUnique != null">
+        #{patientUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAdress != null">
+        #{bornAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        #{born,jdbcType=DATE},
+      </if>
+      <if test="culture != null">
+        #{culture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="aboType != null">
+        #{aboType,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null">
+        #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipName != null">
+        #{relationshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipSex != null">
+        #{relationshipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipAdress != null">
+        #{relationshipAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipEmail != null">
+        #{relationshipEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBookNo != null">
+        #{accountBookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="passportNo != null">
+        #{passportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="officerNumber != null">
+        #{officerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNumber != null">
+        #{driverNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanPassNumber != null">
+        #{taiwanPassNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.Patient">
+    update patient
+    <set>
+      <if test="patientUnique != null">
+        patient_unique = #{patientUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAdress != null">
+        born_adress = #{bornAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        born = #{born,jdbcType=DATE},
+      </if>
+      <if test="culture != null">
+        culture = #{culture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="aboType != null">
+        abo_type = #{aboType,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null">
+        rh_type = #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipName != null">
+        relationship_name = #{relationshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipSex != null">
+        relationship_sex = #{relationshipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipAdress != null">
+        relationship_adress = #{relationshipAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipEmail != null">
+        relationship_email = #{relationshipEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBookNo != null">
+        account_book_no = #{accountBookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="passportNo != null">
+        passport_no = #{passportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="officerNumber != null">
+        officer_number = #{officerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNumber != null">
+        driver_number = #{driverNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        hong_kong_and_macao_pass_no = #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanPassNumber != null">
+        taiwan_pass_number = #{taiwanPassNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.Patient">
+    update patient
+    set patient_unique = #{patientUnique,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      born_adress = #{bornAdress,jdbcType=VARCHAR},
+      born = #{born,jdbcType=DATE},
+      culture = #{culture,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      abo_type = #{aboType,jdbcType=VARCHAR},
+      rh_type = #{rhType,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      relationship_name = #{relationshipName,jdbcType=VARCHAR},
+      relationship_sex = #{relationshipSex,jdbcType=VARCHAR},
+      relationship_adress = #{relationshipAdress,jdbcType=VARCHAR},
+      relationship_email = #{relationshipEmail,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      account_book_no = #{accountBookNo,jdbcType=VARCHAR},
+      passport_no = #{passportNo,jdbcType=VARCHAR},
+      officer_number = #{officerNumber,jdbcType=VARCHAR},
+      driver_number = #{driverNumber,jdbcType=VARCHAR},
+      hong_kong_and_macao_pass_no = #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      taiwan_pass_number = #{taiwanPassNumber,jdbcType=VARCHAR}
+    where patient_id = #{patientId,jdbcType=INTEGER}
+  </update>
+</mapper>

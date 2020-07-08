@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新建患者</title>
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--<link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper.js/umd/popper.min.js"> </script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>-->
+	</head>
+	<body>
+		<div class="patient_content">
+			<br />
+			<div class="patient_head" style="margin-left: 150px;">
+				<table>
+					<tr>
+						<td><button class="btn btn-primary">自定义患者</button></td>
+						<td><button class="btn btn-primary">导入Excel文件</button></td>
+					</tr>
+				</table>
+			</div>
+			<hr />
+			<div class="patient_add" style="margin-left: 150px;">
+				<form class="add_form"> 
+					<table>
+						<tr>
+							<td><label >住院号</label></td>
+							<td >
+								<div class="form-group">
+								   <input type="text" class="form-control" placeholder="住院号">
+								 </div>
+							</td>
+							<td><label >姓名</label></td>
+							<td >
+								<div class="form-group">
+								   <input type="text" class="form-control" placeholder="姓名">
+								 </div>
+							</td>
+						</tr>
+						<tr>
+							<td><label >门诊号</label></td>
+							<td >
+								<div class="form-group">
+								   <input type="text" class="form-control" placeholder="门诊号">
+								 </div>
+							</td>
+							<td><label>出生日期</label></td>
+							<td >
+								<div class="form-group">
+								   <input type="text" class="form-control" placeholder="出生日期">
+								 </div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td><button class="btn btn-primary" style="">确定</button></td>
+						</tr> -->
+					</table>
+					<button class="btn btn-primary" style="margin-left: 200px;">确定</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

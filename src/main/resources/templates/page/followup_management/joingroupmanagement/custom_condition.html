@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自定义条件</title>
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/demo.css">
+        <link rel="stylesheet" href="css/zTreeStyle.css">
+		<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="vendor/jquery/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="vendor/jquery/jquery.ztree.excheck.js"></script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper.js/umd/popper.min.js"> </script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		var zNodes =[
+			{ id:1, pId:0, name:"基本信息", open:true},
+				{ id:101, pId:1, name:"患者唯一标识"},
+				{ id:102, pId:1, name:"姓名"},
+				{ id:103, pId:1, name:"性别"},
+				{ id:104, pId:1, name:"出生日期"},
+				{ id:105, pId:1, name:"出生地"},
+				{ id:106, pId:1, name:"文化程度"},
+				{ id:107, pId:1, name:"移动电话"},
+				{ id:108, pId:1, name:"电子邮件"},
+				{ id:109, pId:1, name:"移动电话"},
+				{ id:120, pId:1, name:"ABO血型"},
+				{ id:121, pId:1, name:"RH血型"},
+				{ id:122, pId:1, name:"联系人", open:true},
+					{ id:1120, pId:122, name:"与患者关系"},
+					{ id:1121, pId:122, name:"姓名"},
+					{ id:1122, pId:122, name:"性别"},
+					{ id:1123, pId:122, name:"住址"},
+					{ id:1124, pId:122, name:"电子邮件"},
+				{ id:123, pId:1, name:"证件", open:true},
+					{ id:1230, pId:123, name:"身份证号"},
+					{ id:1231, pId:123, name:"户口簿号"},
+					{ id:1230, pId:123, name:"护照"},
+					{ id:1231, pId:123, name:"军官证"},
+					{ id:1230, pId:123, name:"驾驶证"},
+					{ id:1231, pId:123, name:"户口簿"},
+					{ id:1230, pId:123, name:"身份证号"},
+					{ id:1231, pId:123, name:"户口簿号"},
+			{ id:2, pId : 0,name:"首页信息",open:true},
+				{ id:201, pId:2, name:"患者唯一标识", open:true},
+				{ id:202, pId:2, name:"姓名", open:true},
+				{ id:203, pId:2, name:"性别", open:true},
+				{ id:204, pId:2, name:"出生日期", open:true},
+				{ id:205, pId:2, name:"出生地", open:true},
+				{ id:206, pId:2, name:"文化程度", open:true},
+				{ id:207, pId:2, name:"移动电话", open:true},
+				{ id:208, pId:2, name:"电子邮件", open:true},
+				{ id:209, pId:2, name:"移动电话", open:true},
+				{ id:210, pId:2, name:"ABO血型", open:true},
+				{ id:211, pId:2, name:"RH血型", open:true},
+			{ id:3, pId : 0,name:"手术信息",open:true},
+				{ id:301, pId:3, name:"手术名称", open:true},
+				{ id:302, pId:3, name:"手术日期", open:true},
+				{ id:303, pId:3, name:"手术执行科室", open:true},
+				{ id:304, pId:3, name:"手术开始时间", open:true},
+				{ id:305, pId:3, name:"手术结束时间", open:true},
+				{ id:306, pId:3, name:"手术工作量", open:true},
+				{ id:307, pId:3, name:"手术部位", open:true},
+				{ id:308, pId:3, name:"麻醉信息", open:true},
+					{ id:3080, pId:308, name:"麻醉方式"},
+					{ id:3081, pId:308, name:"麻醉科室"},
+					{ id:3082, pId:308, name:"麻醉准备时间"},
+					{ id:3083, pId:308, name:"麻醉开始时间"},
+					{ id:3084, pId:308, name:"麻醉结束时间"},
+					{ id:3085, pId:308, name:"麻醉工作量"}
+		];
+
+		var code;
+
+		function setCheck() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			py = $("#py").attr("checked")? "p":"",
+			sy = $("#sy").attr("checked")? "s":"",
+			pn = $("#pn").attr("checked")? "p":"",
+			sn = $("#sn").attr("checked")? "s":"",
+			type = { "Y":py + sy, "N":pn + sn};
+			zTree.setting.check.chkboxType = type;
+			showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+		}
+		function showCode(str) {
+			if (!code) code = $("#code");
+			code.empty();
+			code.append("<li>"+str+"</li>");
+		}
+
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			setCheck();
+			$("#py").bind("change", setCheck);
+			$("#sy").bind("change", setCheck);
+			$("#pn").bind("change", setCheck);
+			$("#sn").bind("change", setCheck);
+		});
+		//-->
+	</SCRIPT>
+    </head>
+	<body>
+		<div class="custom_page">
+			
+			<div class="custom_left" style="float: left; margin-left:150px ; margin-top: 20px; border-style:inset; padding: 20px; height: 700px; overflow: scroll;"  >
+				<table>
+					<tr>
+						<td>
+							<div class="form-group">
+								 <input type="text" class="form-control">
+							</div>
+						</td>
+						<td>
+							<td><div class="col-lg-2">
+								</div>
+							</td>
+						</td>
+						<td><button class="btn btn-primary btn-group-lg" style="margin-top: -20px;">筛选</button></td>
+					</tr>
+				</table>
+				<!-- 	<div style="width: 300px; border-style: inset; height: 600px;"> -->
+						<div class="zTreeDemoBackground left">
+							<ul id="treeDemo" class="ztree"></ul>
+						</div>
+						<div class="right" style="display: none;">
+							<ul class="info">
+									<ul class="list">
+									<li><p>Linkage relationship between parent and child nodes:<br/>
+										check: <input type="checkbox" id="py" class="checkbox first" checked /><span>affect the parent</span>
+										<input type="checkbox" id="sy" class="checkbox first" checked /><span>affect the child</span><br/>
+										uncheck: <input type="checkbox" id="pn" class="checkbox first" checked /><span>affect the parent</span>
+										<input type="checkbox" id="sn" class="checkbox first" checked /><span>affect the child</span><br/>
+										<ul id="code" class="log" style="height:20px;"></ul></p>
+									</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<button class="btn btn-primary" style="text-align: center;">确认</button>
+						</div>
+					<!-- </div> -->
+				</div>
+			
+			<div style="float:left; margin-top: 20px; margin-left: 30px;  width: 2px;height: 700px; background: darkgray;"></div> 
+			
+			<div class="custom_right" style=" padding: 0; margin: 0; border-style:inset; padding: 20px; float: right; margin-right: 480px; margin-top: 20px;height: 700px;">
+				<table style="margin-top: 180px;">
+					<tr>
+						<td><label style="margin-left: 40px;">OR</label></td>
+						<td><div style="width: 50px; height: 1px; background: darkgray; margin-top: -5px;"></div></td>
+						<td><div style="width: 1px; height: 80px; background: darkgray; margin-top: -5px;"></div></td>
+						<td><label style="margin-left: -20px; margin-bottom: 100px;">AND</label></td>
+					    <td><div style="width: 1px; height: 40px; background: darkgray; margin-top: -75px; margin-right: -50px; float: right;"></div></td>
+						<td><div style="width: 40px; height: 1px; background: darkgray; margin-top: -55px; margin-right: -40px;"></div></td>
+						
+					<!-- 	<td><div style="width: 1px; height: 40px; background: darkgray; margin-top: -70px;"></div></td> -->
+						<td><label style="margin-left: -40px; margin-top: 100px;">AND</label></td>
+						<td><div style="width: 40px; height: 1px; background: darkgray; margin-top: 105px; margin-right: -40px;"></div></td>
+						<td><div style="width: 1px; height: 40px; background: darkgray; margin-top: 105px; margin-left: 40px;"></div></td>
+						<td><label style="margin-bottom: 180px; margin-left: -10px;">疾病名称</label></td>
+						<td><label style="margin-bottom: 50px; margin-left: -65px;">白蛋白</label></td>
+						<td><label style="margin-top: 50px; margin-left: -70px;">疾病名称</label></td>
+						<td><label style="margin-top: 180px; margin-left: -70px;">药物</label></td>
+						<td>
+							 <div class="form-group" style="margin-top: -110px;">
+							     <select name="userState" class="form-control" style="width: 100px; height: 38px;" />
+							     <option value="0">大于</option>
+							     <option value="1">等于</option>
+							     <option value="2">小于</option>
+							  </div>
+						</td>
+						<td>
+							 <div class="form-group" style="margin-top: -40px; margin-left: -102px;">
+							     <select name="userState" class="form-control" style="width: 100px; height: 38px;" />
+							     <option value="0">大于</option>
+							     <option value="1">等于</option>
+							     <option value="2">小于</option>
+							  </div>
+						</td>
+						<td>
+							 <div class="form-group" style="margin-bottom: -40px; margin-left: -103px;">
+							     <select name="userState" class="form-control" style="width: 100px; height: 38px;" />
+							     <option value="0">大于</option>
+							     <option value="1">等于</option>
+							     <option value="2">小于</option>
+							  </div>
+						</td>
+						<td>
+							 <div class="form-group" style="margin-top: 190px; margin-left: -105px;">
+							     <select name="userState" class="form-control" style="width: 100px; height: 38px;" />
+							     <option value="0">大于</option>
+							     <option value="1">等于</option>
+							     <option value="2">小于</option>
+							  </div>
+						</td>
+						<td><label style="margin-bottom: 180px; margin-left: 10px;">高血压</label></td>
+						<td><label style="margin-bottom: 60px; margin-left: -40px;">30</label></td>
+						<td><label style="margin-top: 50px; margin-left: -45px;">糖尿病</label></td>
+						<td><label style="margin-top: 180px; margin-left: -50px;">二甲双票</label></td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
+	</body>
+</html>
