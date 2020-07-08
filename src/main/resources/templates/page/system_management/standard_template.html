@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标准化模板维护</title>
+    <style>
+        .scroll-container{
+            width: 400px;
+            height: 575px;
+            overflow: auto;
+            float: left;
+        }
+        .scroll-content{
+            width: 377px;
+            height: 810px;
+        }
+        .test{
+            width: 940px;
+            height: 570px;
+            border: 1px silver solid;
+            float: left;
+            margin-left: 100px;
+
+        }
+        .table tr td:nth-of-type(2) input{
+            margin-right: 100px;
+        }
+        .content{
+            margin-left: 100px;
+        }
+        .table tr{
+            line-height: 50px;
+        }
+        .imgs div{
+            display: inline-block;
+        }
+        .shuyu2 ul li{
+            list-style: none;
+            line-height: 60px;
+
+        }
+        .shuyu2 ul{
+            display: inline-block;
+            margin: 0 60px;
+        }
+        .shuyu2 ul li input{
+            width: 30px;
+            height: 30px;
+        }
+
+    </style>
+    <script src="vendor/layui/layui.js"></script>
+    <script src="layui/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="layui/tree.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <script src="vendor/jquery-2.2.3.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--    <script>
+            function aa(str)
+            {
+                var obj=document.getElementById("divIframe");
+                if(str=="t")
+                {
+                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/tree\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
+                }
+                else
+                {
+                    obj.innerHTML="";
+                }
+            }
+            function bb(str)
+            {
+                var obj=document.getElementById("divIframe");
+                if(str=="y")
+                {
+                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/combinationattribute\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
+                }
+                else
+                {
+                    obj.innerHTML="";
+                }
+            }
+            function cc(str)
+            {
+                var obj=document.getElementById("divIframe");
+                if(str=="u")
+                {
+                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/controlproperties\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
+                }
+                else
+                {
+                    obj.innerHTML="";
+                }
+            }
+            function dd(str)
+            {
+                var obj=document.getElementById("divIframe");
+                if(str=="i")
+                {
+                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/custom\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
+                }
+                else
+                {
+                    obj.innerHTML="";
+                }
+            }
+
+        </script>-->
+</head>
+<body>
+<div class="imgs">
+    <div style="position: relative; width: 170px; height: 89px;" data-toggle="modal" data-target="#myModal">
+        <img src="img/u640.png" width="170" height="59" alt="">
+        <span style="position: absolute; top: -10px; left: 10px;"><h1 style="color: white"></h1></span>
+    </div>
+    <div style="margin-left: 10px;margin-top: 20px"> <span><h1 style="color: #0E74B4"> 标准化模板维护</h1></span></div>
+
+    <div>
+        <button type="button" class="btn btn-primary" style="margin-left: 710px;width: 110px;background-color: #2b669a">保存</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" style="margin-left: 20px;width: 110px;background-color: #2b669a">发布</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" style="margin-left: 20px;width: 110px;background-color: #2b669a">取消</button>
+    </div>
+</div>
+
+
+<div class="scroll-container">
+    <div class="scroll-content" id="divIframe">
+        <div class="main_right" style="width:calc(100% - 240px);height:calc(100% - 80px)">
+            <iframe frameborder="0" scrolling="no" style="width: 245%;height: 100%" name="iframe" src="" id="iframe"></iframe>
+        </div>
+    </div>
+</div>
+
+
+<div style="float:left; margin-top: 50px; margin-left: 90px;  width: 2px;height: 500px; background: darkgray;"></div>
+<div class="test" style="overflow:auto">
+    <div class="content">
+        <div onclick="aa('t')">
+            <div>
+                <h1>基本信息</h1>
+                <table id="content1">
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                        </td>
+                        <td>
+                            <input type="text" id="mdc_city">
+                        </td>
+                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                        </td>
+                        <td >
+                            <select style="width: 300px">
+                                <option value="0">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                                <option value="3">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">出生日期：</span>
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">民族：</span>
+                        </td>
+                        <td>
+                            <select style="width: 300px">
+                                <option value="0">请选择</option>
+                                <option value="1">汉族</option>
+                                <option value="2">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-top: 50px">
+                <h1>体格检查</h1>
+                <table class="table">
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">身高：</span>
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">体重：</span>
+                        </td>
+                        <td >
+                            <input type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">BMI：</span>
+                        </td>
+                        <td>
+                            <input type="text">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="margin-top:50px">
+            <h1>实验室检查</h1>
+            <table class="table" >
+                <!--<span  style="float:left; margin-top:10px; margin-left: 30px;  width: 4px;height:30px; background:darkgrey;"></span>-->
+
+                <td onclick="bb('y')"><span style="white-space: nowrap;display: inline-block;color: dimgray;margin-left: 10px">血常规</span></td>
+                <tr onclick="cc('u')">
+                    <td style="text-align: right">
+                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">白细胞：</span>
+                    </td>
+                    <td>
+                        <a href="/"><input type="text"></a>
+                    </td>
+
+                    <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">血糖：</span>
+                    </td>
+                    <td >
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div onclick="dd('i')" style="margin-top: 50px">
+            <h1 >症状</h1>
+            <table class="table" style="margin-left: -100px">
+                <tr>
+                    <td style="text-align: right">
+                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">症状：</span>
+                    </td>
+                    <td>
+                        <a href="/">
+                            <select style="width: 300px">
+                                <option value="0">请选择</option>
+                            </select>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="shuyu" style="margin-top: 30px;text-align: center">
+                <h2>通用模板选择</h2>
+            </div>
+            <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto" >
+                <ul style="margin-top: 30px">
+                    <li><input type="checkbox"></li>
+                    <li>基本信息<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+
+                    <li><input type="checkbox"></li>
+                    <li>用药<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+                </ul>
+                <ul>
+
+                    <li><input type="checkbox"></li>
+                    <li>体格检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+
+
+                    <li><input type="checkbox"></li>
+                    <li>既往史<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+                </ul>
+                <ul>
+                    <li><input type="checkbox"></li>
+                    <li>实验室检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+
+
+                    <li><input type="checkbox"></li>
+                    <li>临床诊断<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+                </ul>
+                <ul>
+                    <li><input type="checkbox"></li>
+                    <li>影像学检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+
+                    <li><input type="checkbox"></li>
+                    <li>随访<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
+                </ul>
+            </div>
+            <div style="text-align: center">
+                <button class="btn btn-primary" style="width: 150px" >确定/合并</button>
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

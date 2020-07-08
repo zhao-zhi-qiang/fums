@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.FollowUpDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.FollowUp">
+    <id column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
+    <result column="follow_up_principal" jdbcType="VARCHAR" property="followUpPrincipal" />
+    <result column="follow_up_level" jdbcType="INTEGER" property="followUpLevel" />
+    <result column="follow_up_name" jdbcType="VARCHAR" property="followUpName" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="follow_up_create_time" jdbcType="DATE" property="followUpCreateTime" />
+    <result column="follow_up_phone" jdbcType="VARCHAR" property="followUpPhone" />
+    <result column="follow_up_status" jdbcType="INTEGER" property="followUpStatus" />
+    <result column="follow_up_start_time" jdbcType="DATE" property="followUpStartTime" />
+    <result column="follow_up_end_time" jdbcType="DATE" property="followUpEndTime" />
+    <result column="follow_up_code" jdbcType="VARCHAR" property="followUpCode" />
+    <result column="follow_up_patient_number" jdbcType="INTEGER" property="followUpPatientNumber" />
+    <result column="follow_up_control_group" jdbcType="VARCHAR" property="followUpControlGroup" />
+    <result column="follow_up_backdrop" jdbcType="VARCHAR" property="followUpBackdrop" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    follow_up_id, hospital_id, hospital_department_child_code, follow_up_principal, follow_up_level, 
+    follow_up_name, user_account, follow_up_create_time, follow_up_phone, follow_up_status, 
+    follow_up_start_time, follow_up_end_time, follow_up_code, follow_up_patient_number, 
+    follow_up_control_group, follow_up_backdrop
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow_up
+    where follow_up_id = #{followUpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from follow_up
+    where follow_up_id = #{followUpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.FollowUp">
+    insert into follow_up (follow_up_id, hospital_id, hospital_department_child_code, 
+      follow_up_principal, follow_up_level, follow_up_name, 
+      user_account, follow_up_create_time, follow_up_phone, 
+      follow_up_status, follow_up_start_time, follow_up_end_time, 
+      follow_up_code, follow_up_patient_number, follow_up_control_group, 
+      follow_up_backdrop)
+    values (#{followUpId,jdbcType=INTEGER}, #{hospitalId,jdbcType=INTEGER}, #{hospitalDepartmentChildCode,jdbcType=INTEGER}, 
+      #{followUpPrincipal,jdbcType=VARCHAR}, #{followUpLevel,jdbcType=INTEGER}, #{followUpName,jdbcType=VARCHAR}, 
+      #{userAccount,jdbcType=VARCHAR}, #{followUpCreateTime,jdbcType=DATE}, #{followUpPhone,jdbcType=VARCHAR}, 
+      #{followUpStatus,jdbcType=INTEGER}, #{followUpStartTime,jdbcType=DATE}, #{followUpEndTime,jdbcType=DATE}, 
+      #{followUpCode,jdbcType=VARCHAR}, #{followUpPatientNumber,jdbcType=INTEGER}, #{followUpControlGroup,jdbcType=VARCHAR}, 
+      #{followUpBackdrop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.FollowUp">
+    insert into follow_up
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="followUpId != null">
+        follow_up_id,
+      </if>
+      <if test="hospitalId != null">
+        hospital_id,
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code,
+      </if>
+      <if test="followUpPrincipal != null">
+        follow_up_principal,
+      </if>
+      <if test="followUpLevel != null">
+        follow_up_level,
+      </if>
+      <if test="followUpName != null">
+        follow_up_name,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="followUpCreateTime != null">
+        follow_up_create_time,
+      </if>
+      <if test="followUpPhone != null">
+        follow_up_phone,
+      </if>
+      <if test="followUpStatus != null">
+        follow_up_status,
+      </if>
+      <if test="followUpStartTime != null">
+        follow_up_start_time,
+      </if>
+      <if test="followUpEndTime != null">
+        follow_up_end_time,
+      </if>
+      <if test="followUpCode != null">
+        follow_up_code,
+      </if>
+      <if test="followUpPatientNumber != null">
+        follow_up_patient_number,
+      </if>
+      <if test="followUpControlGroup != null">
+        follow_up_control_group,
+      </if>
+      <if test="followUpBackdrop != null">
+        follow_up_backdrop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="followUpId != null">
+        #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalId != null">
+        #{hospitalId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        #{hospitalDepartmentChildCode,jdbcType=INTEGER},
+      </if>
+      <if test="followUpPrincipal != null">
+        #{followUpPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpLevel != null">
+        #{followUpLevel,jdbcType=INTEGER},
+      </if>
+      <if test="followUpName != null">
+        #{followUpName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpCreateTime != null">
+        #{followUpCreateTime,jdbcType=DATE},
+      </if>
+      <if test="followUpPhone != null">
+        #{followUpPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpStatus != null">
+        #{followUpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="followUpStartTime != null">
+        #{followUpStartTime,jdbcType=DATE},
+      </if>
+      <if test="followUpEndTime != null">
+        #{followUpEndTime,jdbcType=DATE},
+      </if>
+      <if test="followUpCode != null">
+        #{followUpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpPatientNumber != null">
+        #{followUpPatientNumber,jdbcType=INTEGER},
+      </if>
+      <if test="followUpControlGroup != null">
+        #{followUpControlGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpBackdrop != null">
+        #{followUpBackdrop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.FollowUp">
+    update follow_up
+    <set>
+      <if test="hospitalId != null">
+        hospital_id = #{hospitalId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=INTEGER},
+      </if>
+      <if test="followUpPrincipal != null">
+        follow_up_principal = #{followUpPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpLevel != null">
+        follow_up_level = #{followUpLevel,jdbcType=INTEGER},
+      </if>
+      <if test="followUpName != null">
+        follow_up_name = #{followUpName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpCreateTime != null">
+        follow_up_create_time = #{followUpCreateTime,jdbcType=DATE},
+      </if>
+      <if test="followUpPhone != null">
+        follow_up_phone = #{followUpPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpStatus != null">
+        follow_up_status = #{followUpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="followUpStartTime != null">
+        follow_up_start_time = #{followUpStartTime,jdbcType=DATE},
+      </if>
+      <if test="followUpEndTime != null">
+        follow_up_end_time = #{followUpEndTime,jdbcType=DATE},
+      </if>
+      <if test="followUpCode != null">
+        follow_up_code = #{followUpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpPatientNumber != null">
+        follow_up_patient_number = #{followUpPatientNumber,jdbcType=INTEGER},
+      </if>
+      <if test="followUpControlGroup != null">
+        follow_up_control_group = #{followUpControlGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpBackdrop != null">
+        follow_up_backdrop = #{followUpBackdrop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where follow_up_id = #{followUpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.FollowUp">
+    update follow_up
+    set hospital_id = #{hospitalId,jdbcType=INTEGER},
+      hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=INTEGER},
+      follow_up_principal = #{followUpPrincipal,jdbcType=VARCHAR},
+      follow_up_level = #{followUpLevel,jdbcType=INTEGER},
+      follow_up_name = #{followUpName,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      follow_up_create_time = #{followUpCreateTime,jdbcType=DATE},
+      follow_up_phone = #{followUpPhone,jdbcType=VARCHAR},
+      follow_up_status = #{followUpStatus,jdbcType=INTEGER},
+      follow_up_start_time = #{followUpStartTime,jdbcType=DATE},
+      follow_up_end_time = #{followUpEndTime,jdbcType=DATE},
+      follow_up_code = #{followUpCode,jdbcType=VARCHAR},
+      follow_up_patient_number = #{followUpPatientNumber,jdbcType=INTEGER},
+      follow_up_control_group = #{followUpControlGroup,jdbcType=VARCHAR},
+      follow_up_backdrop = #{followUpBackdrop,jdbcType=VARCHAR}
+    where follow_up_id = #{followUpId,jdbcType=INTEGER}
+  </update>
+</mapper>

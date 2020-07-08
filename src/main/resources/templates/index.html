@@ -46,6 +46,11 @@
 
         }
     </style>
+    <script type="text/javascript">
+        function aaa(url) {
+            $("#iframe").prop("src",url);
+        }
+    </script>
 </head>
 <body>
 <!-- Side Navbar -->
@@ -93,15 +98,15 @@
                         <li><a href="#">自定义控件</a></li>
                     </ul>
                 </li>
-                <li><a href="tables.html"> <i class="icon-grid"></i>随访进度管理</a></li>
-                <li><a href="#datareview" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>数据复核</a>
+                <li><a onclick="aaa('followUpManagement')" target="iframe"> <i class="icon-grid"></i>随访进度管理</a></li>
+                <li><a href="#datareview" onclick="aaa('dataReview')" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>数据复核</a>
                     <ul id="datareview" class="collapse list-unstyled ">
-                        <li><a href="#">复核明细</a></li>
+                        <li><a onclick="aaa('checkDetail')">复核明细</a></li>
                     </ul>
                 </li>
                 <li><a href="#planDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>患者详细画面</a>
                     <ul id="planDropdown" class="collapse list-unstyled ">
-                        <li><a href="#">随访计划</a></li>
+                        <li><a onclick="aaa('followUpPlan')">随访计划</a></li>
                     </ul>
                 </li>
                 <li><a href="#systemDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>系统管理</a>
@@ -160,6 +165,11 @@
             </div>
         </nav>
     </header>
+     <!--内容区域-->
+    <div class="content-wrapper" style="height: 100%">
+        <iframe width="100%" height="100%" id="iframe" name="iframe" large-header="0" src="followUpManagement"></iframe>
+    </div>
+    <!--<iframe width="100%" height="100%" src="page/followup_management/follow_up_management.html"></iframe>-->
     <footer class="main-footer">
         <div class="container-fluid">
             <div class="row">

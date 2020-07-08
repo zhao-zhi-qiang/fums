@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单总览</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
+    <link rel="stylesheet" href="css/style.css">
+<!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
+    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!--联网引入-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--下拉菜单文字头样式    不能用-->
+    <script rel="stylesheet" type="text/css" src="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css"></script>
+
+
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Roboto -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+
+    <style>
+        html{
+            width: 100%;
+            float: right;
+        }
+        table{
+            border: 1px solid #80bdff;
+        }
+        .main-menu{
+            width: 210px;
+            height: 0px;
+            margin-left: 20px;
+            font-size:20px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var qian;//前
+        var hou;//后
+
+        $(function () {
+            retrieval()
+        })
+
+        function retrieval(){
+            $("#tbody").empty();
+
+            var
+
+            $.ajax({
+                url:"",
+
+
+            })
+        }
+
+
+
+
+    </script>
+
+
+
+
+
+</head>
+
+<body>
+
+<!--表单总览-->
+<table class="table">
+    <span style="font-size:30px; font-weight:800;color: blue;margin-left: 20px;">模板总览</span>
+</table>
+
+<div class="main-menu" >
+    <ul id="side-main-menu" class="side-menu list-unstyled">
+        <li><a href="#globaltemplate" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>通用模板</a>
+            <ul id="globaltemplate" class="collapse list-unstyled ">
+                <li><a href="#">基本信息</a></li>
+                <li><a href="#inspectionpackage" aria-expanded="false" data-toggle="collapse"> <i class="icon-home"></i>检验套餐</a>
+                    <ul id="inspectionpackage" class="collapse list-unstyled ">
+                        <li><a href="#">血常规</a></li>
+                        <li><a href="#">血生化</a></li>
+                        <li><a href="#">尿常规</a></li>
+                    </ul>
+                </li>
+                <li><a href="#checkpackage" aria-expanded="false" data-toggle="collapse"> <i class="icon-home"></i>检查套餐</a>
+                    <ul id="checkpackage" class="collapse list-unstyled ">
+                        <li><a href="#">超声</a></li>
+                        <li><a href="#">核磁</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#endocrinedepartment" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>内分泌科</a>
+            <ul id="endocrinedepartment" class="collapse list-unstyled ">
+                <li><a href="#">糖尿病首诊</a></li>
+                <li><a href="#">甲状腺状况评分</a></li>
+            </ul>
+        </li>
+        <li><a href="#departmentofnephrology" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>肾内科</a>
+            <ul id="departmentofnephrology" class="collapse list-unstyled ">
+                <li><a href="#">健康评分</a></li>
+            </ul>
+        </li>
+        <li><a href="#internalmedicineneurology" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>神经内科</a>
+            <ul id="internalmedicineneurology" class="collapse list-unstyled ">
+                <li><a href="#">评估表</a></li>
+            </ul>
+        </li>
+        <li><a href="#instituteofcardiology" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>心研所</a>
+            <ul id="instituteofcardiology" class="collapse list-unstyled ">
+                <li><a href="#">高血压评估表</a></li>
+                <li><a href="#">冠心病评估表</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+<div style="margin-left: 260px;margin-top: 10px;">
+
+    <table class="table" style="background:beige;" border="0" >
+        <div style="text-align: center">
+        <tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">随访组名称：</span>
+            </td>
+            <td >
+                <input class="form-control" id="#" style="width: 80%">
+            </td>
+
+            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建日期：</span>
+            </td>
+            <td >
+                <input  id="14" name="" style="width: 40%">~<input id="77" name="" style="width: 40%;">
+            </td>
+        </tr>
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">模板名称：</span>
+            </td>
+            <td>
+                <input class="form-control" id="3" style="width: 80%">
+            </td>
+
+            <td style="text-align: right">
+                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建者：</span>
+            </td>
+            <td>
+                <input class="form-control" id="2" style="width: 40%">
+            </td>
+        </div>
+
+    </table>
+
+    <div style="text-align: center;margin-top: 20px;">
+        <button type="button" class="btn btn-success btn-sm" onclick="retrieval()">检索</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="">清空</button>
+    </div>
+
+    <!--    <button class="btn btn-info">创建模板</button>-->
+    <table class="table table-bordered" style="margin-top: 20px;">
+        <thead>
+        <tr class="info" style="text-align: center;">
+            <th>模板名称</th>
+            <th>随访组名称</th>
+            <th>更新日期</th>
+            <th>更新者</th>
+            <th>版本号</th>
+            <th>创建者</th>
+            <th>创建日期</th>
+            <th>状态</th>
+        </tr>
+        </thead>
+        <tbody id="tbody" style="text-align: center;">
+        <tr class="active">
+            <td rowspan="2">糖尿病首诊</td>
+            <td rowspan="2">组1</td>
+            <td>2015-06-01</td>
+            <td>赵四</td>
+            <td>001</td>
+            <td>赵四</td>
+            <td>2015-06-01</td>
+            <td>
+                <a href="#">历史版本</a>
+            </td>
+        </tr>
+        <tr class="active">
+            <td>2015-06-01</td>
+            <td>赵四</td>
+            <td>002</td>
+            <td>赵四</td>
+            <td>2015-06-01</td>
+            <td>
+                <a href="#">当前版本</a>
+            </td>
+        </tr>
+        <tr class="active">
+            <td rowspan="2">甲状腺状况评分</td>
+            <td rowspan="2">组2</td>
+            <td>2015-06-01</td>
+            <td>赵四</td>
+            <td>001</td>
+            <td>赵四</td>
+            <td>2015-06-01</td>
+            <td>
+                <a href="#">未发布</a>
+            </td>
+        </tr>
+        <tr class="active">
+            <td>2015-06-01</td>
+            <td>赵四</td>
+            <td>002</td>
+            <td>赵四</td>
+            <td>2015-06-01</td>
+            <td>
+                <a href="#">当前版本</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="padding-left: 567px;">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

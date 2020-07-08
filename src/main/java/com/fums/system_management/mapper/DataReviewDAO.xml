@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.DataReviewDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.DataReview">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+    <result column="form" jdbcType="VARCHAR" property="form" />
+    <result column="data_item" jdbcType="VARCHAR" property="dataItem" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="skeptic" jdbcType="VARCHAR" property="skeptic" />
+    <result column="review " jdbcType="VARCHAR" property="review" />
+    <result column="review_state" jdbcType="INTEGER" property="reviewState" />
+    <result column="review_date" jdbcType="DATE" property="reviewDate" />
+    <result column="del_state" jdbcType="INTEGER" property="delState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, follow_up_id, form, data_item, patient_id, `value`, skeptic, review , review_state, 
+    review_date, del_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from data_review
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from data_review
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.DataReview">
+    insert into data_review (id, follow_up_id, form, 
+      data_item, patient_id, `value`, 
+      skeptic, review, review_state,
+      review_date, del_state)
+    values (#{id,jdbcType=INTEGER}, #{followUpId,jdbcType=INTEGER}, #{form,jdbcType=VARCHAR}, 
+      #{dataItem,jdbcType=VARCHAR}, #{patientId,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}, 
+      #{skeptic,jdbcType=VARCHAR}, #{review ,jdbcType=VARCHAR}, #{reviewState,jdbcType=INTEGER}, 
+      #{reviewDate,jdbcType=DATE}, #{delState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.DataReview">
+    insert into data_review
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="followUpId != null">
+        follow_up_id,
+      </if>
+      <if test="form != null">
+        form,
+      </if>
+      <if test="dataItem != null">
+        data_item,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="skeptic != null">
+        skeptic,
+      </if>
+      <if test="review != null">
+        review,
+      </if>
+      <if test="reviewState != null">
+        review_state,
+      </if>
+      <if test="reviewDate != null">
+        review_date,
+      </if>
+      <if test="delState != null">
+        del_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="followUpId != null">
+        #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="form != null">
+        #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="dataItem != null">
+        #{dataItem,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="skeptic != null">
+        #{skeptic,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null">
+        #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewState != null">
+        #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="reviewDate != null">
+        #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        #{delState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.DataReview">
+    update data_review
+    <set>
+      <if test="followUpId != null">
+        follow_up_id = #{followUpId,jdbcType=INTEGER},
+      </if>
+      <if test="form != null">
+        form = #{form,jdbcType=VARCHAR},
+      </if>
+      <if test="dataItem != null">
+        data_item = #{dataItem,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="skeptic != null">
+        skeptic = #{skeptic,jdbcType=VARCHAR},
+      </if>
+      <if test="review != null">
+        review = #{review,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewState != null">
+        review_state = #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="reviewDate != null">
+        review_date = #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="delState != null">
+        del_state = #{delState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.DataReview">
+    update data_review
+    set follow_up_id = #{followUpId,jdbcType=INTEGER},
+      form = #{form,jdbcType=VARCHAR},
+      data_item = #{dataItem,jdbcType=VARCHAR},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      `value` = #{value,jdbcType=VARCHAR},
+      skeptic = #{skeptic,jdbcType=VARCHAR},
+      review = #{review,jdbcType=VARCHAR},
+      review_state = #{reviewState,jdbcType=INTEGER},
+      review_date = #{reviewDate,jdbcType=DATE},
+      del_state = #{delState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

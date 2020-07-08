@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.system_management.dao.DiagnosisAndTreatmentPlanDAO">
+  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.DiagnosisAndTreatmentPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="medication" jdbcType="VARCHAR" property="medication" />
+    <result column="test" jdbcType="VARCHAR" property="test" />
+    <result column="inspect" jdbcType="VARCHAR" property="inspect" />
+    <result column="treatment" jdbcType="VARCHAR" property="treatment" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, medication, test, inspect, treatment, `operation`, notice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from diagnosis_and_treatment_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from diagnosis_and_treatment_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.system_management.pojo.DiagnosisAndTreatmentPlan">
+    insert into diagnosis_and_treatment_plan (id,medication, test,
+      inspect, treatment, `operation`,notice)
+    values (#{id,jdbcType=INTEGER}, #{medication,jdbcType=VARCHAR}, #{test,jdbcType=VARCHAR},
+      #{inspect,jdbcType=VARCHAR}, #{treatment,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.DiagnosisAndTreatmentPlan">
+    insert into diagnosis_and_treatment_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="medication != null">
+        medication,
+      </if>
+      <if test="test != null">
+        test,
+      </if>
+      <if test="inspect != null">
+        inspect,
+      </if>
+      <if test="treatment != null">
+        treatment,
+      </if>
+      <if test="operation != null">
+        `operation`,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="medication != null">
+        #{medication,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="inspect != null">
+        #{inspect,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null">
+        #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.DiagnosisAndTreatmentPlan">
+    update diagnosis_and_treatment_plan
+    <set>
+      <if test="medication != null">
+        medication = #{medication,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        test = #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="inspect != null">
+        inspect = #{inspect,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null">
+        treatment = #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        `operation` = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.DiagnosisAndTreatmentPlan">
+    update diagnosis_and_treatment_plan
+    set medication = #{medication,jdbcType=VARCHAR},
+      test = #{test,jdbcType=VARCHAR},
+      inspect = #{inspect,jdbcType=VARCHAR},
+      treatment = #{treatment,jdbcType=VARCHAR},
+      `operation` = #{operation,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
