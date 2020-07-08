@@ -4,11 +4,133 @@
     <meta charset="UTF-8">
     <title>设定用户</title>
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/shuttlebox.css">
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--穿梭框方法-->
+    <script src="js/shuttlebox.js"></script>
+    <!--图标调用，可忽略-->
+    <script src="js/iconfont.js"></script>
 </head>
 <body>
-<div class="" style="width: 100%;height: 100%;"></div>
+<div style="margin-top: 5px">
+    <table>
+        <tr>
+            <td><label style="margin-left: 5px">科室</label></td>
+            <td >
+                <div class="form-group" style="margin-left: 10px">
+                    <select name="userState" class="form-control" style="width: 180px; height: 38px;" />
+                    <option value="">请选择科室</option>
+                    <option value="0">男科</option>
+                    <option value="1">女科</option>
+                    <option value="1">二科</option>
+                    <option value="1">妇产科</option>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label style="margin-left: 5px">姓名</label></td>
+            <td >
+                <div class="form-group" style="width: 120px;height: 38px; margin-left: 10px;">
+                    <input type="text" class="form-control" placeholder="姓名">
+                </div>
+            </td>
+            <td><button class="btn btn-primary btn-sm" style="margin-top: -20px;margin-left: -50px;">搜索</button></td>
+        </tr>
+    </table>
+</div>
+<div class="selection-container" style="margin-top: -10px;">
+    <div class="select-box left">
+        <div class="select-box-title">
+            <input type="checkbox" class="checkbox-all" id="checkbox-all1" />
+            <label for="checkbox-all1"></label>
+            <span>列表一</span>
+        </div>
+        <div class="select-content">
+            <ul class="unselect-ul">
+                <li>
+                    <input type="checkbox" class="checkboxs"  id="tyue-checkbox-blue1" />
+                    <label for="tyue-checkbox-blue1"></label>
+                    <span>备选项1</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue2" />
+                    <label for="tyue-checkbox-blue2"></label>
+                    <span>备选项2</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue3" />
+                    <label for="tyue-checkbox-blue3"></label>
+                    <span>备选项3</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue4" />
+                    <label for="tyue-checkbox-blue4"></label>
+                    <span>备选项4</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue5" />
+                    <label for="tyue-checkbox-blue5"></label>
+                    <span>备选项5</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue6" />
+                    <label for="tyue-checkbox-blue6"></label>
+                    <span>备选项6</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue7" />
+                    <label for="tyue-checkbox-blue7"></label>
+                    <span>备选项7</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue8" />
+                    <label for="tyue-checkbox-blue8"></label>
+                    <span>备选项8</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="arrows-box">
+        <div class="arrow-btns">
+            <button class="arrow-btn right">
+                <svg class="icon icon-seach" aria-hidden="true">
+                    <use xlink:href="#icon-com-dajiantouyou"></use>
+                </svg>
+            </button>
+            <button class="arrow-btn left">
+                <svg class="icon icon-seach" aria-hidden="true">
+                    <use xlink:href="#icon-com-dajiantouzuo"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="select-box right">
+        <div class="select-box-title">
+            <input type="checkbox" class="checkbox-all" id="checkbox-all2" />
+            <label for="checkbox-all2"></label>
+            <span>列表二</span>
+        </div>
+        <div class="select-content">
+            <ul class="selected-ul">
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue9" />
+                    <label for="tyue-checkbox-blue9"></label>
+                    <span>备选项9</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue10" />
+                    <label for="tyue-checkbox-blue10"></label>
+                    <span>备选项10</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkboxs" id="tyue-checkbox-blue11" />
+                    <label for="tyue-checkbox-blue11"></label>
+                    <span>备选项11</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -40,10 +40,10 @@
 					<tr>
 						<td><a class="btn btn-primary btn-sm" href="/toAuthorityManagement">权限管理</a></td>
 						<td><a class="btn btn-primary btn-sm" href="/toJoingroupManagement">入组管理</a></td>
-						<td><a class="btn btn-primary btn-sm" href="#">模板设置</a></td>
-						<td><a class="btn btn-primary btn-sm" href="#">随访规则设定</a></td>
-						<td><a class="btn btn-primary btn-sm" href="#">诊疗方案</a></td>
-						<td><a class="btn btn-primary btn-sm" href="#">节假日管理</a></td>
+						<td><a class="btn btn-primary btn-sm" href="">模板设置</a></td>
+						<td><a class="btn btn-primary btn-sm" href="">随访规则设定</a></td>
+						<td><a class="btn btn-primary btn-sm" href="">诊疗方案</a></td>
+						<td><a class="btn btn-primary btn-sm" href="">节假日管理</a></td>
 					</tr>
 				</table>
 			</div>
@@ -124,8 +124,8 @@
 		<div class="follow_ops" style="margin-left: 10px;">
 			<table>
 				<tr>
-					<td><button class="btn btn-primary btn-sm">新增</button></td>
-					<td><button class="btn btn-primary btn-sm">编辑</button></td>
+					<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">新增</button></td>
+					<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">编辑</button></td>
 					<td><button class="btn btn-primary btn-sm">删除</button></td>
 				</tr>
 			</table>
@@ -179,6 +179,136 @@
 		<div class="container">
 		  <h1>分页</h1>
 		</div>
+            <!--新增-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                               新增页面
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                           <form id="add_form">
+                               <table>
+                                   <tr>
+                                       <td><label>门诊号</label></td>
+                                       <td>
+                                           <div class="form-group">
+                                               <input type="text" class="form-control" placeholder="输入门诊号/住院号" name="" style="width: 150px; height: 38px;">
+                                           </div>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td><label>姓名</label></td>
+                                       <td>
+                                           <div class="form-group">
+                                               <input type="text" class="form-control" name="" placeholder="输入姓名" style="width: 150px; height: 38px;">
+                                           </div>
+                                       </td>
+                                       <td><label>性别</label></td>
+                                       <td>
+                                           <div class="form-group">
+                                               <select name="sex" class="form-control"  style="width: 150px; height: 38px;"/>
+                                               <option value="">请选择</option>
+                                               <option value="0">男</option>
+                                               <option value="1">女</option>
+                                           </div>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td><label>年龄</label></td>
+                                       <td>
+                                           <div class="form-group">
+                                               <input type="text" class="form-control" placeholder="输入年龄" name="" style="width: 150px; height: 38px;">
+                                           </div>
+                                       </td>
+                                       <td><label>入组日期</label></td>
+                                       <td>
+                                           <div class="form-group">
+                                               <input type="text" class="form-control" placeholder="输入入组日期" name="" style="width: 150px; height: 38px;">
+                                           </div>
+                                       </td>
+                                   </tr>
+                               </table>
+                           </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+            <!--编辑-->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                                编辑页面
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edit_form">
+                                <table>
+                                    <tr>
+                                        <td><label>门诊号</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入门诊号/住院号" id="" name="" style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>姓名</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入姓名" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>性别</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select name="sex" class="form-control" id="" style="width: 150px; height: 38px;"/>
+                                                <option value="">请选择</option>
+                                                <option value="0">男</option>
+                                                <option value="1">女</option>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>年龄</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control"  placeholder="输入年龄" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>入组日期</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入入组日期" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
         </div>
 	</body>
 </html>

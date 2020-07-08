@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>随访组管理</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jcDate.css">
     <script src="vendor/jquery/jquery.min.js"></script>
+<!--
+    <script src="vendor/jquery/jQuery-jcDate.js"></script>
+-->
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
       <style>
@@ -34,68 +38,61 @@
         </div><br /><br />
         <div id="header" style="width: 100%; height: 100px; background-color: #B3D7FF; ">
             <br/>
-        <div class="row" style="margin-left: 100px; margin-top: -22px">
-            <table>
-                <tr id="tr_style">
-                    <td><label>负责人</label></td>
-                    <td >
-                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="负责人" style="width: 150px ;height: 38px">
-                          </div>
-                    </td>
-                    <td><label style="margin-left: 100px; ">科室</label></td>
-                    <td >
-                        <div class="form-group" style="margin-left: 10px">
-                         <select name="userState" class="form-control" style="width: 150px ;height: 38px"/>
-                         <option value="">请选择科室</option>
-                         <option value="0">内一科</option>
-                         <option value="1">心二科</option>
-                         <option value="1">心二科</option>
-                        </div>
-                    </td>
-                    <td><label style="margin-left: 100px ">状态</label></td>
-                    <td >
-                        <div class="form-group" style="margin-left: 20px;">
-                         <select name="userState" class="form-control" style="width: 150px ;height: 38px" />
-                         <option value="">请选择状态</option>
-                         <option value="0">正常</option>
-                         <option value="1">删除</option>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>创建时间</label></td>
-                    <td >
-                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="选择开始时间" style="width: 150px ;height: 38px">
-                          </div>
-                    </td>
-                    <td >
-                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="选择结束时间" style="width: 150px ;height: 38px">
-                          </div>
-                    </td>
-                    <td><div class="col-lg-2">
-                        </div>
-                    </td>
-                    <td><div class="col-lg-2">
-                        </div>
-                    </td>
-                    <td><div class="col-lg-2">
-                        </div>
-                    </td>
-                    <td style="float: right; margin-left: -250px">
-                        <button class="btn btn-primary btn-sm">检索</button>
-                        <button class="btn btn-primary btn-sm">清空</button>
-                    </td>
-                </tr>
-            </table>
+        <div class="row" style="margin-left: 50px; margin-top: -22px">
+       <form>
+           <table>
+               <tr id="tr_style">
+                   <td><label>负责人</label></td>
+                   <td >
+                       <div class="form-group">
+                           <input type="text" class="form-control" placeholder="负责人" style="width: 150px ;height: 38px">
+                       </div>
+                   </td>
+                   <td><label style="margin-left: 100px; ">科室</label></td>
+                   <td >
+                       <div class="form-group" style="margin-left: 10px">
+                           <select name="userState" class="form-control" style="width: 150px ;height: 38px"/>
+                           <option value="">请选择科室</option>
+                           <option value="0">内一科</option>
+                           <option value="1">心二科</option>
+                           <option value="1">心二科</option>
+                       </div>
+                   </td>
+                   <td><label style="margin-left: 100px ">状态</label></td>
+                   <td >
+                       <div class="form-group" style="margin-left: 20px;">
+                           <select name="userState" class="form-control" style="width: 150px ;height: 38px" />
+                           <option value="">请选择状态</option>
+                           <option value="0">正常</option>
+                           <option value="1">删除</option>
+                       </div>
+                   </td>
+               </tr>
+               <tr>
+                   <td><label>创建时间</label></td>
+                   <td >
+                       <div class="form-group">
+                           <input type="text" class="form-control" placeholder="选择开始时间" style="width: 150px ;height: 38px">
+                       </div>
+                   </td>
+                   <td >
+                       <div class="form-group">
+                           <input type="text" class="form-control" placeholder="选择结束时间" style="width: 150px ;height: 38px">
+                       </div>
+                   </td>
+               </tr>
+           </table>
+       </form>
+                <div style="float: right; margin-left: -250px;margin-top: 60px;">
+                    <button class="btn btn-primary btn-sm">检索</button>
+                    <button class="btn btn-primary btn-sm" style="margin-left: 20px">清空</button>
+                </div>
           </div>
         </div><br />
         <div id="show_form" style="text-align: center; margin-left: 50px;">
             <table style="margin-top: -20px">
                 <tr>
-                    <td><button class="btn btn-primary btn-sm">编辑</button></td>
+                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">编辑</button></td>
                     <td><button class="btn btn-primary btn-sm">删除</button></td>
                 </tr>
             </table>
@@ -161,141 +158,141 @@
             </table>
         </div>
         <!-- 模态框（Modal） -->
+        <!--添加-->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">
+                    <div class="modal-header" style="height: 40px">
+                        <h5 class="modal-title" id="myModalLabel" style="margin-top: -10px">
                             新建随访组
-                        </h4>
+                        </h5>
                     </div>
                     <div class="modal-body">
-                        <table>
-                            <tr>
-                                <td><label>责任医院</label></td>
-                                <td >
-                                     <div class="form-group">
-                                       <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
-                                       <option value="">请选择医院</option>
-                                       <option value="0">北京人民医院</option>
-                                       <option value="1">北京协和医院</option>
-                                     </div>
-                                </td>
-                                <td><label>责任科室</label></td>
-                                <td >
-                                     <div class="form-group">
-                                          <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
-                                          <option value="">请选择科室</option>
-                                          <option value="0">心内科</option>
-                                          <option value="1">脑外壳</option>
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>负责人</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                                <td><label>级别</label></td>
-                                <td >
-                                     <div class="form-group">
-                                         <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
-                                         <option value="">请选择级别</option>
-                                         <option value="0">I级</option>
-                                         <option value="1">II级</option>
-                                         <option value="1">III级</option>
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>名称</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>创建人</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" type="hidden">
-                                      </div>
-                                </td>
-                                <td><label>创建时间</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" type="hidden">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>联系电话</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                                <td><label>状态</label></td>
-                                <td >
-                                    <div class="form-group">
-                                        <select name="userState" class="form-control" style="width: 210px; height: 38px;" />
-                                        <option value="">请选择状态</option>
-                                        <option value="0">开放</option>
-                                        <option value="1">关闭</option>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>开始日期</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                                <td><label>结束日期</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>课题编号</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                                <td><label>患者数量</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>对照组</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>背景</label></td>
-                                <td >
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="选择状态">
-                                      </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <form id="add_form">
+                            <table>
+                                <tr>
+                                    <td><label style="width: 70px">责任医院</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select name="" class="form-control" style="width:210px; height: 38px;"/>
+                                            <option value="">请选择医院</option>
+                                            <option value="0">北京人民医院</option>
+                                            <option value="1">北京协和医院</option>
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">责任科室</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
+                                            <option value="">请选择科室</option>
+                                            <option value="0">心内科</option>
+                                            <option value="1">脑外壳</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">负责人</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">级别</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
+                                            <option value="">请选择级别</option>
+                                            <option value="0">I级</option>
+                                            <option value="1">II级</option>
+                                            <option value="1">III级</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">名称</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                               <!-- <tr>
+                                    <td><label>创建人</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td><label>创建时间</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td><label style="width: 70px">联系电话</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">状态</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select name="" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
+                                            <option value="">请选择状态</option>
+                                            <option value="0">开放</option>
+                                            <option value="1">关闭</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">开始日期</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">结束日期</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">课题编号</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">患者数量</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">对照组</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input name="" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">背景</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <textarea name="" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -307,6 +304,155 @@
                 </div>
             </div>
         </div>
+
+        <!--修改-->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 40px">
+                        <h5 class="modal-title" id="myModalLabel" style="margin-top: -10px">
+                            编辑随访组
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add_form">
+                            <table>
+                                <tr>
+                                    <td><label style="width: 70px">责任医院</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select id="" name="" class="form-control" style="width:210px; height: 38px;"/>
+                                            <option value="">请选择医院</option>
+                                            <option value="0">北京人民医院</option>
+                                            <option value="1">北京协和医院</option>
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">责任科室</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
+                                            <option value="">请选择科室</option>
+                                            <option value="0">心内科</option>
+                                            <option value="1">脑外壳</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">负责人</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input type="text" id="" name="" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">级别</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
+                                            <option value="">请选择级别</option>
+                                            <option value="0">I级</option>
+                                            <option value="1">II级</option>
+                                            <option value="1">III级</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">名称</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+                                     <td><label>创建人</label></td>
+                                     <td >
+                                         <div class="form-group">
+                                             <input type="text" class="form-control">
+                                         </div>
+                                     </td>
+                                     <td><label>创建时间</label></td>
+                                     <td >
+                                         <div class="form-group">
+                                             <input type="text" class="form-control">
+                                         </div>
+                                     </td>
+                                 </tr>-->
+                                <tr>
+                                    <td><label style="width: 70px">联系电话</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">状态</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
+                                            <option value="">请选择状态</option>
+                                            <option value="0">开放</option>
+                                            <option value="1">关闭</option>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">开始日期</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">结束日期</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">课题编号</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
+                                        </div>
+                                    </td>
+                                    <td><label style="width: 70px;margin-left: -290px">患者数量</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">对照组</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <input id="" name="" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label style="width: 70px">背景</label></td>
+                                    <td >
+                                        <div class="form-group">
+                                            <textarea id="" name="" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </body>
 </html>

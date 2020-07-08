@@ -11,25 +11,21 @@
         <!--<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
         <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>-->
         <script type="text/javascript">
-            $(function(){
-                $(".modal-body tr td lable").on("click",function(){
-                    var address =$(this).attr("data-src");
-                    $("iframe").attr("src",address);
-                });
-            });
+          function changeOps(url) {
+              $("#iframe").prop("src",url);
+          }
         </script>
     </head>
 	<body>
 		<div class="authority_content">
-			<a href="/toGroupManagement">返回随访组</a>
+			<a href="/toFollowupManagement">返回随访组</a>
 			<hr />
-			<div class="authority_head" style="width: 100%; height: 130px; background-color: #B8C1CA;" >
-				<br />
-				<table style="margin-left: 150px;">
+			<div class="authority_head" style="width: 100%; height: 50px; background-color: #B8C1CA;" >
+				<table style="margin-left: 60px;">
 					<tr>
 						<td><label>角色名称</label></td>
 						<td >
-							 <div class="form-group">
+							 <div class="form-group" style="margin-top: 5px">
 							    <input type="text" class="form-control" placeholder="请输入角色名称">
 							  </div>
 						</td>
@@ -38,30 +34,28 @@
 						</td>
 						<td><label>备注</label></td>
 						<td >
-							<div class="form-group">
+							<div class="form-group" style="margin-top: 5px">
 							   <input type="text" class="form-control" placeholder="备注" style="width: 500px;">
 							 </div>
 						</td>
-					</tr>
-					<tr>
-						<td><button class="btn btn-primary btn-sm">检索</button></td>
-						<td><button class="btn btn-primary btn-sm">清空</button></td>
+                        <td><button class="btn btn-primary btn-sm" style="margin-left: 50px;margin-top: -10px">检索</button></td>
+                        <td><button class="btn btn-primary btn-sm" style="margin-left: 60px;margin-top: -10px">清空</button></td>
 					</tr>
 				</table>
 			</div>
 			<hr />
-			<div class="follow_ops" style="margin-left: 150px;">
+			<div class="follow_ops" style="margin-left: 50px;">
 				<table>
 					<tr>
-						<td><button class="btn btn-primary btn-sm">新增</button></td>
-						<td><button class="btn btn-primary btn-sm">编辑</button></td>
+						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">新增</button></td>
+						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal3">编辑</button></td>
 						<td><button class="btn btn-primary btn-sm">删除</button></td>
 					</tr>
 				</table>
 				
 			</div>
-			<div id="show_form" style="text-align: center; margin-left: 150px;">
-				<table class="table table-bordered" style="width: 1200px; height: 100%;">
+			<div id="show_form" style="text-align: center; margin-left: 50px;">
+				<table class="table table-bordered" style="width: 100%; height: 100%;">
 				    <thead>
 				      <tr class="table-primary">
 				        <td><input type="checkbox" id="checkbox_style"></td>
@@ -112,12 +106,12 @@
                         <div class="modal-body">
                             <table>
                                 <tr>
-                                    <td><label class="btn btn-primary btn-sm" data-src="setUser">设定用户</label></td>
-                                    <td><label class="btn btn-primary btn-sm" data-src="setPermissions">设定权限</label></td>
+                                    <td><label class="btn btn-primary btn-sm" target="iframe" onclick="changeOps('setUser')">设定用户</label></td>
+                                    <td><label class="btn btn-primary btn-sm" target="iframe" onclick="changeOps('setPermissions')">设定权限</label></td>
                                 </tr>
                             </table>
-                            <div class="content" style="border-style: inset;padding: 10px;width: 470px;height: 400px">
-                                <iframe id="iframe" name="iframe" src="/setUser" width="100%" height="600px"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+                            <div class="content-wrapper" style="height: 370px;width: 480px;overflow: hidden">
+                                <iframe width="100%" height="100%" id="iframe" name="iframe" large-header="0" src="/setUser"></iframe>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -134,6 +128,135 @@
 			<div class="container">
 			  <h1>分页</h1>
 			</div>
-		</div>
+
+            <!--添加-->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                                添加页面
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add_form">
+                                <table>
+                                    <tr>
+                                        <td><label>角色级别</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select name="sex" class="form-control" id="" style="width: 150px; height: 38px;"/>
+                                                <option value="">请选择</option>
+                                                <option value="0">I级</option>
+                                                <option value="1">II级</option>
+                                                <option value="1">III级</option>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>角色名称</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入角色名称" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>权限及用户设定</label></td>
+                                        <td>
+                                            <span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>用户</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control"  placeholder="输入用户" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>权限</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入用户权限" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+            <!--修改-->
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                                编辑页面
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edit_form">
+                                <table>
+                                    <tr>
+                                        <td><label>角色级别</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select name="sex" class="form-control" id="" style="width: 150px; height: 38px;"/>
+                                                <option value="">请选择</option>
+                                                <option value="0">I级</option>
+                                                <option value="1">II级</option>
+                                                <option value="1">III级</option>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>角色名称</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入角色名称" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>权限及用户设定</label></td>
+                                        <td>
+                                            <span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>用户</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control"  placeholder="输入用户" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                        <td><label>权限</label></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="输入用户权限" id="" name=""  style="width: 150px; height: 38px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+        </div>
 	</body>
 </html>
