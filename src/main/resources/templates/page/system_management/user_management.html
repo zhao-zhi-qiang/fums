@@ -5,14 +5,14 @@
     <title>用户管理</title>
 
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
     <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
         <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
-    <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="stylesheet" href="css/style.css">-->
     <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
-    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
+    <!--<script src="js/jQuery/jquery-2.2.3.min.js"></script>
     <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+-->
     <!--联网引入-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -26,6 +26,83 @@
             border: 1px solid #80bdff;
         }
     </style>
+
+
+    <script type="text/javascript">
+
+        var page;
+        var qian;//前
+        var hou;//后
+
+        $(function () {
+            retrieval()
+        })
+
+        function retrieval(pageNum){
+
+           $("#tbody").empty();
+
+            var userId = $("#user_id").val();//id
+            var userAccount = $("#user_account").val();//name
+            var userSex = $("#user_sex").val();//性别
+            var userPhone = $("#user_phone").val();//电话
+            var userEmail = $("#user_email").val();//邮箱
+            var password = $("#password").val();//密码
+            var hospitalDepartmentName = $("#hospital_department_name").val();//科室
+
+            $.ajax({
+                url:"SystemManagementController/lists",
+                type:"post",
+                data:{
+                    "userId":userId,
+                    "userAccount":userAccount,
+                    "userSex":userSex,
+                    "userPhone":userPhone,
+                    "userEmail":userEmail,
+                    "password":password,
+                    "hospitalDepartmentName":hospitalDepartmentName,
+                    "pageNum":pageNum
+                },
+                dataType:"json",
+                success: function (list1) {
+                    var ss = "";
+                    for (var i = 0; i < aa; i++) {
+                        ss = "<tr><td><input type=\"checkbox\" style='width: 40px;' class=\"checkboxxia\" onclick=\"xiaOnclick()\" value=" + list1.list[i].id + "></td><td>"
+                            + list1.list[i].userId +"</td><td>"
+                            + list1.list[i].userAccount +"</td><td>"
+                            + (list1.list[i].userSex ==1?"男":"女") +"</td><td>"
+                            + list1.list[i].userPhone +"</td><td>"
+                            + list1.list[i].userEmail +"</td><td>"
+                            + list1.list[i].hospitalDepartmentName +"</td></tr>"
+
+                        $("#tbody").append(ss);
+                        qian=list1.pageNum==1?1:list1.pageNum-1;
+                        hou=list1.pageNum==list1.pages?list1.pages:list1.pageNum+1;
+
+                    }
+                }
+            })
+        }
+
+
+        // 科室
+        $.ajax({
+            url:"SystemManagementController/seleDepartment",
+            data:{},
+            type:"post",
+            dataType:"json",
+            success:function (result) {
+                console.log(result);
+                $("#hospital_department_name").empty();
+                $("#hospital_department_name").prepend('<option value="0">请选择</option>')
+                for(var i=0;i<result.length;i++){
+                    var list=result;
+                    $("#hospital_department_name").prepend('<option value="' + list[i].hospital_department_name + '">' + list[i].hospitalDepartmentName + '</option>')
+                }
+            }
+        })
+
+    </script>
 
 </head>
 
@@ -45,44 +122,48 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
                 </td>
                 <td >
-                    <input style="height: 34px;width: 55%" class="form-control" id="#">
+                    <input style="height: 34px;width: 55%" class="form-control" id="user_id" name="userId">
                 </td>
 
                 <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
                 </td>
                 <td >
-                    <input style="height: 34px;width: 55%" class="form-control" id="1">
+                    <input style="height: 34px;width: 55%" class="form-control" id="user_account" name="userAccount">
                 </td>
             </tr>
-            <td style="text-align: right">
-                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
-            </td>
-            <td>
-                <select style="width: 55%;height: 34px;">
-                    <option value="0">请选择</option>
-                </select>
-            </td>
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                </td>
+                <td>
+                    <select style="width: 55%;height: 34px;" id="user_sex" name="userSex">
+                        <option value="0">请选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </td>
 
-            <td style="text-align: right">
-                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
-            </td>
-            <td>
-                <input style="height: 34px;width: 55%" class="form-control" id="21">
-            </td>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+                </td>
+                <td>
+                    <input style="height: 34px;width: 55%" class="form-control" id="user_phone" name="userPhone">
+                </td>
+            </tr>
 
             <tr>
                 <td style="text-align: right">
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
                 </td>
                 <td>
-                    <input style="height: 34px;width: 55%" class="form-control" id="24">
+                    <input style="height: 34px;width: 55%" class="form-control" id="user_email" name="userEmail">
                 </td>
 
                 <td style="text-align: right">
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
                 </td>
                 <td>
-                    <input style="height: 34px;width: 55%" class="form-control" id="2">
+                    <input style="height: 34px;width: 55%" class="form-control" id="password" name="password">
                 </td>
             </tr>
 
@@ -91,7 +172,7 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
                 </td>
                 <td>
-                    <select style="width: 55%;height: 34px;">
+                    <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
                         <option value="0">请选择</option>
                     </select>
                 </td>
@@ -101,8 +182,8 @@
     </table>
 
     <div style="text-align: center;padding-top: 0px">
-        <button type="button" class="btn btn-success btn-sm" onclick="">检索</button>
-        <button type="button" class="btn btn-success btn-sm" onclick="">清空</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="retrieval()">检索</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="empty()">清空</button>
     </div>
 
 
@@ -118,7 +199,7 @@
     <table class="table table-bordered" style="text-align: center;">
         <thead >
         <tr class="info" >
-            <th><input type="checkbox" id="checkboxMain" onclick="" value=''></th>
+            <th><input type="checkbox" id="checkboxMain" onclick="mainOnclick()" value=''></th>
             <th style="text-align: center;">用户ID</th>
             <th style="text-align: center;">用户姓名</th>
             <th style="text-align: center;">性别</th>
@@ -127,10 +208,9 @@
             <th style="text-align: center;">科室</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         <tr class="active">
-            <th><input type="checkbox" id="checkboxMain2" onclick="" value=''></th>
-
+            <th><input type="checkbox" id="checkboxMain2" onclick="mainOnclick()" value=''></th>
             <td>122132</td>
             <td>赵四</td>
             <td>男</td>
@@ -138,7 +218,7 @@
             <td>test@263.net</td>
             <td>内分泌科</td>
         </tr>
-        <tr class="active">
+        <!--<tr class="active">
             <th><input type="checkbox" id="checkboxMain1" onclick="" value=''></th>
             <td>123456</td>
             <td>赵四</td>
@@ -146,7 +226,7 @@
             <td>赵四</td>
             <td>test@263.net</td>
             <td>内分泌科</td>
-        </tr>
+        </tr>-->
         </tbody>
     </table>
 
@@ -166,20 +246,20 @@
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
                             </td>
                             <td >
-                                <input style="height: 34px;width: 55%" class="form-control" id="user_id" name="userId">
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_id1" name="userId">
                             </td>
 
                             <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
                             </td>
                             <td >
-                                <input style="height: 34px;width: 55%" class="form-control" id="user_account" name="userAccount">
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_account1" name="userAccount">
                             </td>
                         </tr>
                         <td style="text-align: right">
                             <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
                         </td>
                         <td>
-                            <select style="width: 55%;height: 34px;" id="user_sex" name="userSex">
+                            <select style="width: 55%;height: 34px;" id="user_sex1" name="userSex">
                                 <option value="0">请选择</option>
                                 <option value="1">男</option>
                                 <option value="2">女</option>
@@ -190,7 +270,7 @@
                             <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
                         </td>
                         <td>
-                            <input style="height: 34px;width: 55%" class="form-control" id="user_phone" name="userPhone">
+                            <input style="height: 34px;width: 55%" class="form-control" id="user_phone1" name="userPhone">
                         </td>
 
                         <tr>
@@ -198,14 +278,14 @@
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
                             </td>
                             <td>
-                                <input style="height: 34px;width: 55%" class="form-control" id="user_email" name="userEmail">
+                                <input style="height: 34px;width: 55%" class="form-control" id="user_email1" name="userEmail">
                             </td>
 
                             <td style="text-align: right">
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
                             </td>
                             <td>
-                                <input style="height: 34px;width: 55%" class="form-control" id="password" name="password">
+                                <input style="height: 34px;width: 55%" class="form-control" id="password1" name="password">
                             </td>
                         </tr>
 
@@ -214,7 +294,7 @@
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
                             </td>
                             <td>
-                                <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
+                                <select style="width: 55%;height: 34px;" id="hospital_department_name1" name="hospitalDepartmentName">
                                     <option value="0">请选择</option>
                                 </select>
                             </td>
@@ -317,12 +397,12 @@
     <div style="text-align: center">
         <ul class="pagination">
             <li><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            <li><a href="#" onclick="retrieval(1)">1</a></li>
+            <li><a href="#" onclick="retrieval(2)">2</a></li>
+            <li><a href="#" onclick="retrieval(3)">3</a></li>
+            <li><a href="#" onclick="retrieval(4)">4</a></li>
+            <li><a href="#" onclick="retrieval(5)">5</a></li>
+            <li><a href="#" >&raquo;</a></li>
         </ul>
     </div>
     </table>
