@@ -22,4 +22,11 @@ public class FollowUpRuleSettingController {
     public String followUpRuleSetting(){
         return "follow_up_rule_setting/follow_up_rule_setting";
     }
+
+    @RequestMapping("/holiday_management")
+    public String holidayManagemnet(){
+        return "follow_up_rule_setting/holiday_management";
+    }
+
+
 }
