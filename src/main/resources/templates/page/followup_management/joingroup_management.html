@@ -11,17 +11,14 @@
 		<!--<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
 		<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>-->
 		<script type="text/javascript">
-            $(function(){
-                $(".iframe_content tr td a").on("click",function(){
-                    var address =$(this).attr("data-src");
-                    $("iframe").attr("src",address);
-                });
-            });
+            function changePage(url) {
+                $("#iframe").prop("src",url);
+            }
 		</script>
 	</head>
 	<body>
 		<div class="joingroup_page">
-			<div class="joingroup_head" style="margin-left: 150px;"> 
+			<div class="joingroup_head" style="margin-left: 50px;">
 				<table >
 					<tr>
 						<td><a href="/toFollowupManagement">返回随访组</a></td>
@@ -31,40 +28,40 @@
 				</table>
 			</div>
 			<hr />
-			<div class="joingroup_content">
-				<div class="left_content" style="float: left; margin-left: 150px;">
+			<div class="joingroup_content" style="width: 100%; height: 100%;">
+				<div class="left_content" style="float: left; margin-left: 50px;">
 					<table class="iframe_content">
 						<tr>
 							<td>
-								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingAdministrative">按科室</a>
+								<a style="margin-top: 60px;width: 100px;height: 35px;" class="btn btn-info btn-sm" onclick="changePage('accordingAdministrative')" target="iframe">按科室</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingDisease">按病种</a>
+								<a style="margin-top: 20px;width: 100px;height: 35px;" class="btn btn-info btn-sm" onclick="changePage('accordingDisease')" target="iframe">按病种</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingPerson">按人员</a>
+								<a style="margin-top: 20px;width: 100px;height: 35px;" class="btn btn-info btn-sm" onclick="changePage('accordingPerson')" target="iframe">按人员</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<a class="btn btn-primary btn-sm" href="#" data-src="/customCondition">自定义条件</a>
+								<a style="margin-top: 20px;width: 100px;height: 35px;" class="btn btn-info btn-sm" onclick="changePage('customCondition')" target="iframe">自定义条件</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<a class="btn btn-primary btn-sm" href="#" data-src="/accordingResult">按结果集</a>
+								<a style="margin-top: 20px;width: 100px;height: 35px;" class="btn btn-info btn-sm" onclick="changePage('accordingResult')" target="iframe">按结果集</a>
 							</td>
 						</tr>
 					</table>
 					
 				</div>
-				<div style="float:left; margin-top: 0px; margin-left: 30px;  width: 2px;height: 300px; background: darkgray;"></div> 
-				<div class="right_content" style="float: right; margin-right: 800px;">
-					<div class="right_head">
+				<div style="float:left; margin-top: 0px; margin-left: 30px;  width: 2px;height:600px; background: darkgray;"></div>
+				<div class="right_content" style="float: left; margin-left:700px;width: 100%; height: 500px; margin-top: -600px;border-style: none">
+					<div class="right_head" style="margin-left: -500px">
 						<table>
 							<tr>
 								<td>
@@ -86,10 +83,10 @@
 								</td>
 							</tr>
 						</table>
-					</div><br /><br />
-                    <div class="right_content" style="width: 100% ; height: auto; margin-top: -400px; margin-left: 300px">
-                        <iframe id="iframe" name = "frame" src="/accordingAdministrative" width="100%" height="600px"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
-                    <div>
+					</div>
+                    <div class="content-wrapper" style="height: 100%;width: 100%;margin-left: -500px;overflow-x: hidden;overflow-y: hidden">
+                        <iframe width="100%" height="100%" id="iframe" name="iframe" large-header="0" frameborder="0"  src="/accordingAdministrative"></iframe>
+                    </div>
 				</div>
 			</div>
 		</div>

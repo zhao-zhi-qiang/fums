@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followmanagement.dao.HospitalDepartmentChildMapper">
+  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+    <id column="hospital_department_child_id" jdbcType="INTEGER" property="hospitalDepartmentChildId" />
+    <result column="hospital_department_child_name" jdbcType="VARCHAR" property="hospitalDepartmentChildName" />
+    <result column="hospital_department_child_state" jdbcType="INTEGER" property="hospitalDepartmentChildState" />
+    <result column="hospital_department_child_code" jdbcType="VARCHAR" property="hospitalDepartmentChildCode" />
+    <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hospital_department_child_id, hospital_department_child_name, hospital_department_child_state, 
+    hospital_department_child_code, hospital_department_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hospital_department_child
+    where hospital_department_child_id = #{hospitalDepartmentChildId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital_department_child
+    where hospital_department_child_id = #{hospitalDepartmentChildId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.followmanagement.pojo.HospitalDepartmentChild">
+    insert into hospital_department_child (hospital_department_child_id, hospital_department_child_name, 
+      hospital_department_child_state, hospital_department_child_code, 
+      hospital_department_code)
+    values (#{hospitalDepartmentChildId,jdbcType=INTEGER}, #{hospitalDepartmentChildName,jdbcType=VARCHAR}, 
+      #{hospitalDepartmentChildState,jdbcType=INTEGER}, #{hospitalDepartmentChildCode,jdbcType=VARCHAR}, 
+      #{hospitalDepartmentCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.followmanagement.pojo.HospitalDepartmentChild">
+    insert into hospital_department_child
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hospitalDepartmentChildId != null">
+        hospital_department_child_id,
+      </if>
+      <if test="hospitalDepartmentChildName != null">
+        hospital_department_child_name,
+      </if>
+      <if test="hospitalDepartmentChildState != null">
+        hospital_department_child_state,
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code,
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        hospital_department_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hospitalDepartmentChildId != null">
+        #{hospitalDepartmentChildId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildName != null">
+        #{hospitalDepartmentChildName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentChildState != null">
+        #{hospitalDepartmentChildState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        #{hospitalDepartmentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+    update hospital_department_child
+    <set>
+      <if test="hospitalDepartmentChildName != null">
+        hospital_department_child_name = #{hospitalDepartmentChildName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentChildState != null">
+        hospital_department_child_state = #{hospitalDepartmentChildState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalDepartmentCode != null">
+        hospital_department_code = #{hospitalDepartmentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hospital_department_child_id = #{hospitalDepartmentChildId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+    update hospital_department_child
+    set hospital_department_child_name = #{hospitalDepartmentChildName,jdbcType=VARCHAR},
+      hospital_department_child_state = #{hospitalDepartmentChildState,jdbcType=INTEGER},
+      hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=VARCHAR},
+      hospital_department_code = #{hospitalDepartmentCode,jdbcType=VARCHAR}
+    where hospital_department_child_id = #{hospitalDepartmentChildId,jdbcType=INTEGER}
+  </update>
+</mapper>

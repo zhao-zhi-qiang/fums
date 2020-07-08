@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followmanagement.dao.HospitalUthorityMapper">
+  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.HospitalUthority">
+    <id column="hospital_uthority_id" jdbcType="INTEGER" property="hospitalUthorityId" />
+    <result column="hospital_uthority_name" jdbcType="VARCHAR" property="hospitalUthorityName" />
+    <result column="hospital_uthority_code" jdbcType="VARCHAR" property="hospitalUthorityCode" />
+    <result column="hospital_uthority_state" jdbcType="INTEGER" property="hospitalUthorityState" />
+    <result column="hospital_uthority_create_time" jdbcType="DATE" property="hospitalUthorityCreateTime" />
+    <result column="hospital_uthority_update_time" jdbcType="DATE" property="hospitalUthorityUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hospital_uthority_id, hospital_uthority_name, hospital_uthority_code, hospital_uthority_state, 
+    hospital_uthority_create_time, hospital_uthority_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hospital_uthority
+    where hospital_uthority_id = #{hospitalUthorityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital_uthority
+    where hospital_uthority_id = #{hospitalUthorityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.followmanagement.pojo.HospitalUthority">
+    insert into hospital_uthority (hospital_uthority_id, hospital_uthority_name, 
+      hospital_uthority_code, hospital_uthority_state, 
+      hospital_uthority_create_time, hospital_uthority_update_time
+      )
+    values (#{hospitalUthorityId,jdbcType=INTEGER}, #{hospitalUthorityName,jdbcType=VARCHAR}, 
+      #{hospitalUthorityCode,jdbcType=VARCHAR}, #{hospitalUthorityState,jdbcType=INTEGER}, 
+      #{hospitalUthorityCreateTime,jdbcType=DATE}, #{hospitalUthorityUpdateTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.followmanagement.pojo.HospitalUthority">
+    insert into hospital_uthority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hospitalUthorityId != null">
+        hospital_uthority_id,
+      </if>
+      <if test="hospitalUthorityName != null">
+        hospital_uthority_name,
+      </if>
+      <if test="hospitalUthorityCode != null">
+        hospital_uthority_code,
+      </if>
+      <if test="hospitalUthorityState != null">
+        hospital_uthority_state,
+      </if>
+      <if test="hospitalUthorityCreateTime != null">
+        hospital_uthority_create_time,
+      </if>
+      <if test="hospitalUthorityUpdateTime != null">
+        hospital_uthority_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hospitalUthorityId != null">
+        #{hospitalUthorityId,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalUthorityName != null">
+        #{hospitalUthorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalUthorityCode != null">
+        #{hospitalUthorityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalUthorityState != null">
+        #{hospitalUthorityState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalUthorityCreateTime != null">
+        #{hospitalUthorityCreateTime,jdbcType=DATE},
+      </if>
+      <if test="hospitalUthorityUpdateTime != null">
+        #{hospitalUthorityUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.HospitalUthority">
+    update hospital_uthority
+    <set>
+      <if test="hospitalUthorityName != null">
+        hospital_uthority_name = #{hospitalUthorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalUthorityCode != null">
+        hospital_uthority_code = #{hospitalUthorityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalUthorityState != null">
+        hospital_uthority_state = #{hospitalUthorityState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalUthorityCreateTime != null">
+        hospital_uthority_create_time = #{hospitalUthorityCreateTime,jdbcType=DATE},
+      </if>
+      <if test="hospitalUthorityUpdateTime != null">
+        hospital_uthority_update_time = #{hospitalUthorityUpdateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where hospital_uthority_id = #{hospitalUthorityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.HospitalUthority">
+    update hospital_uthority
+    set hospital_uthority_name = #{hospitalUthorityName,jdbcType=VARCHAR},
+      hospital_uthority_code = #{hospitalUthorityCode,jdbcType=VARCHAR},
+      hospital_uthority_state = #{hospitalUthorityState,jdbcType=INTEGER},
+      hospital_uthority_create_time = #{hospitalUthorityCreateTime,jdbcType=DATE},
+      hospital_uthority_update_time = #{hospitalUthorityUpdateTime,jdbcType=DATE}
+    where hospital_uthority_id = #{hospitalUthorityId,jdbcType=INTEGER}
+  </update>
+</mapper>
