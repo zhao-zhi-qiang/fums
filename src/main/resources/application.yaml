@@ -1,7 +1,5 @@
-#\u914D\u7F6E\u7AEF\u53E3
 server:
   port: 8080
-#\u7981\u7528thymeleaf\u7684\u7F13\u5B58
 spring:
   thymeleaf:
     cache: false
@@ -12,38 +10,13 @@ spring:
     mode: HTML5
 
   datasource:
-    url: jdbc:mysql://node3:3306/drugplatform?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/tree?characterEncoding=utf8
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-    #druid\u8FDE\u63A5\u6C60
-    #\u521D\u59CB\u5316\u8FDE\u63A5\u6570
-    initialSize: 5
-    #\u6700\u5C0F\u8FDE\u63A5\u6C60\u6570\u91CF
-    minIdle: 20
-    #\u6700\u5927\u8FDE\u63A5\u6C60\u6570\u91CF
-    maxActive: 60000
-    #\u83B7\u53D6\u8FDE\u63A5\u65F6\u6700\u5927\u7B49\u5F85\u65F6\u95F4\uFF0C\u5355\u4F4D\u6BEB\u79D2
-    maxWait: 60000
-    #\u68C0\u6D4B\u8FDE\u63A5\u7684\u95F4\u9694\u65F6\u95F4
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    #\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548\u7684sql
-    validationQuery: SELECT 1 FROM DUAL
-    #\u7533\u8BF7\u8FDE\u63A5\u7684\u65F6\u5019\u68C0\u6D4B
-    testWhileIdle: true
-    #\u7533\u8BF7\u8FDE\u63A5\u65F6\u6267\u884CvalidationQuery\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548
-    testOnBorrow: false
-    #\u5F52\u8FD8\u8FDE\u63A5\u65F6\u6267\u884CvalidationQuery\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548
-    testOnReturn: false
-    #\u662F\u5426\u7F13\u5B58preparedStatement
-    poolPreparedStatements: true
 
 mybatis:
-  mapper-locations: classpath:com/ygjy/**/mapper/*.xml
-  type-aliases-package: com.ygjy.pojo
+  mapper-locations: classpath:com/fums/**/mapper/*.xml
+  type-aliases-package: com.fums.pojo
   configuration:
-    #\u53EF\u4EE5\u6253\u5370sql\u3001\u53C2\u6570\u3001\u67E5\u8BE2\u7ED3\u679C\u7684
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    #\u4E0D\u6253\u5370\u67E5\u8BE2\u7ED3\u679C
-    #log-impl: org.apache.ibatis.logging.log4j.Log4jImpl

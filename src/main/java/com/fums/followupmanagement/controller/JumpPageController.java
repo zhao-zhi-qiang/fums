@@ -22,4 +22,8 @@ public class JumpPageController {
     public String followUpPlan(){
         return "page/patients_with_details/followUp_plan";
     }
+    @RequestMapping("/patientsWithDetails")
+    public String patientsWithDetails(){
+        return "page/patients_with_details/patients_with_details";
+    }
 }

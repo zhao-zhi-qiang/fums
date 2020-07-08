@@ -6,13 +6,14 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <link href="css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
-        <!--<link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>-->
         <link href="css/styles.css" type="text/css" rel="stylesheet"/>
         <link href="/css/data_review/styles.css" type="text/css" rel="stylesheet"/>
         <link rel="stylesheet" type="text/css" class="library" href="bootstarp/css/bootstrap.min.css">
-        <!--<script src="resources/scripts/jquery-1.7.1.min.js"></script>-->
         <script type="text/javascript" class="library" src="/js/jquery-1.9.1.min.js"></script>
-        <script src="/css/data_review/data.js"></script>
+        <script type="text/javascript" class="library" src="bootstarp/js/bootstrap.min.js"></script>
+        <script type="text/javascript" class="library" src="js/WdatePicker.js"></script>
+        <script type="text/javascript" src="js/data_review/data_review.js"></script>
+
       </head>
 <body>
     <div id="base" class="">
@@ -69,7 +70,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" style="width: auto;">复合时间：</label>
                     <div class="col-sm-10" style="width: auto;">
-                        <input class="form-control" style="width: 148px;height: 22px;font-size:13px">
+                        <input class="form-control" style="width: 148px;height: 22px;font-size:13px" onclick=WdatePicker({dateFmt:'yyyy-MM-dd'}) readonly="readonly">
                     </div>
                 </div>
             </div>
@@ -139,7 +140,7 @@
                     <td>复核</td>
                 </tr>
             </thead>
-            <tbody style="vertical-align: middle;">
+            <tbody id="tbody" style="vertical-align: middle;">
                 <tr>
                     <td><input type="checkbox"></td>
                     <td>随访组1</td>
@@ -155,6 +156,35 @@
                 </tr>
             </tbody>
           </table>
+          <nav aria-label="Page navigation">
+              <ul id="fenye" class="pagination">
+                  <li>
+                      <a href="#">
+                          <span>首页</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                      </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                      <a href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#">
+                          <span>尾页</span>
+                      </a>
+                  </li>
+              </ul>
+          </nav>
       </div>
 
     </div>
