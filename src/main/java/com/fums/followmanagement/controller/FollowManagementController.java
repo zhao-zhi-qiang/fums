@@ -131,4 +131,22 @@ public class FollowManagementController {
     public String setUser(){
         return "page/followup_management/joingroupmanagement/set_user";
     }
+
+    /**
+     * 跳转上传文件页面
+     * @return
+     */
+    @RequestMapping(value = "toUploadFile")
+    public String toUploadFile(){
+        return "page/followup_management/upload_file";
+    }
+
+    /**
+     * 跳转新建患者2页面
+     * @return
+     */
+    @RequestMapping(value = "toCreateNewperson")
+    public String toCreateNewperson(){
+        return "page/followup_management/create_newperson";
+    }
 }
