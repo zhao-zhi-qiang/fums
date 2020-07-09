@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.followmanagement.dao.HospitalUthorityMapper">
-  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.HospitalUthority">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.HospitalUthority">
     <id column="hospital_uthority_id" jdbcType="INTEGER" property="hospitalUthorityId" />
     <result column="hospital_uthority_name" jdbcType="VARCHAR" property="hospitalUthorityName" />
     <result column="hospital_uthority_code" jdbcType="VARCHAR" property="hospitalUthorityCode" />
@@ -76,7 +76,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.HospitalUthority">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.HospitalUthority">
     update hospital_uthority
     <set>
       <if test="hospitalUthorityName != null">
@@ -97,7 +97,7 @@
     </set>
     where hospital_uthority_id = #{hospitalUthorityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.HospitalUthority">
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.HospitalUthority">
     update hospital_uthority
     set hospital_uthority_name = #{hospitalUthorityName,jdbcType=VARCHAR},
       hospital_uthority_code = #{hospitalUthorityCode,jdbcType=VARCHAR},

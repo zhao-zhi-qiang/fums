@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.followmanagement.dao.HospitalDepartmentMapper">
-  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.HospitalDepartment">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.HospitalDepartment">
     <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
     <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
     <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.HospitalDepartment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.HospitalDepartment">
     update hospital_department
     <set>
       <if test="hospitalDepartmentName != null">
@@ -74,7 +74,7 @@
     </set>
     where hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.HospitalDepartment">
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.HospitalDepartment">
     update hospital_department
     set hospital_department_name = #{hospitalDepartmentName,jdbcType=VARCHAR},
       hospital_department_state = #{hospitalDepartmentState,jdbcType=INTEGER},
