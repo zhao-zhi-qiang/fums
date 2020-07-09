@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.followmanagement.dao.FollowUpMapper">
-  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.FollowUp">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.FollowUp">
     <id column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
     <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
     <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
@@ -25,10 +25,9 @@
     follow_up_start_time, follow_up_end_time, follow_up_code, follow_up_patient_number, 
     follow_up_control_group, follow_up_backdrop
   </sql>
-
     <!--验证随访组表单属性-->
     <select id="verifyProperties" resultMap="BaseResultMap">
-        select follow_up
+        select * from follow_up
             <where>
                 <if test="followUpName != null and followUpName != ''">
                     and follow_up_name = #{followUpName}
@@ -172,7 +171,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.FollowUp">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.FollowUp">
     update follow_up
     <set>
       <if test="hospitalId != null">
@@ -223,7 +222,7 @@
     </set>
     where follow_up_id = #{followUpId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.FollowUp">
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.FollowUp">
     update follow_up
     set hospital_id = #{hospitalId,jdbcType=INTEGER},
       hospital_department_child_code = #{hospitalDepartmentChildCode,jdbcType=INTEGER},

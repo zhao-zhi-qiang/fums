@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.followmanagement.dao.HospitalDepartmentChildMapper">
-  <resultMap id="BaseResultMap" type=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.HospitalDepartmentChild">
     <id column="hospital_department_child_id" jdbcType="INTEGER" property="hospitalDepartmentChildId" />
     <result column="hospital_department_child_name" jdbcType="VARCHAR" property="hospitalDepartmentChildName" />
     <result column="hospital_department_child_state" jdbcType="INTEGER" property="hospitalDepartmentChildState" />
@@ -67,7 +67,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.HospitalDepartmentChild">
     update hospital_department_child
     <set>
       <if test="hospitalDepartmentChildName != null">
@@ -85,7 +85,7 @@
     </set>
     where hospital_department_child_id = #{hospitalDepartmentChildId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType=" com.fums.followmanagement.pojo.HospitalDepartmentChild">
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.HospitalDepartmentChild">
     update hospital_department_child
     set hospital_department_child_name = #{hospitalDepartmentChildName,jdbcType=VARCHAR},
       hospital_department_child_state = #{hospitalDepartmentChildState,jdbcType=INTEGER},

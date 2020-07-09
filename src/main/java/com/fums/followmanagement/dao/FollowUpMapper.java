@@ -3,11 +3,13 @@ package com.fums.followmanagement.dao;
 import com.fums.followmanagement.pojo.FollowUp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
 @Mapper
+@Component
 public interface FollowUpMapper {
     int deleteByPrimaryKey(Integer followUpId);
 
