@@ -16,7 +16,7 @@ public class DataReviewServiceImpl implements DataReviewService {
     @Override
     public List<DataReview> findAllDataReview(DataReview dataReview,Integer[] list) {
         //DataReviewExample dataReviewExample = new DataReviewExample();
-        List<DataReview> dataReviewList = dataReviewDAO.selectAll(dataReview,list);
+        List<DataReview> dataReviewList = dataReviewDAO.selectAll(dataReview,list,null,null);
         return dataReviewList;
     }
 

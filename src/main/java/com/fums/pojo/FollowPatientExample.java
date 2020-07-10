@@ -212,6 +212,66 @@ public class FollowPatientExample {
             return (Criteria) this;
         }
 
+        public Criteria andHospitalDepartmentIdIsNull() {
+            addCriterion("hospital_department_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdIsNotNull() {
+            addCriterion("hospital_department_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdEqualTo(Integer value) {
+            addCriterion("hospital_department_id =", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdNotEqualTo(Integer value) {
+            addCriterion("hospital_department_id <>", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdGreaterThan(Integer value) {
+            addCriterion("hospital_department_id >", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("hospital_department_id >=", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdLessThan(Integer value) {
+            addCriterion("hospital_department_id <", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("hospital_department_id <=", value, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdIn(List<Integer> values) {
+            addCriterion("hospital_department_id in", values, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdNotIn(List<Integer> values) {
+            addCriterion("hospital_department_id not in", values, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdBetween(Integer value1, Integer value2) {
+            addCriterion("hospital_department_id between", value1, value2, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalDepartmentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("hospital_department_id not between", value1, value2, "hospitalDepartmentId");
+            return (Criteria) this;
+        }
+
         public Criteria andFollowUpIdIsNull() {
             addCriterion("follow_up_id is null");
             return (Criteria) this;

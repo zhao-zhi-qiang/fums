@@ -743,13 +743,13 @@ a.fc-more:hover {
 	z-index: 5
 }
 
-.fc-view-container *,
+/*.fc-view-container *,
 .fc-view-container :after,
 .fc-view-container :before {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box
-}
+}*/
 
 .fc-view,
 .fc-view>table {
@@ -1145,7 +1145,7 @@ a.fc-more:hover {
 	bottom: 0
 }
 
-.fc-list-empty-wrap1 {
+/*.fc-list-empty-wrap1 {
 	width: 100%;
 	height: 100%;
 	display: table
@@ -1155,8 +1155,9 @@ a.fc-more:hover {
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center
-}
+}*/
 
+/*
 .fc-unthemed .fc-list-empty {
 	background-color: #eee
-}
+}*/

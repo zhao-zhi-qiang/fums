@@ -9,6 +9,11 @@
     <result column="del_state" jdbcType="INTEGER" property="delState" />
     <result column="set_of_date" jdbcType="DATE" property="setOfDate" />
     <result column="follow_up_setdate" jdbcType="INTEGER" property="followUpSetdate" />
+    <result column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
+    <result column="name" property="patientName" />
+    <result column="patient_unique" property="patientUnique" />
+    <result column="sex" property="sex" />
+    <result column="follow_up_name" property="followUpName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, follow_up_id, patient_id, date_of_next_follow_up, del_state, set_of_date, follow_up_setdate
+    id, follow_up_id, patient_id, date_of_next_follow_up, del_state, set_of_date, follow_up_setdate, hospital_department_id
   </sql>
   <select id="selectByExample" parameterType="com.fums.pojo.FollowPatientExample" resultMap="BaseResultMap">
     select
@@ -95,27 +100,39 @@
   </select>
   <select id="selectAll" parameterType="com.fums.pojo.FollowPatient" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from follow_patient
+    fp.id, fp.follow_up_id, fp.patient_id,
+    fp.date_of_next_follow_up, fp.del_state, fp.set_of_date,
+    fp.follow_up_setdate, fp.hospital_department_id, p.name, p.sex, p.patient_unique, fu.follow_up_name
+    from follow_patient fp
+    left join patient p ON fp.patient_id = p.patient_id
+    left join follow_up fu on fp.follow_up_id=fu.follow_up_id
     <where>
-      <if test="record.followUpId != 0">
+      del_state = 0
+      <if test="record.followUpId != 0 and record.followUpId != null">
         and follow_up_id = #{record.followUpId}
       </if>
-      <if test="record.patientId != 0">
-        and patient_id = #{record.patientId}
+      <if test="record.hospitalDepartmentId != 0 and record.hospitalDepartmentId != null">
+        and hospital_department_id = #{record.hospitalDepartmentId}
       </if>
-      <if test="record.dateOfNextFollowUp != null and record.dateOfNextFollowUp != ''">
-        and date_of_next_follow_up like "%"#{record.dateOfNextFollowUp}"%"
+      <if test="setOfDate1 != null and setOfDate2 != null">
+        and set_of_date between  #{setOfDate1} and #{setOfDate2}
       </if>
-      <if test="record.setOfDate != null">
-        and set_of_date = #{record.setOfDate}
+      <if test="record.patientUnique != null and record.patientUnique != ''">
+        and p.patient_unique like "%"#{record.patientUnique}"%"
       </if>
-      <if test="list != null and list.length > 0">
+      <if test="record.patientName != null and record.patientName != ''">
+        and p.name like "%"#{record.patientName}"%"
+      </if>
+      <if test="record.followUpSetdate != null and record.followUpSetdate != ''">
+        and follow_up_setdate = #{record.followUpSetdate}
+      </if>
+      <if test="list != null and list.length>0">
         and follow_up_setdate in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-          #{item}
+        #{item}
         </foreach>
       </if>
+
     </where>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

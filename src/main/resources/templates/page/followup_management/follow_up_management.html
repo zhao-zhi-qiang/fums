@@ -14,7 +14,10 @@
 
 	<script type="text/javascript" class="library" src="/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" class="library" src="/bootstarp/js/bootstrap.min.js"></script>
-  <!-- 日历js -->
+    <script type="text/javascript" class="library" src="js/WdatePicker.js"></script>
+
+
+    <!-- 日历js -->
 	<script type="text/javascript" src="/js/moment.min.js" ></script><!-- 日期处理时间工具 -->
 	<script type="text/javascript" src="js/fullcalendar.min.js" ></script>
 	<script type="text/javascript" src="js/index.js" ></script>
@@ -52,7 +55,7 @@
         <tr>
           <td style="width: 40%;">1.科室：</td>
           <td style="width: 60%;">
-            <select style="width: 100%;">
+            <select id="hospitalDepartment" name="hospitalDepartmentId" style="width: 100%;">
               <option value="0">-请选择-</option>
               <option value="1">科室一</option>
             </select>
@@ -61,7 +64,7 @@
         <tr>
           <td style="width: 40%;">2.随访组：</td>
           <td style="width: 60%;">
-            <select style="width: 100%;">
+            <select id="followUp" name="followUpId" style="width: 100%;">
               <option value="0">-请选择-</option>
               <option value="1">随访组一</option>
             </select>
@@ -70,7 +73,7 @@
         <tr>
           <td style="width: 40%;">3.日期：</td>
           <td style="width: 60%;">
-            <input style="width: 100%;" type="text">
+            <input style="width: 100%;" type="text" name="setOfDate1" onclick=WdatePicker({dateFmt:'yyyy-MM-dd'}) readonly="readonly">
           </td>
         </tr>
         <tr>
@@ -80,23 +83,23 @@
         <tr>
           <td style="width: 40%;"></td>
           <td style="width: 60%">
-            <input style="width: 100%;" type="text">
+            <input style="width: 100%;" type="text" name="setOfDate2" onclick=WdatePicker({dateFmt:'yyyy-MM-dd'}) readonly="readonly">
           </td>
         </tr>
         <tr>
           <td style="width: 40%;">4.住院号</td>
           <td style="width: 60%;">
-            <input style="width: 100%;" type="text">
+            <input style="width: 100%;" type="text" name="patientUnique">
           </td>
         </tr>
         <tr>
           <td style="width: 40%;">5.姓名</td>
           <td style="width: 60%;">
-            <input style="width: 100%;" type="text">
+            <input style="width: 100%;" type="text" name="patientName">
           </td>
         </tr>
         <tr><td colspan="2" align="center">
-          <button type="button">筛选</button>
+          <button type="button" style="cursor:pointer;" onclick="followUpManagementFenYe(1,null)">筛选</button>
         </td></tr>
         
       </table>
@@ -119,10 +122,10 @@
         </div>
 <div id="list_view">
         <div id="yisuifnag" style="position: absolute;top: 40px;left: 20px;">
-          <input type="checkbox">已随访
+          <input type="checkbox" name="followUpSetdate" value="1" onchange="followUpManagementFenYe(1)">已随访
         </div>
         <div id="weisuifnag" style="position: absolute;top: 40px;left: 90px;">
-          <input type="checkbox">未随访
+          <input type="checkbox" name="followUpSetdate" value="0" onchange="followUpManagementFenYe(1)">未随访
         </div>
 
         <table id="tabular_data" class="table table-bordered table-hover">
@@ -168,7 +171,7 @@
         </table>
       </div>
       
-      <div id="calendar" style="display: none; position: absolute;top: 40px;height: 1%;"></div>
+      <div id="calendar" style="display: none; position: absolute;top: 40px;height: 50%;"></div>
 
     </div>    
     </div>

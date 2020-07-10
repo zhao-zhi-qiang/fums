@@ -1,6 +1,7 @@
 package com.fums.followupmanagement.dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,8 +22,8 @@ public interface MyBatisBaseDao<Model, PK extends Serializable, E> {
 
     int insertSelective(Model record);
 
-    List<Model> selectByExample(Model record);
-    List<Model> selectAll(Model record,Integer[] list);
+    List<Model> selectByExample(E example);
+    List<Model> selectAll(Model record, Integer[] list, Date setOfDate1, Date setOfDate2);
 
     Model selectByPrimaryKey(PK id);
 

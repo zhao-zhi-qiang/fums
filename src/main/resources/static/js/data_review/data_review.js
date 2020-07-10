@@ -47,6 +47,7 @@ function fenye(pageNum) {
                 }
                 a+='<td>'+list[i].reviewDate+'</td>';
                 a+='<td><img style="cursor:pointer;" onclick="tiaozhuan('+list[i].id+')" class="img" src="img/u167.png"/></td>';
+                a+='</tr>';
             }
             $("#tbody").append(a);
             $("#fenye").empty();

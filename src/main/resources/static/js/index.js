@@ -2,17 +2,17 @@
 
 $(function(){
 	
-	var get = '2020-05-14';
+	var get = new Date();
 	
 //	$("#calendar").fullCalendar({
 	var calendar = $('#calendar').fullCalendar({
 		header: {													//设置日历头部信息，false，则不显示头部信息。包括left，center,right左中右三个位置
 			left: 'prev,next, today',								//上一个、下一个、今天
 			center: 'title',										//标题
-			right: 'month,agendaWeek,agendaDay,listMonth'			//月、周、日、日程列表
+			right: 'month,agendaWeek'			//月、周、日、日程列表
 		},
 		locale: 'zh-cn',											//?没用？
-        timeFormat: 'HH:mm',										//日程事件的时间格式
+       // timeFormat: 'HH:mm',										//日程事件的时间格式
 //      timeFormat: 'HH:mm{ - H:mm}',{agenda: ‘h:mm{ - h:mm}}
 		buttonText: {    											//各按钮的显示文本信息
             today: '今天',    
@@ -21,11 +21,11 @@ $(function(){
             agendaDay: '日',
             listMonth: '日程',
         },
-//      columnFormat: {
-//	        month: 'dddd',
-//	        week: 'dddd M-d',
-//	        day: 'dddd M-d'
-//	    },
+/*      columnFormat: {
+	        month: 'ddd',
+	        week: 'ddd d/M',
+	        day: 'dddd d/M'
+	    },*/
 //		titleFormat: {
 //	        month: 'yyyy年 MMMM月',
 //	        week: "[yyyy年] MMMM月d日 { '&#8212;' [yyyy年] MMMM月d日}",
@@ -39,23 +39,23 @@ $(function(){
 		allDayText: "全天",											//自定义全天视图的名称
         allDaySlot: false,  										//是否在周日历上方显示全天
 //      allDayDefault: false,										//是否为全天日程事件，显示这一天中所做的事情
-		slotDuration : "00:30:00",      							//一格时间槽代表多长时间，默认00:30:00（30分钟）
-        slotLabelFormat : "H(:mm)a",    							//日期视图左边那一列显示的每一格日期时间格式
-        slotLabelInterval : "01:00:00", 							//日期视图左边那一列多长间隔显示一条日期文字(默认跟着slotDuration走的，可自定义)
-        snapDuration : "01:00:00",      							//其实就是动态创建一个日程时，默认创建多长的时间块
+		slotDuration : "1:00:00",      							//一格时间槽代表多长时间，默认00:30:00（30分钟）
+        slotLabelFormat : "d:HH",    							//日期视图左边那一列显示的每一格日期时间格式
+        //slotLabelInterval : "01:00:00", 							//日期视图左边那一列多长间隔显示一条日期文字(默认跟着slotDuration走的，可自定义)
+        //snapDuration : "01:00:00",      							//其实就是动态创建一个日程时，默认创建多长的时间块
 		firstDay: 1,   												//一周中显示的第一天是哪天，周日是0，周一是1，类推
         hiddenDays: [],												//隐藏一周中的某一天或某几天，数组形式，如隐藏周二和周五：[2,5]，默认不隐藏，除非weekends设置为false。
         weekends: true,												//是否显示周六和周日，设为false则不显示周六和周日。默认值为true
         weekMode: 'fixed',											//月视图里显示周的模式，因每月周数不同月视图高度不定。fixed：固定显示6周高，日历高度保持不变liquid：不固定周数，高度随周数变化variable：不固定周数，但高度固定
 		weekNumbers: false,											//是否在日历中显示周次(一年中的第几周)，如果设置为true，则会在月视图的左侧、周视图和日视图的左上角显示周数。
-        weekNumberCalculation: 'iso',								//周次的显示格式。
-		height: 800,												//设置日历的高度，包括header日历头部，默认未设置，高度根据aspectRatio值自适应。
+       // weekNumberCalculation: 'iso',								//周次的显示格式。
+		height: 500,												//设置日历的高度，包括header日历头部，默认未设置，高度根据aspectRatio值自适应。
 //      contentHeight: 600,											//设置日历主体内容的高度，不包括header部分，默认未设置，高度根据aspectRatio值自适应。
 		handleWindowResize: true,									//是否随浏览器窗口大小变化而自动变化。
 		defaultView: 'month',										//初始化时默认视图，默认是月month，agendaWeek是周，agendaDay是当天
 //      slotEventOverlap: false,									//事件是否可以重叠覆盖
 		defaultDate: get,											//默认显示那一天的日期视图getDates(true)2020-05-10
-		nowIndicator: true,            								//周/日视图中显示今天当前时间点（以红线标记），默认false不显示
+		//nowIndicator: true,            								//周/日视图中显示今天当前时间点（以红线标记），默认false不显示
 		eventLimit: false,       									//数据条数太多时，限制显示条数（多余的以“+2more”格式显示），默认false不限制,支持输入数字设定固定的显示条数
 		eventLimitText: "更多",       								//当一块区域内容太多以"+2 more"格式显示时，这个more的名称自定义（应该与eventLimit: true一并用）
         dayPopoverFormat : "YYYY年M月d日", 							//点开"+2 more"弹出的小窗口标题，与eventLimitClick可以结合用
@@ -136,17 +136,22 @@ $(function(){
 				"overlap": false,
 				"rendering": "background",
 				"color": "#cccccc"
+			},{
+			"title":"3"+"/"+"8   完成率80%",
+				"start": "2020-07-10T12:00:00",
+				"end": "2020-07-10T14:00:00",
+				"color":"red"
 			},
       	],
       	dayClick: function(date, allDay, jsEvent, view) {						//空白的日期区点击
 //        	alert($.fullCalendar.formatDate(date, "YYYY-MM-DD"));
 //      	console.log('Clicked on: ' + date.format());
 		},
-		eventClick: function(event, jsEvent) {									//日程事件点击
+		/*eventClick: function(event, jsEvent) {									//日程事件点击
 			alert(event.title + event.start.format() + '______' + event.end.format() + '_______' + " ——详情");
 			//状态判断？？？
 			//权限限制？？？
-		},
+		},*/
 		eventMouseover: function(){},						//鼠标划过和离开的事件，用法和参数同上
 		eventMouseout: function(){},
 		
