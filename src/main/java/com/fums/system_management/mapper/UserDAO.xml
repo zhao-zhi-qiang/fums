@@ -16,108 +16,84 @@
     <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
     <result column="user_create_time" jdbcType="DATE" property="userCreateTime" />
     <result column="user_update_time" jdbcType="DATE" property="userUpdateTime" />
+    <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
   </resultMap>
-  <insert id="insert" parameterType="com.fums.system_management.pojo.User">
-    insert into user (id, user_id, user_account, 
-      user_name, `password`, user_sex, 
-      user_address, user_phone, user_email, 
-      user_salt, user_state, hospital_department_child_code, 
-      user_create_time, user_update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, 
-      #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
-      #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userSalt,jdbcType=VARCHAR}, #{userState,jdbcType=INTEGER}, #{hospitalDepartmentChildCode,jdbcType=INTEGER}, 
-      #{userCreateTime,jdbcType=DATE}, #{userUpdateTime,jdbcType=DATE})
+
+  <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
+    <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
+    <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
+    <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
+    <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
+  </resultMap>
+
+  <!--用户科室中间表-->
+  <resultMap id="ueBaseResultMap" type="com.fums.system_management.pojo.UserDepartment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
+  </resultMap>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select u.id, u.user_id ,u.user_account,u.user_sex,u.user_phone,
+    u.user_email,u.password,h.hospital_department_id,h.hospital_department_name
+    from
+    `user` u
+    LEFT JOIN user_department d ON u.id = d.id
+    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+    where 1 = 1
+
+    <if test="userId != null and userId != ''">
+      and u.user_id like concat('%',#{userId},'%')
+    </if>
+    <if test="userAccount != null and userAccount != ''">
+      and u.user_account like concat('%',#{userAccount},'%')
+    </if>
+    <if test="userSex != null and userSex != 0">
+      and user_sex like concat('%',#{userSex},'%')
+    </if>
+    <if test="userPhone != null and userPhone != ''">
+      and user_phone like concat('%',#{userPhone},'%')
+    </if>
+    <if test="userEmail != null and userEmail != ''">
+      and user_email like concat('%',#{userEmail},'%')
+    </if>
+    <if test="password != null and password != ''">
+      and password like concat('%',#{password},'%')
+    </if>
+    <if test="hospitalDepartmentName != null and hospitalDepartmentName !=0">
+      and h.hospital_department_name like concat('%',#{hospitalDepartmentName},'%')
+    </if>
+  </select>
+
+  <select id="seleDepartment" resultMap="usBaseResultMap">
+    select hospital_department_id,hospital_department_name from hospital_department
+  </select>
+
+  <insert id="insert" parameterType="com.fums.system_management.pojo.User" useGeneratedKeys="true" keyProperty="id" >
+
+    INSERT INTO `tree`.`user` ( `user_id`, `user_account`, `user_sex`, `user_phone`, `user_email`,  `password`)
+    VALUES (#{userId},#{userAccount},#{userSex},#{userPhone},#{userEmail},#{password});
+
   </insert>
-  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userAccount != null">
-        user_account,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="userSex != null">
-        user_sex,
-      </if>
-      <if test="userAddress != null">
-        user_address,
-      </if>
-      <if test="userPhone != null">
-        user_phone,
-      </if>
-      <if test="userEmail != null">
-        user_email,
-      </if>
-      <if test="userSalt != null">
-        user_salt,
-      </if>
-      <if test="userState != null">
-        user_state,
-      </if>
-      <if test="hospitalDepartmentChildCode != null">
-        hospital_department_child_code,
-      </if>
-      <if test="userCreateTime != null">
-        user_create_time,
-      </if>
-      <if test="userUpdateTime != null">
-        user_update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userAccount != null">
-        #{userAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userSex != null">
-        #{userSex,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddress != null">
-        #{userAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhone != null">
-        #{userPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null">
-        #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="userSalt != null">
-        #{userSalt,jdbcType=VARCHAR},
-      </if>
-      <if test="userState != null">
-        #{userState,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalDepartmentChildCode != null">
-        #{hospitalDepartmentChildCode,jdbcType=INTEGER},
-      </if>
-      <if test="userCreateTime != null">
-        #{userCreateTime,jdbcType=DATE},
-      </if>
-      <if test="userUpdateTime != null">
-        #{userUpdateTime,jdbcType=DATE},
-      </if>
-    </trim>
+
+  <insert id="inserts" parameterType="com.fums.system_management.pojo.UserDepartment">
+
+    INSERT INTO `tree`.`user_department` ( `user_id`,`hospital_department_id`)
+    VALUES (#{a},#{b});
+
   </insert>
+
+
+
+  <!--  <select id="seleUpdate" resultMap="BaseResultMap">-->
+  <!--    select * from user where id = #{id}-->
+  <!--  </select>-->
+
+  <!--  <update id="saveUpdata" parameterType="com.fums.system_management.pojo.User">-->
+
+  <!--    /*update USER  set user_id = #{userId},user_account=#{},user_sex=#{},user_phone=#{}，user_email=#{}，password=#{}，-->
+  <!--    hospital_department_name=#{}-->
+  <!--    where `id`= #{id}*/-->
+
+  <!--  </update>-->
 </mapper>

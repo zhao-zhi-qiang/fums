@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * user
- * @author 
+ * @author
  */
 public class User implements Serializable {
     /**
@@ -73,12 +73,48 @@ public class User implements Serializable {
      */
     private Date userCreateTime;
 
+    /*
+     *引入科室名称
+     *
+     */
+    private String hospitalDepartmentName;
+
     /**
      * 用户更新时间
      */
     private Date userUpdateTime;
 
-    private static final long serialVersionUID = 1L;
+    /*引入科室表*/
+    private HospitalDepartment hospitalDepartment;
+
+    private Integer hospitalDepartmentId;
+
+    /*引入用户科室中间表*/
+    private UserDepartment userDepartment;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", userAccount='" + userAccount + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userSalt='" + userSalt + '\'' +
+                ", userState=" + userState +
+                ", hospitalDepartmentChildCode=" + hospitalDepartmentChildCode +
+                ", userCreateTime=" + userCreateTime +
+                ", hospitalDepartmentName='" + hospitalDepartmentName + '\'' +
+                ", userUpdateTime=" + userUpdateTime +
+                ", hospitalDepartment=" + hospitalDepartment +
+                ", hospitalDepartmentId=" + hospitalDepartmentId +
+                ", userDepartment=" + userDepartment +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -184,6 +220,14 @@ public class User implements Serializable {
         this.userCreateTime = userCreateTime;
     }
 
+    public String getHospitalDepartmentName() {
+        return hospitalDepartmentName;
+    }
+
+    public void setHospitalDepartmentName(String hospitalDepartmentName) {
+        this.hospitalDepartmentName = hospitalDepartmentName;
+    }
+
     public Date getUserUpdateTime() {
         return userUpdateTime;
     }
@@ -192,77 +236,27 @@ public class User implements Serializable {
         this.userUpdateTime = userUpdateTime;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        User other = (User) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getUserAccount() == null ? other.getUserAccount() == null : this.getUserAccount().equals(other.getUserAccount()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getUserSex() == null ? other.getUserSex() == null : this.getUserSex().equals(other.getUserSex()))
-            && (this.getUserAddress() == null ? other.getUserAddress() == null : this.getUserAddress().equals(other.getUserAddress()))
-            && (this.getUserPhone() == null ? other.getUserPhone() == null : this.getUserPhone().equals(other.getUserPhone()))
-            && (this.getUserEmail() == null ? other.getUserEmail() == null : this.getUserEmail().equals(other.getUserEmail()))
-            && (this.getUserSalt() == null ? other.getUserSalt() == null : this.getUserSalt().equals(other.getUserSalt()))
-            && (this.getUserState() == null ? other.getUserState() == null : this.getUserState().equals(other.getUserState()))
-            && (this.getHospitalDepartmentChildCode() == null ? other.getHospitalDepartmentChildCode() == null : this.getHospitalDepartmentChildCode().equals(other.getHospitalDepartmentChildCode()))
-            && (this.getUserCreateTime() == null ? other.getUserCreateTime() == null : this.getUserCreateTime().equals(other.getUserCreateTime()))
-            && (this.getUserUpdateTime() == null ? other.getUserUpdateTime() == null : this.getUserUpdateTime().equals(other.getUserUpdateTime()));
+    public HospitalDepartment getHospitalDepartment() {
+        return hospitalDepartment;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
-        result = prime * result + ((getUserAccount() == null) ? 0 : getUserAccount().hashCode());
-        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getUserSex() == null) ? 0 : getUserSex().hashCode());
-        result = prime * result + ((getUserAddress() == null) ? 0 : getUserAddress().hashCode());
-        result = prime * result + ((getUserPhone() == null) ? 0 : getUserPhone().hashCode());
-        result = prime * result + ((getUserEmail() == null) ? 0 : getUserEmail().hashCode());
-        result = prime * result + ((getUserSalt() == null) ? 0 : getUserSalt().hashCode());
-        result = prime * result + ((getUserState() == null) ? 0 : getUserState().hashCode());
-        result = prime * result + ((getHospitalDepartmentChildCode() == null) ? 0 : getHospitalDepartmentChildCode().hashCode());
-        result = prime * result + ((getUserCreateTime() == null) ? 0 : getUserCreateTime().hashCode());
-        result = prime * result + ((getUserUpdateTime() == null) ? 0 : getUserUpdateTime().hashCode());
-        return result;
+    public void setHospitalDepartment(HospitalDepartment hospitalDepartment) {
+        this.hospitalDepartment = hospitalDepartment;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", userAccount=").append(userAccount);
-        sb.append(", userName=").append(userName);
-        sb.append(", password=").append(password);
-        sb.append(", userSex=").append(userSex);
-        sb.append(", userAddress=").append(userAddress);
-        sb.append(", userPhone=").append(userPhone);
-        sb.append(", userEmail=").append(userEmail);
-        sb.append(", userSalt=").append(userSalt);
-        sb.append(", userState=").append(userState);
-        sb.append(", hospitalDepartmentChildCode=").append(hospitalDepartmentChildCode);
-        sb.append(", userCreateTime=").append(userCreateTime);
-        sb.append(", userUpdateTime=").append(userUpdateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public Integer getHospitalDepartmentId() {
+        return hospitalDepartmentId;
+    }
+
+    public void setHospitalDepartmentId(Integer hospitalDepartmentId) {
+        this.hospitalDepartmentId = hospitalDepartmentId;
+    }
+
+    public UserDepartment getUserDepartment() {
+        return userDepartment;
+    }
+
+    public void setUserDepartment(UserDepartment userDepartment) {
+        this.userDepartment = userDepartment;
     }
 }
