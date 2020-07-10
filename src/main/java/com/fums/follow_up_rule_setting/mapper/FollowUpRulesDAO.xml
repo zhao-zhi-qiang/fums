@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.FollowUpRulesDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.FollowUpRules">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="
+are_holidays_scheduled" jdbcType="INTEGER" property="
+areHolidaysScheduled" />
+    <result column="point_of_time_id" jdbcType="INTEGER" property="pointOfTimeId" />
+    <result column="follow_up_template_id" jdbcType="INTEGER" property="followUpTemplateId" />
+    <result column="reminders_for_patients" jdbcType="VARCHAR" property="remindersForPatients" />
+    <result column="Doctors_reminders" jdbcType="VARCHAR" property="doctorsReminders" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, 
+are_holidays_scheduled, point_of_time_id, follow_up_template_id, reminders_for_patients, 
+    Doctors_reminders
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow_up_rules
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from follow_up_rules
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.FollowUpRules">
+    insert into follow_up_rules (id, 
+are_holidays_scheduled, point_of_time_id, 
+      follow_up_template_id, reminders_for_patients, 
+      Doctors_reminders)
+    values (#{id,jdbcType=INTEGER}, #{
+areHolidaysScheduled,jdbcType=INTEGER}, #{pointOfTimeId,jdbcType=INTEGER}, 
+      #{followUpTemplateId,jdbcType=INTEGER}, #{remindersForPatients,jdbcType=VARCHAR}, 
+      #{doctorsReminders,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.FollowUpRules">
+    insert into follow_up_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="
+areHolidaysScheduled != null">
+        
+are_holidays_scheduled,
+      </if>
+      <if test="pointOfTimeId != null">
+        point_of_time_id,
+      </if>
+      <if test="followUpTemplateId != null">
+        follow_up_template_id,
+      </if>
+      <if test="remindersForPatients != null">
+        reminders_for_patients,
+      </if>
+      <if test="doctorsReminders != null">
+        Doctors_reminders,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="
+areHolidaysScheduled != null">
+        #{
+areHolidaysScheduled,jdbcType=INTEGER},
+      </if>
+      <if test="pointOfTimeId != null">
+        #{pointOfTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="followUpTemplateId != null">
+        #{followUpTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="remindersForPatients != null">
+        #{remindersForPatients,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorsReminders != null">
+        #{doctorsReminders,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.FollowUpRules">
+    update follow_up_rules
+    <set>
+      <if test="
+areHolidaysScheduled != null">
+        
+are_holidays_scheduled = #{
+areHolidaysScheduled,jdbcType=INTEGER},
+      </if>
+      <if test="pointOfTimeId != null">
+        point_of_time_id = #{pointOfTimeId,jdbcType=INTEGER},
+      </if>
+      <if test="followUpTemplateId != null">
+        follow_up_template_id = #{followUpTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="remindersForPatients != null">
+        reminders_for_patients = #{remindersForPatients,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorsReminders != null">
+        Doctors_reminders = #{doctorsReminders,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.FollowUpRules">
+    update follow_up_rules
+    set 
+are_holidays_scheduled = #{
+areHolidaysScheduled,jdbcType=INTEGER},
+      point_of_time_id = #{pointOfTimeId,jdbcType=INTEGER},
+      follow_up_template_id = #{followUpTemplateId,jdbcType=INTEGER},
+      reminders_for_patients = #{remindersForPatients,jdbcType=VARCHAR},
+      Doctors_reminders = #{doctorsReminders,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

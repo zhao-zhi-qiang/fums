@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.BenchmarkEventsDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="outpatient_department" jdbcType="VARCHAR" property="outpatientDepartment" />
+    <result column="be_hospitalized" jdbcType="VARCHAR" property="beHospitalized" />
+    <result column="leave_hospital" jdbcType="VARCHAR" property="leaveHospital" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="admission_to_icu" jdbcType="VARCHAR" property="admissionToIcu" />
+    <result column="out_of_icu" jdbcType="VARCHAR" property="outOfIcu" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, outpatient_department, be_hospitalized, leave_hospital, `operation`, admission_to_icu, 
+    out_of_icu
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from benchmark_events
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from benchmark_events
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    insert into benchmark_events (id, outpatient_department, be_hospitalized, 
+      leave_hospital, `operation`, admission_to_icu, 
+      out_of_icu)
+    values (#{id,jdbcType=INTEGER}, #{outpatientDepartment,jdbcType=VARCHAR}, #{beHospitalized,jdbcType=VARCHAR}, 
+      #{leaveHospital,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, #{admissionToIcu,jdbcType=VARCHAR}, 
+      #{outOfIcu,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    insert into benchmark_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="outpatientDepartment != null">
+        outpatient_department,
+      </if>
+      <if test="beHospitalized != null">
+        be_hospitalized,
+      </if>
+      <if test="leaveHospital != null">
+        leave_hospital,
+      </if>
+      <if test="operation != null">
+        `operation`,
+      </if>
+      <if test="admissionToIcu != null">
+        admission_to_icu,
+      </if>
+      <if test="outOfIcu != null">
+        out_of_icu,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="outpatientDepartment != null">
+        #{outpatientDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="beHospitalized != null">
+        #{beHospitalized,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveHospital != null">
+        #{leaveHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionToIcu != null">
+        #{admissionToIcu,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfIcu != null">
+        #{outOfIcu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    update benchmark_events
+    <set>
+      <if test="outpatientDepartment != null">
+        outpatient_department = #{outpatientDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="beHospitalized != null">
+        be_hospitalized = #{beHospitalized,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveHospital != null">
+        leave_hospital = #{leaveHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null">
+        `operation` = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionToIcu != null">
+        admission_to_icu = #{admissionToIcu,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfIcu != null">
+        out_of_icu = #{outOfIcu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    update benchmark_events
+    set outpatient_department = #{outpatientDepartment,jdbcType=VARCHAR},
+      be_hospitalized = #{beHospitalized,jdbcType=VARCHAR},
+      leave_hospital = #{leaveHospital,jdbcType=VARCHAR},
+      `operation` = #{operation,jdbcType=VARCHAR},
+      admission_to_icu = #{admissionToIcu,jdbcType=VARCHAR},
+      out_of_icu = #{outOfIcu,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

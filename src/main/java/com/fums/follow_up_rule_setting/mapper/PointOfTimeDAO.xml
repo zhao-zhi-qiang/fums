@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.PointOfTimeDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.PointOfTime">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="benchmart_events_id" jdbcType="INTEGER" property="benchmartEventsId" />
+    <result column="filter_events_id" jdbcType="INTEGER" property="filterEventsId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="interval_time" jdbcType="TIMESTAMP" property="intervalTime" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="days_ahead" jdbcType="INTEGER" property="daysAhead" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, benchmart_events_id, filter_events_id, start_time, interval_time, duration, days_ahead
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from point_of_time
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from point_of_time
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.PointOfTime">
+    insert into point_of_time (id, benchmart_events_id, filter_events_id, 
+      start_time, interval_time, duration, 
+      days_ahead)
+    values (#{id,jdbcType=INTEGER}, #{benchmartEventsId,jdbcType=INTEGER}, #{filterEventsId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{intervalTime,jdbcType=TIMESTAMP}, #{duration,jdbcType=INTEGER}, 
+      #{daysAhead,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.PointOfTime">
+    insert into point_of_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="benchmartEventsId != null">
+        benchmart_events_id,
+      </if>
+      <if test="filterEventsId != null">
+        filter_events_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="intervalTime != null">
+        interval_time,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="daysAhead != null">
+        days_ahead,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="benchmartEventsId != null">
+        #{benchmartEventsId,jdbcType=INTEGER},
+      </if>
+      <if test="filterEventsId != null">
+        #{filterEventsId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intervalTime != null">
+        #{intervalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="daysAhead != null">
+        #{daysAhead,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.PointOfTime">
+    update point_of_time
+    <set>
+      <if test="benchmartEventsId != null">
+        benchmart_events_id = #{benchmartEventsId,jdbcType=INTEGER},
+      </if>
+      <if test="filterEventsId != null">
+        filter_events_id = #{filterEventsId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intervalTime != null">
+        interval_time = #{intervalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="daysAhead != null">
+        days_ahead = #{daysAhead,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.PointOfTime">
+    update point_of_time
+    set benchmart_events_id = #{benchmartEventsId,jdbcType=INTEGER},
+      filter_events_id = #{filterEventsId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      interval_time = #{intervalTime,jdbcType=TIMESTAMP},
+      duration = #{duration,jdbcType=INTEGER},
+      days_ahead = #{daysAhead,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

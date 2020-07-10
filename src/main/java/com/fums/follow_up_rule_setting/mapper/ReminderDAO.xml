@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.ReminderDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.Reminder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="reminder_method" jdbcType="VARCHAR" property="reminderMethod" />
+    <result column="reminder_pepole" jdbcType="VARCHAR" property="reminderPepole" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, reminder_method, reminder_pepole
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reminder
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reminder
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.Reminder">
+    insert into reminder (id, reminder_method, reminder_pepole
+      )
+    values (#{id,jdbcType=INTEGER}, #{reminderMethod,jdbcType=VARCHAR}, #{reminderPepole,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.Reminder">
+    insert into reminder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="reminderMethod != null">
+        reminder_method,
+      </if>
+      <if test="reminderPepole != null">
+        reminder_pepole,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reminderMethod != null">
+        #{reminderMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="reminderPepole != null">
+        #{reminderPepole,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.Reminder">
+    update reminder
+    <set>
+      <if test="reminderMethod != null">
+        reminder_method = #{reminderMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="reminderPepole != null">
+        reminder_pepole = #{reminderPepole,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.Reminder">
+    update reminder
+    set reminder_method = #{reminderMethod,jdbcType=VARCHAR},
+      reminder_pepole = #{reminderPepole,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

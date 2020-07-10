@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.FilterEventsDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="our_hospital" jdbcType="VARCHAR" property="ourHospital" />
+    <result column="undergraduate_department" jdbcType="VARCHAR" property="undergraduateDepartment" />
+    <result column="first" jdbcType="VARCHAR" property="first" />
+    <result column="last" jdbcType="VARCHAR" property="last" />
+    <result column="this_visit" jdbcType="VARCHAR" property="thisVisit" />
+    <result column="arbitrary_treatment" jdbcType="VARCHAR" property="arbitraryTreatment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, our_hospital, undergraduate_department, `first`, `last`, this_visit, arbitrary_treatment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filter_events
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from filter_events
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ygjy.pojo.FilterEvents">
+    insert into filter_events (id, our_hospital, undergraduate_department, 
+      `first`, `last`, this_visit, 
+      arbitrary_treatment)
+    values (#{id,jdbcType=INTEGER}, #{ourHospital,jdbcType=VARCHAR}, #{undergraduateDepartment,jdbcType=VARCHAR}, 
+      #{first,jdbcType=VARCHAR}, #{last,jdbcType=VARCHAR}, #{thisVisit,jdbcType=VARCHAR}, 
+      #{arbitraryTreatment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    insert into filter_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ourHospital != null">
+        our_hospital,
+      </if>
+      <if test="undergraduateDepartment != null">
+        undergraduate_department,
+      </if>
+      <if test="first != null">
+        `first`,
+      </if>
+      <if test="last != null">
+        `last`,
+      </if>
+      <if test="thisVisit != null">
+        this_visit,
+      </if>
+      <if test="arbitraryTreatment != null">
+        arbitrary_treatment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ourHospital != null">
+        #{ourHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="undergraduateDepartment != null">
+        #{undergraduateDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="first != null">
+        #{first,jdbcType=VARCHAR},
+      </if>
+      <if test="last != null">
+        #{last,jdbcType=VARCHAR},
+      </if>
+      <if test="thisVisit != null">
+        #{thisVisit,jdbcType=VARCHAR},
+      </if>
+      <if test="arbitraryTreatment != null">
+        #{arbitraryTreatment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    update filter_events
+    <set>
+      <if test="ourHospital != null">
+        our_hospital = #{ourHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="undergraduateDepartment != null">
+        undergraduate_department = #{undergraduateDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="first != null">
+        `first` = #{first,jdbcType=VARCHAR},
+      </if>
+      <if test="last != null">
+        `last` = #{last,jdbcType=VARCHAR},
+      </if>
+      <if test="thisVisit != null">
+        this_visit = #{thisVisit,jdbcType=VARCHAR},
+      </if>
+      <if test="arbitraryTreatment != null">
+        arbitrary_treatment = #{arbitraryTreatment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    update filter_events
+    set our_hospital = #{ourHospital,jdbcType=VARCHAR},
+      undergraduate_department = #{undergraduateDepartment,jdbcType=VARCHAR},
+      `first` = #{first,jdbcType=VARCHAR},
+      `last` = #{last,jdbcType=VARCHAR},
+      this_visit = #{thisVisit,jdbcType=VARCHAR},
+      arbitrary_treatment = #{arbitraryTreatment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

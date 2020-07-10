@@ -28,5 +28,10 @@ public class FollowUpRuleSettingController {
         return "follow_up_rule_setting/holiday_management";
     }
 
+    @RequestMapping("/search_template")
+    public String searchTemplate(){
+        return "follow_up_rule_setting/search_template.html";
+    }
+
 
 }
