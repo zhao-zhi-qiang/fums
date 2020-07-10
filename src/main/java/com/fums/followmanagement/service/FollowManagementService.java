@@ -2,6 +2,7 @@ package com.fums.followmanagement.service;
 
 import com.fums.followmanagement.dao.FollowUpMapper;
 import com.fums.followmanagement.pojo.FollowUp;
+import com.fums.followmanagement.pojo.HospitalDepartmentChild;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,13 +29,19 @@ public interface FollowManagementService {
     /**
      * 查询所有随访组信息
      * @param followUpPrincipal
-     * @param hospitalDepartmentChildCode
+     * @param hospitalDepartmentChildName
      * @param followUpStatus
-     * @param followUpCreateTime
+     * @param followUpCreateTime1
+     * @param followUpCreateTime2
      * @return
      */
-    List<FollowUp> findFollowUpAll(String followUpPrincipal,String hospitalDepartmentChildCode,Integer followUpStatus,Date followUpCreateTime);
+    List<FollowUp> findFollowUpAll(String followUpPrincipal,String hospitalDepartmentChildName,Integer followUpStatus,Date followUpCreateTime1,Date followUpCreateTime2);
 
+    /**
+     * 查询所有科室
+     * @return
+     */
+    List<HospitalDepartmentChild> findDepartmentAll();
     /**
      * 添加随访组
      * @param followUp

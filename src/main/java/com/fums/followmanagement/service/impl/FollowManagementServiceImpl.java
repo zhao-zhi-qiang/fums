@@ -1,7 +1,9 @@
 package com.fums.followmanagement.service.impl;
 
 import com.fums.followmanagement.dao.FollowUpMapper;
+import com.fums.followmanagement.dao.HospitalDepartmentChildMapper;
 import com.fums.followmanagement.pojo.FollowUp;
+import com.fums.followmanagement.pojo.HospitalDepartmentChild;
 import com.fums.followmanagement.service.FollowManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class FollowManagementServiceImpl implements FollowManagementService{
     @Autowired
     private FollowUpMapper followUpMapper;
 
+    @Autowired
+    private HospitalDepartmentChildMapper hospitalDepartmentChildMapper;
     /**
      * 验证随访组表单属性
      * @param followUpName
@@ -39,14 +43,24 @@ public class FollowManagementServiceImpl implements FollowManagementService{
     /**
      * 查询所有随访组信息
      * @param followUpPrincipal
-     * @param hospitalDepartmentChildCode
+     * @param hospitalDepartmentChildName
      * @param followUpStatus
-     * @param followUpCreateTime
+     * @param followUpCreateTime1
+     * @param followUpCreateTime2
      * @return
      */
     @Override
-    public List<FollowUp> findFollowUpAll(String followUpPrincipal, String hospitalDepartmentChildCode, Integer followUpStatus, Date followUpCreateTime) {
-        return followUpMapper.selectFollowUpAll(followUpPrincipal,followUpPrincipal,followUpStatus,hospitalDepartmentChildCode,followUpCreateTime);
+    public List<FollowUp> findFollowUpAll(String followUpPrincipal, String hospitalDepartmentChildName, Integer followUpStatus, Date followUpCreateTime1,Date followUpCreateTime2) {
+        return followUpMapper.selectFollowUpAll(hospitalDepartmentChildName,followUpPrincipal,followUpStatus,followUpCreateTime1,followUpCreateTime2);
+    }
+
+    /**
+     * 查询所有科室信息
+     * @return
+     */
+    @Override
+    public List<HospitalDepartmentChild> findDepartmentAll() {
+        return hospitalDepartmentChildMapper.selectDepartmentAll();
     }
 
     /**

@@ -35,11 +35,11 @@ public interface FollowUpMapper {
     /**
      * 查询所有随访组信息
      * @param followUpPrincipal
-     * @param hospitalDepartmentChildCode
+     * @param hospitalDepartmentChildName
      * @param followUpStatus
-     * @param departmentChildCode
-     * @param followUpCreateTime
+     * @param followUpCreateTime1
+     * @param followUpCreateTime2
      * @return
      */
-    List<FollowUp> selectFollowUpAll(@Param("followUpPrincipal") String followUpPrincipal, @Param("hospitalDepartmentChildCode") String hospitalDepartmentChildCode, @Param("followUpStatus") Integer followUpStatus, String departmentChildCode, @Param("followUpCreateTime") Date followUpCreateTime);
+    List<FollowUp> selectFollowUpAll(@Param("followUpPrincipal") String followUpPrincipal, @Param("hospitalDepartmentChildName") String hospitalDepartmentChildName, @Param("followUpStatus") Integer followUpStatus, @Param("followUpCreateTime1") Date followUpCreateTime1,@Param("followUpCreateTime2") Date followUpCreateTime2);
 }
