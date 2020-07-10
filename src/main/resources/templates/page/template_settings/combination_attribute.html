@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合属性</title>
+    <style>
+        ul li{
+            list-style: none;
+            display: inline;
+        }
+        .test ul li input{
+            border-radius:8px;
+        }
+        *{
+            /*margin: 0px;*/
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    <ul >
+        <li>名称:</li>
+        <li><input type="text" value="血常规"></li>
+    </ul>
+    <ul>
+        <li><input type="checkbox" style="width:20px;height:20px;"></li>
+        <li>是否可重复</li>
+    </ul>
+    <ul>
+        <li>最大重复次数:</li>
+        <li><input type="text" style="width: 50px;" value="99"></li>
+    </ul>
+    <ul>
+        <li><input type="checkbox" style="width:20px;height:20px;"></li>
+        <li>是否可采集项目</li>
+    </ul>
+       <div>组内约束</div>
+    <ul>
+        <li><input type="radio" style="width:20px;height:20px;"></li>
+        <li>同一患者</li>
+    </ul>
+    <ul>
+        <li><input type="radio" style="width:20px;height:20px;"></li>
+        <li>同一就诊</li>
+    </ul>
+    <div>帅选条件</div>
+    <ul>
+        <li>科室:</li>
+        <li><input type="text"></li>
+    </ul>
+    <ul>
+        <li>时间:</li>
+        <li><input type="text" style="width: 80px"><span>-</span><input type="text" style="width: 80px"></li>
+    </ul>
+    <ul>
+        <li>来源:</li>
+        <select>
+            <option value="0">请选择</option>
+            <option value="1">CDR</option>
+            <option value="2">随访</option>
+        </select>
+    </ul>
+</div>
+</body>
+</html>

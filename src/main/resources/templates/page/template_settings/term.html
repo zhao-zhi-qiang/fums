@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>术语列表</title>
+    <style>
+      .scroll-container{
+          width: 250px;
+          height: 450px;
+          overflow: auto;
+          float: left;
+      }
+        .scroll-content{
+            width: 600px;
+            height: 1000px;
+        }
+        .test{
+            width: 800px;
+            height: 450px;
+            border: 1px silver solid;
+            float: left;
+            margin-left: 50px;
+            font-size: 10px;
+        }
+       .table tr td:nth-of-type(2) input{
+           margin-right: 100px;
+       }
+        .content{
+         margin-left: 100px;
+      }
+      .imgs div{
+             display: inline-block;
+         }
+      .shuyu2 ul li{
+          list-style: none;
+          line-height: 60px;
+
+      }
+      .shuyu2 ul{
+          display: inline-block;
+          margin: 0 60px;
+      }
+      .shuyu2 ul li input{
+          width: 30px;
+          height: 30px;
+      }
+    </style>
+    <script src="js/template_setting/layui.js"></script>
+    <script src="js/template_setting/jquery-2.2.3.min.js"></script>
+ <script type="text/javascript" src="js/template_setting/tree.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <script src="js/template_setting/bootstrap.min.js"></script>
+    <script src="js/template_setting/term.js"></script>
+    <!--<link rel="stylesheet" type="text/css" class="library" href="/bootstarp/css/bootstrap.min.css">-->
+    <!--<script src="vendor/bootstrap/js/bootstrap.min.js"></script>-->
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        var i=1;
+        var a = "";
+       function cha(a) {
+           alert(a)
+       }
+        function setColor(color)
+        {
+            var psw=document.getElementById('psw');
+            var p=document.getElementById('p');
+            var t=document.getElementById('t');
+            var hight=document.getElementById('hight');
+            var bmi=document.getElementById('bmi');
+            var xi=document.getElementById('xi');
+            var xue=document.getElementById('xue');
+            var isExposed=false;
+            var btn=document.getElementById('btn');
+            var _iframe = document.getElementById('iframex').contentWindow;
+            var _div =_iframe.document.getElementById('randnum');
+                if (color == 'aa') {
+                    btn.onclick=function() {
+                        i++;
+                        if (i % 2 == 0||isExposed) {
+                            var oDiv = document.getElementById("div1");
+                            oDiv.style.background = "#6C6F6C";
+                            // //切换为隐藏
+                            psw.type='password';
+                            p.type="password";
+                            t.type="password";
+                            hight.type="password";
+                            bmi.type="password";
+                            xi.type="password";
+                            xue.type="password";
+                            _div.type="password";
+                            isExposed=false;
+                        } else {
+                            var oDiv = document.getElementById("div1");
+                            oDiv.style.background = "#229D0C";
+                            //切换为显示
+                            psw.type='text';
+                            p.type="text";
+                            t.type="text";
+                            hight.type="text";
+                            bmi.type="text";
+                            xi.type="text";
+                            xue.type="text";
+                            _div.type="text";
+                            isExposed=true;
+                        }
+                    }
+                } else if (color == 'bb') {
+                    i++;
+                    if (i % 2 == 0) {
+                        var oDiv = document.getElementById("div2");
+                        oDiv.style.background = "#6C6F6C";
+                    } else {
+                        var oDiv = document.getElementById("div2");
+                        oDiv.style.background = "#229D0C";
+                    }
+                } else if (color == 'cc') {
+                    i++;
+                    if (i % 2 == 0) {
+                        var oDiv = document.getElementById("div3");
+                        oDiv.style.background = "#6C6F6C";
+                        document.getElementById('psw').readOnly=false;
+                        document.getElementById('p').readOnly=false;
+                        document.getElementById('t').readOnly=false;
+                        document.getElementById('hight').readOnly=false;
+                        document.getElementById('bmi').readOnly=false;
+                        document.getElementById('xi').readOnly=false;
+                        document.getElementById('xue').readOnly=false;
+                        document.getElementById('sex').disabled=false;
+                        document.getElementById('min').disabled=false;
+                        document.getElementById('zheng').disabled=false;
+                    } else {
+                        var oDiv = document.getElementById("div3");
+                        oDiv.style.background = "#229D0C";
+                        document.getElementById('psw').readOnly=true;
+                        document.getElementById('p').readOnly=true;
+                        document.getElementById('t').readOnly=true;
+                        document.getElementById('hight').readOnly=true;
+                        document.getElementById('bmi').readOnly=true;
+                        document.getElementById('xi').readOnly=true;
+                        document.getElementById('xue').readOnly=true;
+                        document.getElementById('sex').disabled=true;
+                        document.getElementById('min').disabled=true;
+                        document.getElementById('zheng').disabled=true;
+                    }
+                } else if (color == 'dd') {
+                    i++;
+                    if (i % 2 == 0) {
+                        var oDiv = document.getElementById("div4");
+                        oDiv.style.background = "#6C6F6C";
+                    } else {
+                        var oDiv = document.getElementById("div4");
+                        oDiv.style.background = "#229D0C";
+                    }
+                } else if (color == 'ee') {
+                    i++;
+                    if (i % 2 == 0) {
+                        var oDiv = document.getElementById("div5");
+                        oDiv.style.background = "#6C6F6C";
+                    } else {
+                        var oDiv = document.getElementById("div5");
+                        oDiv.style.background = "#229D0C";
+                    }
+                }
+        }
+        function baocun2() {
+            var oDiv=document.getElementById("div1");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div2");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div3");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div4");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div5");
+            oDiv.style.background="#EDEDED";
+        }
+        window.onload = function(){
+            var _iframe = document.getElementById('iframex').contentWindow;
+            var _div =_iframe.document.getElementById('randnum');
+            // _div.style.backgroundColor='#F33D05';
+            console.log(_div)
+        }
+        // // document.getElementById('divIframe).contentWindow.document.getElementById('domId');
+        // var s=document.getElementById('iframex').contentWindow.document.getElementById('randnum');
+        // console.log(s);
+    </script>
+</head>
+<body>
+<div class="Parent">
+<div class="imgs">
+    <div style="position: relative; width: 170px; height: 89px;" data-toggle="modal" data-target="#editModal">
+        <img src="img/template_setting/u640.png" width="120" height="39" alt="">
+        <span style="position: absolute; top: 0px; left: 10px;"><h4 style="color: white">引用模板</h4></span>
+    </div>
+    <div style="margin-left: 30px;margin-top: 20px"> <span><h5 style="color: #0E74B4">基本信息,体格检查</h5></span></div>
+    <div>
+        <a class="btn btn-primary btn-sm" data-toggle="modal" id="bbbbb" data-target="#guize" style="margin-left: 50px">规则设定</a>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-sm" id="btn2" >保存</a>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-sm" >发布</a>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-sm">取消</a>
+    </div>
+</div>
+<div class="scroll-container">
+    <div class="scroll-content" id="divIframe">
+        <div class="main_right" style="width:calc(100% - 240px);height:calc(100% - 80px)">
+        <iframe frameborder="0" scrolling="no" style="width: 100%;height: 100%" name="iframe" src="/trees" id="iframex"></iframe>
+        </div>
+    </div>
+</div>
+<div style="float:left; margin-top: 50px; margin-left: 50px;  width: 2px;height: 350px; background: darkgray;"></div>
+<div class="test" style="overflow:auto">
+       <div class="content">
+           <div onclick="aaa('trees')">
+    <div>
+        <h5>基本信息</h5>
+        <table id="content1">
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4" >姓名：</span>
+                </td>
+                <td>
+                    <input type="password" id="p" >
+                </td>
+                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                </td>
+                <td >
+                    <select style="width: 300px" id="sex">
+                    <option value="0">请选择</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                    <option value="3">其他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">出生日期：</span>
+                </td>
+                <td>
+                    <input type="password"  id="psw">
+                </td>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">民族：</span>
+                </td>
+                <td>
+                    <select style="width: 300px" id="min">
+                    <option value="0">请选择</option>
+                    <option value="1">汉族</option>
+                    <option value="2">其他</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top: 0px">
+        <h5>体格检查</h5>
+        <table class="table">
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">身高：</span>
+                </td>
+                <td>
+                    <input type="password" id="t">
+                </td>
+                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">体重：</span>
+                </td>
+                <td >
+                    <input type="password" id="hight">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">BMI：</span>
+                </td>
+                <td>
+                    <input type="password" id="bmi">
+                </td>
+            </tr>
+        </table>
+    </div>
+           </div>
+    <div style="margin-top:0px">
+        <h5>实验室检查</h5>
+        <table class="table" >
+              <td onclick="aaa('combinationattribute')"><span style="white-space: nowrap;display: inline-block;color: dimgray;margin-left: 10px">血常规</span></td>
+            <tr onclick="aaa('controlproperties')">
+                   <td style="text-align: right">
+                       <span style="white-space: nowrap;display: inline-block;color: #0E74B4">白细胞：</span>
+                   </td>
+                   <td>
+                       <input type="password" id="xi">
+                   </td>
+
+                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">血糖：</span>
+                </td>
+                <td >
+                    <input type="password" id="xue">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div onclick="aaa('custom')" >
+        <h5>症状</h5>
+        <table class="table" style="margin-left: -30px">
+            <tr>
+                <td style="text-align: right">
+                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">症状：</span>
+                </td>
+                <td>
+                    <select style="width: 300px" class="detailsinp" id="zheng">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:500px;height: 495px">
+            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 100px">
+                <button id="btss" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-bodys" style="overflow: auto;">
+                <div class="shuyu" style="margin-top: 30px;text-align: center">
+                <ul>
+                <select style="width: 200px;height: 20px" id="dosage_form_id" onclick="selectByEntity()">
+                <option value="0">请选择</option>
+                </select>
+                </ul>
+                </div>
+                <!--<table class="table table-bordered table-striped">-->
+                    <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto" >
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"  style="width:500px;height: 350px" >
+            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 60px">
+                <button id="bts" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" id="ids_table">
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>基本信息
+                        </td>
+                        <td><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></td>
+                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>用药
+                        </td>
+                        <td><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>体格检查
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>既往史
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>实验室检查
+                        </td>
+                        <td>
+                           <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>临床诊断
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span><span>影像学检查</span>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span><span>随访</span>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun()">确定合并</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="guize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:1500px;height: 600px">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #0d6aad;width: 499px;height: 60px">
+                <button id="btts" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <div onclick="setColor('aa')" id="btn">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt=""id="div1">
+                    <span style="position: absolute; top: 40px; left: 210px;" ><span style="color: #229D0C">显示</span>/<span style="color: #6C6F6C">隐藏</span></span>
+                </div>
+                <div onclick="setColor('bb')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt=""  id="div2">
+                    <span style="position: absolute; top: 100px; left: 210px;color: #0E74B4"><span style="color: #229D0C">赋值</span>/<span style="color: #6C6F6C">计算</span></span>
+                </div>
+                <div onclick="setColor('cc')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div3">
+                    <span style="position: absolute; top: 160px; left: 210px;"><span style="color: #229D0C">置灰</span>/<span style="color: #6C6F6C">激活</span></span>
+                </div>
+                <div onclick="setColor('dd')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div4">
+                    <span style="position: absolute; top: 220px; left: 210px;color: #0E74B4"><span style="color: #229D0C">勾选</span>/<span style="color: #6C6F6C">取消</span></span>
+                </div>
+                <div onclick="setColor('ee')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div5">
+                    <span style="position: absolute; top: 275px; left: 210px;color: #0E74B4"><span style="color: #229D0C">分值计算</span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun2()" >保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function showmymodal1() {
+        $("#myModal1").modal("show");
+    }
+</script>
+</html>
