@@ -7,11 +7,103 @@
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jcDate.css">
     <script src="vendor/jquery/jquery.min.js"></script>
-<!--
-    <script src="vendor/jquery/jQuery-jcDate.js"></script>
--->
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var result = null;
+       $(function () {
+            reloadList();
+        })
+        /*查询所有随访组信息*/
+        function reloadList(pageNum) {
+            $("#tbody").empty();
+            $("#page").empty();
+            var followUpPrincipal = $("#followUpPrincipal").val();
+            var hospitalDepartmentChildName = $("#hospitalDepartmentChildName").val();
+            var followUpStatus = $("#followUpStatus").val();
+            var followUpCreateTime1 = $("#followUpCreateTime1").val();
+            var followUpCreateTime2 = $("#followUpCreateTime2").val();
+            $.ajax({
+                url:"findFollowManagementAll",
+                data:{
+                    "followUpPrincipal":followUpPrincipal,
+                    "hospitalDepartmentChildName":hospitalDepartmentChildName,
+                    "followUpStatus":followUpStatus,
+                    "followUpCreateTime1":followUpCreateTime1,
+                    "followUpCreateTime2":followUpCreateTime2,
+                    "pageNum":pageNum
+                },
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    result = data.list;
+                    var style = "";
+                    var grateStyle = "";
+                    var followUpStatus = "";
+                    var v = "";
+                    for (var i = 0;i<data.list.length;i++){
+                       var followUpGrate =data.list[i].followUpGrate;
+                       var grate =  followUpGrate/100;
+                        if (grate >= 0 && grate <= 20) {
+                            grateStyle = "badge-danger";
+                        }else if(grate > 20 && grate <=40){
+                            grateStyle = "badge-warning";
+                        }else if(grate > 40 && grate <=60){
+                            grateStyle = "badge-info";
+                        }else if(grate > 60 && grate <=80) {
+                            grateStyle = "badge-success";
+                        }else if(grate > 80 && grate <=100){
+                            grateStyle = "badge-primary";
+                        }
+                        if (data.list[i].followUpStatus == 0){
+                            followUpStatus = "开放";
+                            style = "btn-primary";
+                        }else {
+                            followUpStatus = "关闭";
+                            style = "btn-danger";
+                        }
+                        v += "<tr>";
+                        v += '<td><input type="checkbox"></td>';
+                        v += "<td>"+data.list[i].followUpName+"</td>"
+                        v += '<td><span class="badge '+grateStyle+'">'+data.list[i].followUpGrate+'</span></td>'
+                        v += "<td>"+data.list[i].followUpPrincipal+"</td>"
+                        v += '<td><button type="button" class="btn '+style+'">'+followUpStatus+'</button></td>'
+                        v += "<td>"+data.list[i].hospitalDepartmentChild.hospitalDepartmentChildName+"</td>"
+                        v += "<td>"+data.list[i].followUpCreateTime+"</td>"
+                        v += "</tr>";
+                    }
+                    $("#tbody").append(v);
+                    var up = data.hasPreviousPage?data.prePage:1;
+                    var down = data.hasNextPage?data.nextPage:data.lastPage;
+                    var p = '<button type="button" onclick="reloadList(1)" class="layui-btn  layui-btn-normal layui-btn-sm">首页</button>';
+                    p += '<button type="button" onclick="reloadList('+up+')" class="layui-btn  layui-btn-normal layui-btn-sm">上一页</button>';
+                    p += '<button type="button" onclick="reloadList('+down+')" class="layui-btn  layui-btn-normal layui-btn-sm">下一页</button>';
+                    p += '<button type="button" onclick="reloadList('+data.lastPage+')" class="layui-btn  layui-btn-normal layui-btn-sm">尾页</button>';
+                    $("#page").append(p);
+                }
+            })
+        }
+        /*添加随访组*/
+        function addSave(){
+            $.ajax({
+                url:"",
+            })
+        }
+        var app = angular.module('myApp',[]);
+        app.controller("myController",['$scope','$http',function($scope,$http){
+            /*查询所有科室*/
+            $http({
+                method:'get',
+                url:'findDepartmentAll',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).success(function (data) {
+                $scope.departments = data;
+            }).error(function (data) {
+
+            });
+        }])
+    </script>
       <style>
           #header_style li{
               float: left;
@@ -28,7 +120,7 @@
           }
       </style>
 </head>
-<body style="margin: 0; padding: 0;">
+<body ng-app = "myApp" ng-controller="myController" data-ng-init = "list()" style="margin: 0; padding: 0;">
     <div class="group_management">
         <div id="page_top" style="margin-top: -20px">
             <ul id="header_style">
@@ -45,23 +137,20 @@
                    <td><label>负责人</label></td>
                    <td >
                        <div class="form-group">
-                           <input type="text" class="form-control" placeholder="负责人" style="width: 150px ;height: 38px">
+                           <input type="text" class="form-control" placeholder="负责人" style="width: 150px ;height: 38px" id="followUpPrincipal">
                        </div>
                    </td>
                    <td><label style="margin-left: 100px; ">科室</label></td>
                    <td >
                        <div class="form-group" style="margin-left: 10px">
-                           <select name="userState" class="form-control" style="width: 150px ;height: 38px"/>
+                           <select name="hospitalDepartmentChildName" class="form-control" style="width: 150px ;height: 38px" id="hospitalDepartmentChildName" ng-model="selectDepartmentAll" ng-options="department.hospitalDepartmentChildId as department.hospitalDepartmentChildName for department in departments"/>
                            <option value="">请选择科室</option>
-                           <option value="0">内一科</option>
-                           <option value="1">心二科</option>
-                           <option value="1">心二科</option>
                        </div>
                    </td>
                    <td><label style="margin-left: 100px ">状态</label></td>
                    <td >
                        <div class="form-group" style="margin-left: 20px;">
-                           <select name="userState" class="form-control" style="width: 150px ;height: 38px" />
+                           <select name="userState" class="form-control" style="width: 150px ;height: 38px" id="followUpStatus"/>
                            <option value="">请选择状态</option>
                            <option value="0">正常</option>
                            <option value="1">删除</option>
@@ -72,21 +161,21 @@
                    <td><label>创建时间</label></td>
                    <td >
                        <div class="form-group">
-                           <input type="text" class="form-control" placeholder="选择开始时间" style="width: 150px ;height: 38px">
+                           <input type="text" class="form-control" placeholder="选择开始时间" style="width: 150px ;height: 38px" id="followUpCreateTime1">
                        </div>
                    </td>
                    <td >
                        <div class="form-group">
-                           <input type="text" class="form-control" placeholder="选择结束时间" style="width: 150px ;height: 38px">
+                           <input type="text" class="form-control" placeholder="选择结束时间" style="width: 150px ;height: 38px" id="followUpCreateTime2">
                        </div>
                    </td>
                </tr>
            </table>
        </form>
-                <div style="float: right; margin-left: -250px;margin-top: 60px;">
-                    <button class="btn btn-primary btn-sm">检索</button>
-                    <button class="btn btn-primary btn-sm" style="margin-left: 20px">清空</button>
-                </div>
+            <div style="float: right; margin-left: -250px;margin-top: 60px;">
+                <button class="btn btn-primary btn-sm" onclick="reloadList()">检索</button>
+                <button class="btn btn-primary btn-sm" style="margin-left: 20px">清空</button>
+            </div>
           </div>
         </div><br />
         <div id="show_form" style="text-align: center; margin-left: 50px;">
@@ -108,54 +197,13 @@
                     <th>创建时间</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><input type="checkbox" id="checkbox_style"></td>
-                    <td>肿瘤中心随访</td>
-                    <td><span class="badge badge-danger">0%-20%</span></td>
-                    <td>张三</td>
-                    <td><button type="button" class="btn btn-primary">开放</button></td>
-                    <td>肿瘤中心</td>
-                    <td>2020-06-29</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" id="checkbox_style"></td>
-                    <td>内分泌随访</td>
-                    <td><span class="badge badge-warning">20%-40%</span></td>
-                    <td>李四</td>
-                    <td><button type="button" class="btn btn-danger">关闭</button></td>
-                    <td>内分泌科</td>
-                    <td>2020-06-29</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" id="checkbox_style"></td>
-                    <td>高血压人群随访</td>
-                    <td><span class="badge badge-primary">80%-100%</span></td>
-                    <td>王五</td>
-                    <td><button type="button" class="btn btn-primary">开放</button></td>
-                    <td>心研所</td>
-                    <td>2020-06-29</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" id="checkbox_style"></td>
-                    <td>心脏病随访</td>
-                    <td><span class="badge badge-info">40%-60%</span></td>
-                    <td>赵柳</td>
-                    <td><button type="button" class="btn btn-primary">开放</button></td>
-                    <td>内一科</td>
-                    <td>2020-06-29</td>
-                  </tr>
-                  <tr>
-                     <td><input type="checkbox" id="checkbox_style"></td>
-                    <td>X光片随访</td>
-                    <td><span class="badge badge-success">60%-80%</span></td>
-                    <td>钱七</td>
-                    <td><button type="button" class="btn btn-primary">开放</button></td>
-                    <td>放射科</td>
-                    <td>2020-06-29</td>
-                  </tr>
+                <tbody id="tbody">
+
                 </tbody>
             </table>
+        </div>
+        <!--分页展示-->
+        <div id="page">
         </div>
         <!-- 模态框（Modal） -->
         <!--添加-->
@@ -297,7 +345,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="addSave()">
                             提交
                         </button>
                     </div>
@@ -310,12 +358,12 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header" style="height: 40px">
-                        <h5 class="modal-title" id="myModalLabel" style="margin-top: -10px">
+                        <h5 class="modal-title" id="myModalLabel2" style="margin-top: -10px">
                             编辑随访组
                         </h5>
                     </div>
                     <div class="modal-body">
-                        <form id="add_form">
+                        <form id="edit_form">
                             <table>
                                 <tr>
                                     <td><label style="width: 70px">责任医院</label></td>

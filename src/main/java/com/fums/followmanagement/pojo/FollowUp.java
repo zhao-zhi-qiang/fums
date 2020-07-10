@@ -7,7 +7,7 @@ public class FollowUp {
 
     private Integer hospitalId;
 
-    private Integer hospitalDepartmentChildCode;
+    private String hospitalDepartmentChildCode;
 
     private String followUpPrincipal;
 
@@ -35,6 +35,18 @@ public class FollowUp {
 
     private String followUpBackdrop;
 
+    private String followUpGrate;
+
+    private HospitalDepartmentChild hospitalDepartmentChild;
+
+    public HospitalDepartmentChild getHospitalDepartmentChild() {
+        return hospitalDepartmentChild;
+    }
+
+    public void setHospitalDepartmentChild(HospitalDepartmentChild hospitalDepartmentChild) {
+        this.hospitalDepartmentChild = hospitalDepartmentChild;
+    }
+
     public Integer getFollowUpId() {
         return followUpId;
     }
@@ -51,12 +63,12 @@ public class FollowUp {
         this.hospitalId = hospitalId;
     }
 
-    public Integer getHospitalDepartmentChildCode() {
+    public String getHospitalDepartmentChildCode() {
         return hospitalDepartmentChildCode;
     }
 
-    public void setHospitalDepartmentChildCode(Integer hospitalDepartmentChildCode) {
-        this.hospitalDepartmentChildCode = hospitalDepartmentChildCode;
+    public void setHospitalDepartmentChildCode(String hospitalDepartmentChildCode) {
+        this.hospitalDepartmentChildCode = hospitalDepartmentChildCode == null ? null : hospitalDepartmentChildCode.trim();
     }
 
     public String getFollowUpPrincipal() {
@@ -161,5 +173,13 @@ public class FollowUp {
 
     public void setFollowUpBackdrop(String followUpBackdrop) {
         this.followUpBackdrop = followUpBackdrop == null ? null : followUpBackdrop.trim();
+    }
+
+    public String getFollowUpGrate() {
+        return followUpGrate;
+    }
+
+    public void setFollowUpGrate(String followUpGrate) {
+        this.followUpGrate = followUpGrate == null ? null : followUpGrate.trim();
     }
 }
