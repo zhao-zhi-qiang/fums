@@ -28,6 +28,7 @@
     </style>
 
 
+    <!--查询和模糊查询-->
     <script type="text/javascript">
 
         var page;
@@ -40,7 +41,7 @@
 
         function retrieval(pageNum){
 
-           $("#tbody").empty();
+            $("#tbody").empty();
 
             var userId = $("#user_id").val();//id
             var userAccount = $("#user_account").val();//name
@@ -65,14 +66,16 @@
                 },
                 dataType:"json",
                 success: function (list1) {
+                    console.log(list1);
                     var ss = "";
-                    for (var i = 0; i < aa; i++) {
+                    for (var i = 0; i < list1.list.length; i++) {
                         ss = "<tr><td><input type=\"checkbox\" style='width: 40px;' class=\"checkboxxia\" onclick=\"xiaOnclick()\" value=" + list1.list[i].id + "></td><td>"
                             + list1.list[i].userId +"</td><td>"
                             + list1.list[i].userAccount +"</td><td>"
                             + (list1.list[i].userSex ==1?"男":"女") +"</td><td>"
                             + list1.list[i].userPhone +"</td><td>"
                             + list1.list[i].userEmail +"</td><td>"
+                            /*+ list1.list[i].password +"</td><td>"*/
                             + list1.list[i].hospitalDepartmentName +"</td></tr>"
 
                         $("#tbody").append(ss);
@@ -82,27 +85,164 @@
                     }
                 }
             })
+
+            // 科室
+            $.ajax({
+                url:"SystemManagementController/seleDepartment",
+                data:{},
+                type:"post",
+                dataType:"json",
+                success:function (result) {
+                    console.log(result);
+                    $("#hospital_department_id").empty();
+                    $("#hospital_department_id").prepend('<option value="0">请选择</option>')
+                    for(var i=0;i<result.length;i++){;
+                        var list=result
+                        $("#hospital_department_id").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                        $("#hospital_department_id1").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                        $("#hospital_department_id2").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                    }
+                }
+            })
+        }
+    </script>
+
+
+    <!--新增-->
+    <script type="text/javascript">
+         function save() {
+
+             var userId = $("#user_id1").val();//id
+             var userAccount = $("#user_account1").val();//name
+             var userSex = $("#user_sex1").val();//性别
+             var userPhone = $("#user_phone1").val();//电话
+             var userEmail = $("#user_email1").val();//邮箱
+             var password = $("#password1").val();//密码
+             var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
+
+             alert(hospitalDepartmentName);
+
+             $.ajax({
+                 url: "SystemManagementController/insert",
+                 type: "post",
+                 data:{
+                     "userId":userId,
+                     "userAccount":userAccount,
+                     "userSex":userSex,
+                     "userPhone":userPhone,
+                     "userEmail":userEmail,
+                     "password":password,
+                     "hospitalDepartmentName":hospitalDepartmentName
+                 },
+                 dataType: "json",
+                 success: function (insert) {
+                     if(insert != 0){
+                         alert("添加成功");
+                         window.location.reload();
+                     }else{
+                         alert("添加失败");
+                     }
+                 }
+             })
+         }
+     </script>
+
+
+    <!--修改回显-->
+    <script type="text/javascript">
+        /*        function seleUpdate(){
+                    $.ajax({
+                        url:"SystemManagementController/seleUpdate",
+                        type:"post",
+                        dataType:"json",
+                        data:{
+                            id : id
+                        },
+                        success:function (seleUpdate) {
+
+                            $("#qqq").val(seleUpdate.id);
+                            $("#user_id2").val(seleUpdate.userId);
+                            $("#user_account2").val(seleUpdate.userAccount);
+                            $("#user_sex2").val(seleUpdate.userSex);
+                            $("#user_phone2").val(seleUpdate.userPhone);
+                            $("#user_email2").val(seleUpdate.userEmail);
+                            $("#password2").val(seleUpdate.password);
+                            $("#hospital_department_name2").val(seleUpdate.hospital_department_name);
+                        }
+                    })
+                }*/
+
+        /*修改更新*/
+        /*function saveUpdate() {
+            $.ajax({
+                url:"SystemManagementController/saveUpdate",
+                type:"post",
+                data: $("#yy").serialize(),
+
+                success:function (saveUpdate) {
+                    if(saveUpdate != 0){
+                        alert("修改成功");
+                        window.location.reload();
+                    }else{
+                        alert("修改失败");
+                    }
+                }
+            })
+        }*/
+    </script>
+
+    <!--<script type="text/javascript">
+
+        /*批量删除*/
+        function xiaOnclick() {
+            var clickpool = true;
+            $.each($(".checkboxxia"),function(index,item){
+                if($(item).prop("checked")==false)clickpool=false;
+            })
+            $("#checkboxMain").prop("checked",clickpool)
         }
 
+        function mainOnclick() {
+            $.each($(".checkboxxia"),function(index,item){
+                $(item).prop("checked",$("#checkboxMain").prop("checked"));
+            })
+        }
 
-        // 科室
-        $.ajax({
-            url:"SystemManagementController/seleDepartment",
-            data:{},
-            type:"post",
-            dataType:"json",
-            success:function (result) {
-                console.log(result);
-                $("#hospital_department_name").empty();
-                $("#hospital_department_name").prepend('<option value="0">请选择</option>')
-                for(var i=0;i<result.length;i++){
-                    var list=result;
-                    $("#hospital_department_name").prepend('<option value="' + list[i].hospital_department_name + '">' + list[i].hospitalDepartmentName + '</option>')
+        function deleteALL() {
+            var bool = false;
+            var list = new Array();
+            /*var st="";*/
+            $.each($("input[class='checkboxxia']:checkbox:checked"),function(index,item){
+                list.push($(item).val());
+
+                /*st+=$(item).val()+",";*/
+
+                /*console.log($(item).val());*/
+                bool = true;
+            });
+
+            if(true){
+                if (confirm("确定要删除吗?")){
+                    $.ajax({
+                        type:"GET",
+                        url:"removeByKeys",
+                        dataType:"json",
+                        data:{"list":list}, // 传输一个list集合包含所选框的id,,,,也可以传一个st到后台data:{"list":st},
+                        success:function (result) {
+                            var b = result;
+                            if (result > 0){
+                                alert("删除成功!");
+                                window.location.reload();
+                            }else{
+                                alert("删除失败!");
+                            }
+                        }
+                    })
                 }
             }
-        })
+        }
 
-    </script>
+    </script>-->
 
 </head>
 
@@ -172,7 +312,7 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
                 </td>
                 <td>
-                    <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
+                    <select style="width: 55%;height: 34px;" id="hospital_department_id" name="hospitalDepartmentName">
                         <option value="0">请选择</option>
                     </select>
                 </td>
@@ -294,7 +434,7 @@
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
                             </td>
                             <td>
-                                <select style="width: 55%;height: 34px;" id="hospital_department_name1" name="hospitalDepartmentName">
+                                <select style="width: 55%;height: 34px;" id="hospital_department_id1" name="hospitalDepartmentName">
                                     <option value="0">请选择</option>
                                 </select>
                             </td>
@@ -303,7 +443,7 @@
 
                 </table>
                 <div class="modal-footer">
-                    <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
+                    <button class="btn btn-success" onclick="save()" data-dismiss="modal" >保存</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
             </div>
@@ -375,7 +515,7 @@
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
                             </td>
                             <td>
-                                <select style="width: 55%;height: 34px;" id="hospital_department_name2" name="hospitalDepartmentName">
+                                <select style="width: 55%;height: 34px;" id="hospital_department_id2" name="hospitalDepartmentName">
                                     <option value="0">请选择</option>
                                 </select>
                             </td>
