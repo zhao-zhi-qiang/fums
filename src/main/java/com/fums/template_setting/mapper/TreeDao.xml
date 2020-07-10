@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.template_setting.dao.TreeDao">
+    <resultMap id="BaseResultMap" type="com.fums.template_setting.pojo.detail">
+        <id column="details_id" jdbcType="INTEGER" property="detailsId" />
+        <result column="details" jdbcType="VARCHAR" property="details" />
+        <result column="symptoms_id" jdbcType="INTEGER" property="symptomsId" />
+        <result column="source_id" jdbcType="INTEGER" property="sourceId" />
+        <association property="symptom" javaType="com.fums.template_setting.pojo.Symptom">
+            <id column="sym_id" jdbcType="INTEGER" property="symId" />
+            <result column="symptoms_name" jdbcType="VARCHAR" property="symptoms" />
+            <result column="details_id" jdbcType="INTEGER" property="details" />
+        </association>
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="com.fums.template_setting.pojo.Symptom">
+        <id column="sym_id" jdbcType="INTEGER" property="symId" />
+        <result column="symptoms_name" jdbcType="VARCHAR" property="symptoms" />
+        <result column="details_id" jdbcType="INTEGER" property="details" />
+    </resultMap>
+    <!--所有表内容-->
+    <select id="selectSymptom" resultMap="BaseResultMap">
+        SELECT s.`details`,s.`details_id`,s.`symptoms_id`,p.`symptoms_name`,p.`sym_id`,s.source_id FROM details s
+        inner JOIN symptom p ON p.`sym_id`=s.`symptoms_id`
+        where 1=1
+        <if test="symId != null">
+            and p.`sym_id` like CONCAT('%',#{symId,jdbcType=INTEGER},'%')
+        </if>
+    </select>
+    <!--症状表内容-->
+    <select id="selectSymptom2" resultMap="BaseResultMap">
+        SELECT s.`details`,s.`details_id`,s.`symptoms_id`,p.`symptoms_name`,p.`sym_id`,s.source_id FROM details s
+        inner JOIN symptom p ON p.`sym_id`=s.`symptoms_id`
+        where symptoms_id=1
+    </select>
+    <!--症状表-->
+    <select id="queryid" resultMap="BaseResultMap1">
+        SELECT * FROM symptom
+    </select>
+    <!--多id查询-->
+    <select id="selectMoreId" resultMap="BaseResultMap">
+        SELECT *FROM details
+        WHERE `details_id` IN
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <!--添加至树节点-->
+    <insert id="insertTree" parameterType="com.fums.template_setting.pojo.detail">
+        INSERT INTO details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="details != null">
+                details,
+            </if>
+            <if test="symptomsId != null">
+                symptoms_id,
+            </if>
+            <if test="sourceId != null">
+                source_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="details != null">
+                #{details,jdbcType=VARCHAR},
+            </if>
+            <if test="symptomsId != null">
+                #{symptomsId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceId != null">
+                #{sourceId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>

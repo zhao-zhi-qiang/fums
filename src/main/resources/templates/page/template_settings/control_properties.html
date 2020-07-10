@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控件属性</title>
+    <style>
+        ul li{
+            list-style: none;
+            display: inline;
+        }
+        .test ul li input{
+            border-radius:8px;
+        }
+        *{
+            /*margin: 0px;*/
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+   <div class="test">
+       <ul >
+           <li>名称:</li>
+           <li><input type="text" value="白细胞"></li>
+       </ul>
+       <ul>
+           <li>单位:</li>
+           <li><input type="text" value="mmol/L"></li>
+       </ul>
+       <ul>
+           <li>值域:</li>
+           <li><input type="text" style="width: 80px;"><span>-</span><input type="text" style="width: 80px"></li>
+       </ul>
+       <ul>
+           <li style="margin-left: -40px">正常范围:</li>
+           <li><input type="text" style="width: 80px"><span>-</span><input type="text" style="width: 80px"></li>
+       </ul>
+       <ul>
+           <li><input type="checkbox" style="width:20px;height:20px;"></li>
+           <li>是否需要预警</li>
+       </ul>
+       <ul>
+           <li><input type="checkbox" style="width:20px;height:20px;"></li>
+           <li>是否必填</li>
+       </ul>
+       <ul>
+           <li><input type="checkbox" style="width:20px;height:20px;"></li>
+           <li>是否可搜索</li>
+       </ul>
+       <ul>
+           <li><input type="checkbox" style="width:20px;height:20px;"></li>
+           <li>是否必填项</li>
+       </ul>
+       <ul>
+           <li><input type="checkbox" style="width:20px;height:20px;"></li>
+           <li>是否采集项目</li>
+       </ul>
+       <div>帅选条件</div>
+       <ul>
+           <li>科室:</li>
+           <li><input type="text" ></li>
+       </ul>
+       <ul>
+           <li>时间:</li>
+           <li><input type="text" style="width: 80px"><span>-</span><input type="text" style="width: 80px"></li>
+       </ul>
+       <ul>
+           <li>来源:</li>
+           <select>
+               <option value="0">请选择</option>
+               <option value="1">CDR</option>
+               <option value="2">随访</option>
+           </select>
+       </ul>
+       <ul>
+           <li><input type="radio" style="width:20px;height:20px;"></li>
+           <li>首次</li>
+       </ul>
+       <ul>
+           <li><input type="radio" style="width:20px;height:20px;"></li>
+           <li>末次</li>
+       </ul>
+       <ul>
+           <li><input type="radio" style="width:20px;height:20px;"></li>
+           <li>最大值</li>
+       </ul>
+       <ul>
+           <li><input type="radio" style="width:20px;height:20px;"></li>
+           <li>最小值</li>
+       </ul>
+       <ul>
+           <li><input type="radio" style="width:20px;height:20px;"></li>
+           <li>异常值</li>
+       </ul>
+   </div>
+</body>
+</html>

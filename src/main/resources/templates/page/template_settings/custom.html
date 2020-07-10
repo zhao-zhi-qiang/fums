@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义控件属性</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <script src="js/template_setting/bootstrap.min.js"></script>
+    <script src="js/template_setting/jquery-2.2.3.min.js"></script>
+    <style>
+        ul li{
+            list-style: none;
+            display: inline;
+        }
+        .test ul li input{
+            border-radius:8px;
+        }
+        .shuyu2 ul li{
+            list-style: none;
+            line-height: 60px;
+        }
+        .shuyu2 ul{
+            display: inline-block;
+            margin: 0 60px;
+        }
+        .shuyu2 ul li input{
+            width: 30px;
+            height: 30px;
+        }
+        .imgs div{
+            display: inline-block;
+        }
+        *{
+        /*margin: 0px;*/
+            padding: 0px;
+        }
+    </style>
+    <script>
+        $(function(){
+            // 添加选项
+            $("#opbtn").click(function(){
+                if($("#details>li").size() < 6){// 最多添加6个选项
+                    $("#details").append("<li><input class='detailsinp'/></li>");
+                }else{// 提示选项个数已经达到最大
+                    $("#optips").html("选项个数已经达到最大,不能再添加!");
+                    $("#optips").css({"color":"red"});
+                }
+
+            });
+
+            // 删除选项
+            $("#delbtn").click(function(){
+                if($("#details>li").size() <= 0){
+                    $("#optips").html("已经没有选项可以删除了!");
+                    $("#optips").css({"color":"red"});
+                } else{
+                    // 删除选项,每次删除最后一个
+                    $("#details>li").last().remove();
+                }
+            });
+        });
+        function showmymodal1() {
+            window.parent.showmymodal1();
+        }
+        function bu(result){
+            var result1=result;
+            $.each(result1,function (index,item) {
+                var num=String(item.details).split(",");
+                console.log(result1);
+                console.log(num);
+                $.each(num,function (index,item2) {
+                    $("#details").append("<li><input class='detailsinp' value=" + item2 + " /></li>");
+                })
+            })
+        }
+        //症状表
+        $.ajax({
+            url:"queryid",
+            data:{},
+            type:"post",
+            dataType:"json",
+            success:function (result) {
+                $("#symptomsId").empty();
+                $("#symptomsId").prepend('<option value="0" >请选择</option>')
+                for(var i=0;i<result.length;i++){
+                    $("#symptomsId").prepend('<option value="' + result[i].symId + '">' + result[i].symptoms + '</option>')
+                }
+            }
+        })
+
+        function addTree() {
+            var symptomsId=$("#symptomsId").val();
+            var  sourceId=$("#sourceId").val();
+            var details="";
+            $.each($(".detailsinp"),function (index,item) {
+                details+=$(item).val()+',';
+            })
+            details = details.substring(0, details.lastIndexOf(","));
+            if(symptomsId==0){
+                alert("请选择分类");
+                return;
+            }
+            if(sourceId==0){
+                alert("请选择来源");
+                return;
+            }
+
+            if(details==null||details==""){
+                alert("请填写术语或者选择术语");
+                return;
+            }
+            // 添加至树节点
+
+            console.log(details);
+            console.log($("#fromTree").serialize())
+            $.ajax({
+                url:"insertTree",
+                data:$("#fromTree").serialize()+'&details='+details,
+                type:"post",
+                dataType:"json",
+                success:function (result) {
+                    if(result>0){
+                        alert("添加成功");
+                        parent.location.reload();
+                        window.location.reload();
+
+                    }else{
+                        alert("添加失败");
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+
+<ul >
+    <li>名称:</li>
+    <li><input type="text" value="症状"></li>
+</ul>
+<ul>
+    <li><input type="checkbox" style="width:20px;height:20px;"></li>
+    <li>是否必填</li>
+</ul>
+<ul>
+    <li><input type="checkbox" style="width:20px;height:20px;"></li>
+    <li>是否可搜索</li>
+</ul>
+<ul>
+    <li><input type="checkbox" style="width:20px;height:20px;"></li>
+    <li>是否隐私项</li>
+</ul>
+<ul>
+    <div class="imgs">
+    <div><h5>内容</h5></div>
+    <div style="position: relative; width: 100px; height: 30px;" data-toggle="modal" data-target="#myModal" onclick="showmymodal1()">
+        <img src="img/template_setting/u640.png" width="120" height="30" alt="">
+        <span style="position: absolute; top: 3px; left: 10px;"><h5 style="color: white">选择术语</h5></span>
+    </div>
+    </div>
+</ul>
+<ul>
+    <a class="btn btn-primary btn-sm"  id="opbtn">添加术语</a>
+    <a class="btn btn-primary btn-sm"  id="delbtn">删除术语</a>
+    <a class="btn btn-primary btn-sm" href="">合并术语</a>
+    <ol id="details" type="text" name="details"></ol>
+    <!-- 提示语 -->
+    <span id="optips"></span>
+</ul>
+<form action="" id="fromTree">
+<ul>
+    <li>来源:</li>
+    <select id="sourceId" name="sourceId">
+        <option value="0">请选择</option>
+        <option value="1">手工录入</option>
+        <option value="2">移动App</option>
+        <option value="3">网页</option>
+        <option value="4">微信</option>
+    </select>
+</ul>
+<ul>
+    <li>分类:</li>
+    <select id="symptomsId" name="symptomsId">
+        <option value="0">请选择</option>
+        <option value="1">症状</option>
+        <option value="2">分类一</option>
+        <option value="3">分类二</option>
+        <option value="4">。。。</option>
+        <option value="5">其他</option>
+    </select>
+</ul>
+<ul>
+    <a class="btn btn-primary btn-sm" onclick="addTree()">添加至树节点</a>
+</ul>
+</form>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>纯CSS模态窗口实现炫酷动画效果|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="css/template_setting/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/template_setting/htmleaf-demo.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Reenie+Beanie">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="css/template_setting/demo.css">
+	<link rel="stylesheet" href="css/template_setting/light-modal.css">
+</head>
+<body>
+	<div class="htmleaf-container">
+		<div class="main">
+		        <div class="title">Light Modal | <small>Pure CSS</small></div>
+		        <div class="modals">
+		            <div class="modal-type" >
+		                <!--<a href="#modal-id-1" class="btn">Open Simple Modal</a>-->
+		                <a href="#modal-id-2" class="btn">Modal with Header/Footer</a>
+		                <!--<a href="#image-modal" class="btn">Open Image Modal</a>-->
+		            </div>
+		            <form>
+		                <select class="input input--dropdown js--animations">
+		                    <option value="zoomInUp">选择一种动画效果</option>
+		                    <option value="basic">Basic</option>
+		                    <optgroup label="Attention Seekers">
+		                        <option value="bounce">bounce</option>
+		                        <option value="flash">flash</option>
+		                        <option value="pulse">pulse</option>
+		                        <option value="rubberBand">rubberBand</option>
+		                        <option value="shake">shake</option>
+		                        <option value="swing">swing</option>
+		                        <option value="tada">tada</option>
+		                        <option value="wobble">wobble</option>
+		                        <option value="jello">jello</option>
+		                    </optgroup>
+		                    <optgroup label="Bouncing Entrances">
+		                        <option value="bounceIn">bounceIn</option>
+		                        <option value="bounceInDown">bounceInDown</option>
+		                        <option value="bounceInLeft">bounceInLeft</option>
+		                        <option value="bounceInRight">bounceInRight</option>
+		                        <option value="bounceInUp">bounceInUp</option>
+		                    </optgroup>
+		                    <optgroup label="Fading Entrances">
+		                        <option value="fadeIn">fadeIn</option>
+		                        <option value="fadeInDown">fadeInDown</option>
+		                        <option value="fadeInDownBig">fadeInDownBig</option>
+		                        <option value="fadeInLeft">fadeInLeft</option>
+		                        <option value="fadeInLeftBig">fadeInLeftBig</option>
+		                        <option value="fadeInRight">fadeInRight</option>
+		                        <option value="fadeInRightBig">fadeInRightBig</option>
+		                        <option value="fadeInUp">fadeInUp</option>
+		                        <option value="fadeInUpBig">fadeInUpBig</option>
+		                    </optgroup>
+		                    <optgroup label="Flippers">
+		                        <option value="flip">flip</option>
+		                        <option value="flipInX">flipInX</option>
+		                        <option value="flipInY">flipInY</option>
+		                    </optgroup>
+		                    <optgroup label="Lightspeed">
+		                        <option value="lightSpeedIn">lightSpeedIn</option>
+		                    </optgroup>
+		                    <optgroup label="Rotating Entrances">
+		                        <option value="rotateIn">rotateIn</option>
+		                        <option value="rotateInDownLeft">rotateInDownLeft</option>
+		                        <option value="rotateInDownRight">rotateInDownRight</option>
+		                        <option value="rotateInUpLeft">rotateInUpLeft</option>
+		                        <option value="rotateInUpRight">rotateInUpRight</option>
+		                    </optgroup>
+		                    <optgroup label="Sliding Entrances">
+		                        <option value="slideInUp">slideInUp</option>
+		                        <option value="slideInDown">slideInDown</option>
+		                        <option value="slideInLeft">slideInLeft</option>
+		                        <option value="slideInRight">slideInRight</option>
+		                    </optgroup>
+		                    <optgroup label="Zoom Entrances">
+		                        <option value="zoomIn">zoomIn</option>
+		                        <option value="zoomInDown">zoomInDown</option>
+		                        <option value="zoomInLeft">zoomInLeft</option>
+		                        <option value="zoomInRight">zoomInRight</option>
+		                        <option value="zoomInUp">zoomInUp</option>
+		                    </optgroup>
+		                    <optgroup label="Specials">
+		                        <option value="rollIn">rollIn</option>
+		                    </optgroup>
+		                </select>
+		            </form>
+		        </div>
+		    </div>
+		    <div class="light-modal" id="modal-id-2" role="dialog" aria-labelledby="light-modal-label" aria-hidden="true">
+		        <div class="light-modal-content  animated zoomInUp">
+		             <!--light modal header -->
+		            <div class="light-modal-header">
+		                <h3 class="light-modal-heading">Modal Title</h3>
+		                <a href="#" class="light-modal-close-icon" aria-label="close">&times;</a>
+		            </div>
+		            <!-- light modal body -->
+		            <!--<div class="light-modal-body">-->
+		                <!--<p>Light modal is a pure CSS based modal. It works using <span>:target</span> property</p>-->
+		                <!--<p>Current animations are based on <a href="https://daneden.github.io/animate.css/" target="_blank" class="animated infinite">Animate.css</a>.</p>-->
+		                <!--<p>However you are free to use your own animations. Just add your animation class to <span>light-modal-content</span> and you are good to go.</p>-->
+		            <!--</div>-->
+					<table id="content">
+						<tr>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								基本信息<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+							<td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td >
+								用药<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								体格检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								既往史<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								实验室检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								临床诊断<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								影像学检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+							<td style="text-align: right">
+								<span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>
+							</td>
+							<td>
+								随访<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+							</td>
+						</tr>
+					</table>
+		            <!-- light modal footer -->
+		            <div class="light-modal-footer">
+		                <a href="#" class="light-modal-close-btn" aria-label="close">Close</a>
+		            </div>
+		        </div>
+		    </div>
+	</div>
+	
+	<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/template_setting/jquery-2.2.3.min.js"><\/script>')</script>
+	<script src="js/template_setting/scripts.js"></script>
+</body>
+</html>
