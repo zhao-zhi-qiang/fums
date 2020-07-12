@@ -65,8 +65,14 @@
     </if>
   </select>
 
+
+
   <select id="seleDepartment" resultMap="usBaseResultMap">
     select hospital_department_id,hospital_department_name from hospital_department
+  </select>
+
+  <select id="seleUser" resultMap="BaseResultMap">
+    select id,user_account from user
   </select>
 
   <insert id="insert" parameterType="com.fums.system_management.pojo.User" useGeneratedKeys="true" keyProperty="id" >
@@ -83,11 +89,10 @@
 
   </insert>
 
-
-
-  <!--  <select id="seleUpdate" resultMap="BaseResultMap">-->
-  <!--    select * from user where id = #{id}-->
-  <!--  </select>-->
+<!--修改回显-->
+    <select id="seleUpdate" resultMap="BaseResultMap">
+      select * from user where id = #{id}
+    </select>
 
   <!--  <update id="saveUpdata" parameterType="com.fums.system_management.pojo.User">-->
 
@@ -96,4 +101,63 @@
   <!--    where `id`= #{id}*/-->
 
   <!--  </update>-->
+
+  <delete id="deleteALL" parameterType="java.lang.Integer">
+
+    delete from user where id in
+    <foreach collection="array" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+
+  </delete>
+
+
+<!--权限表-->
+
+  <select id="selectUser" resultMap="BaseResultMap">
+    select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
+    from
+    `user` u
+    LEFT JOIN user_department d ON u.id = d.id
+    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+    where 1 = 1
+
+    <if test="userAccount != null and userAccount != ''">
+      and u.user_account like concat('%',#{userAccount},'%')
+    </if>
+    <if test="hospitalDepartmentName != null and hospitalDepartmentName !=0">
+      and h.hospital_department_name like concat('%',#{hospitalDepartmentName},'%')
+    </if>
+  </select>
+
+  <delete id="delete">
+    delete from user where id = #{id}
+  </delete>
+
+
+  <insert id="insertUser" parameterType="com.fums.system_management.pojo.User" useGeneratedKeys="true" keyProperty="id" >
+
+    INSERT INTO `tree`.`user` ( `user_account`)
+    VALUES (#{userAccount});
+
+  </insert>
+
+  <insert id="insertsUser" parameterType="com.fums.system_management.pojo.UserDepartment">
+
+    INSERT INTO `tree`.`user_department` ( `user_id`,`hospital_department_id`)
+    VALUES (#{a},#{b});
+
+  </insert>
+
+  <!--修改回显-->
+  <select id="UpdateUser" resultMap="BaseResultMap">
+      select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
+    from
+    `user` u
+    LEFT JOIN user_department d ON u.id = d.id
+    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+    where u.id = #{id}
+    </select>
+
+
 </mapper>

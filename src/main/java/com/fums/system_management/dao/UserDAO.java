@@ -29,11 +29,18 @@ public interface UserDAO {
                          @Param("hospitalDepartmentName") String hospitalDepartmentName);
 
 
+
     /**
      * 科室表
      * @return
      */
     List<HospitalDepartment> seleDepartment();
+
+    /**
+     * 用户表
+     * @return
+     */
+    List<User> seleUser();
 
     /*新增*/
     int insert(User user);
@@ -42,10 +49,31 @@ public interface UserDAO {
     void inserts(@Param("a")Integer a,@Param("b") Integer b);
 
     /*修改回显*/
-//    User seleUpdate(Integer id);
+    User seleUpdate(Integer id);
 
     /*更新*/
 //    int saveUpdata(User user);
 
+    /*批量删除*/
+    int deleteALL(String[] ids);
+
+
+    /*查询权限*/
+    List<User> selectUser(@Param("hospitalDepartmentName") String hospitalDepartmentName,
+                          @Param("userAccount") String userAccount);
+
+    //登记页面删除
+    int delete(Integer id);
+
+    /*新增*/
+    int insertUser(User user);
+
+    void insertsUser(@Param("a")Integer a,@Param("b") Integer b);
+
+    /*修改回显*/
+    User UpdateUser(Integer id);
+
+    /*更新*/
+//    int saveUpdateUser(User user);
 
 }

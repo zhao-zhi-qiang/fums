@@ -28,12 +28,19 @@ public class UserServiceImpl implements UserService {
         return userDAO.selectAll(userId,userAccount,userSex,userPhone,userEmail,password,hospitalDepartmentName);
     }
 
+
+
     @Override
     public List<HospitalDepartment> seleDepartment() {
         return userDAO.seleDepartment();
     }
 
-  @Override
+    @Override
+    public List<User> seleUser() {
+        return userDAO.seleUser();
+    }
+
+    @Override
     public int insert(User user) {
         return userDAO.insert(user);
     }
@@ -44,13 +51,62 @@ public class UserServiceImpl implements UserService {
         userDAO.inserts(a,b);
     }
 
-//    @Override
-//    public User seleUpdate(Integer id) {
-//        return userManagementDao.seleUpdate(id);
-//    }
+    @Override
+    public User seleUpdate(Integer id) {
+        return userDAO.seleUpdate(id);
+    }
+
 
 //    @Override
 //    public int saveUpdata(User user) {
 //        return userManagementDao.saveUpdata(user);
 //    }
+
+
+    @Override
+    public boolean deleteALL(String[] ids) {
+
+        int result = userDAO.deleteALL(ids);
+        if (result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+
+    @Override
+    public List<User> selectUser(String hospitalDepartmentName, String userAccount) {
+        return userDAO.selectUser(hospitalDepartmentName,userAccount);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return userDAO.delete(id);
+    }
+
+    @Override
+    public int insertUser(User user) {
+        return userDAO.insertUser(user);
+    }
+
+
+    @Override
+    public void insertsUser(Integer a, Integer b) {
+        userDAO.insertsUser(a,b);
+    }
+
+
+    @Override
+    public User UpdateUser(Integer id) {
+        return userDAO.UpdateUser(id);
+    }
+
+
+//    @Override
+//    public int saveUpdateUser(User user) {
+//        return userDAO.saveUpdateUser(user);
+//    }
+
 }

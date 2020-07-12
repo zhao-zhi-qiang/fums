@@ -38,12 +38,13 @@ public class SystemManagementController {
 
         PageHelper.startPage(pageNum,5);
         List<User> list1 = userService.selectAll(userId,userAccount,userSex,userPhone,userEmail,password,hospitalDepartmentName);
-        System.out.println(list1);
+
         PageInfo<User> pageInfo = new PageInfo<>(list1);
 
         return JSON.toJSONString(pageInfo);
 
     }
+
 
     /**
      * 科室表查询
@@ -52,9 +53,18 @@ public class SystemManagementController {
     public List<HospitalDepartment> seleDepartment(){
         List<HospitalDepartment> result = userService.seleDepartment();
 
-        System.out.println(result);
-
         return result;
+    }
+
+    /**
+     * 用户表查询
+     */
+    @RequestMapping(value = "seleUser" ,produces = "application/json;charset=utf-8")
+    public List<User> seleUser(){
+
+        List<User> result1 = userService.seleUser();
+
+        return result1;
     }
 
     /**
@@ -76,13 +86,13 @@ public class SystemManagementController {
     /**
      * 修改回显
      */
-    /*@RequestMapping(value = "seleUpdate" ,produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "seleUpdate" ,produces = "application/json;charset=utf-8")
     public User seleUpdate(Integer id){
 
         User seleUpdate = userService.seleUpdate(id);
 
         return seleUpdate;
-    }*/
+    }
 
     /**
      * 修改更新
@@ -93,6 +103,77 @@ public class SystemManagementController {
         int saveUpdate = userService.saveUpdata(user);
 
         return saveUpdate;
+    }*/
+
+
+    /*批量删除*/
+    @ResponseBody
+    @RequestMapping(value="deleteALL",produces={"application/json;charset=utf-8"})
+    public String removeByKeys(@RequestParam(value = "list[]") String[] list){
+
+        boolean result=userService.deleteALL(list);
+
+        return JSON.toJSONString(result);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "selectUser" , produces = "application/json;charset=utf-8")
+    public String selectUser(String hospitalDepartmentName,String userAccount,
+                             @RequestParam(value = "pageNum" ,defaultValue = "1",required = false) Integer pageNum){
+
+        PageHelper.startPage(pageNum,5);
+        List<User> listUser = userService.selectUser(userAccount,hospitalDepartmentName);
+
+        PageInfo<User> pageInfo = new PageInfo<>(listUser);
+
+        return JSON.toJSONString(pageInfo);
+    }
+
+    //案件登记页面删除
+    @ResponseBody
+    @RequestMapping(value = "ee" , produces = "application/json;charset=utf-8")
+    public int delete(Integer id) {
+
+        int ee1 = userService.delete(id);
+
+        return ee1;
+    }
+
+
+    @RequestMapping(value = "insertUser" ,produces = "application/json;charset=utf-8")
+    public String insertsUser(User user,String hospitalDepartmentName){
+
+        userService.insertUser(user);
+        int a = user.getId();
+        int b = Integer.parseInt(hospitalDepartmentName);
+
+        userService.insertsUser(a,b);
+
+        return null;
+    }
+
+
+    /**
+     * 修改回显
+     */
+    @RequestMapping(value = "UpdateUser" ,produces = "application/json;charset=utf-8")
+    public User UpdateUser(Integer id){
+
+        User UpdateUser = userService.UpdateUser(id);
+
+        return UpdateUser;
+    }
+
+    /**
+     * 修改更新
+     */
+   /* @RequestMapping(value = "saveUpdateUser" ,produces = "application/json;charset=utf-8")
+    public int saveUpdateUser(User user){
+
+        int saveUpdateUser = userService.saveUpdateUser(user);
+
+        return saveUpdateUser;
     }*/
 
 
