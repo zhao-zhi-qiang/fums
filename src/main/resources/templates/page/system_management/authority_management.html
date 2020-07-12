@@ -5,13 +5,6 @@
     <title>权限管理</title>
 
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
-        <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
-    <link rel="stylesheet" href="css/style.css">
-    <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
-    <script src="js/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
 
     <!--联网引入-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,6 +16,194 @@
             width: 95%;
         }
     </style>
+
+
+    <script type="text/javascript">
+
+        var page;
+        var qian;//前
+        var hou;//后
+
+        $(function () {
+            retrieval()
+        })
+
+        function retrieval(pageNum){
+
+            $("#tbody").empty();
+
+            var hospitalDepartmentName = $("#hospital_department_id").val();//科室
+            var userAccount = $("#id").val();//name
+
+            $.ajax({
+                url:"SystemManagementController/selectUser",
+                type:"post",
+                data:{
+                    "hospitalDepartmentName":hospitalDepartmentName,
+                    "userAccount":userAccount,
+                    "pageNum":pageNum
+                },
+                dataType:"json",
+                success: function (listUser) {
+                    console.log(listUser);
+                    var ss = "";
+                    for (var i = 0; i < listUser.list.length; i++) {
+                        ss = "<tr><td>"+ (i + 1) +"</td><td>"
+                            + listUser.list[i].hospitalDepartmentName +"</td><td>"
+                            + listUser.list[i].userAccount +"</td><td>"
+                            + "<button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"UpdateUser("+ listUser.list[i].id +")\">编辑</button>"
+                            + "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"deleUser("+ listUser.list[i].id +")\">删除</button></td></tr>"
+
+                        $("#tbody").append(ss);
+                        qian=listUser.pageNum==1?1:listUser.pageNum-1;
+                        hou=listUser.pageNum==listUser.pages?listUser.pages:listUser.pageNum+1;
+                    }
+                }
+            })
+        }
+    </script>
+
+    <!--删除-->
+    <script type="text/javascript">
+
+        function deleUser(id) {
+            $.ajax({
+                url:"SystemManagementController/ee",
+                type:"post",
+                data:{id : id},
+                success:function(ee1){
+                    if(confirm("是否确定删除？")){
+                        alert("删除成功");
+                        window.location.reload();
+                    }else{
+                        alert("删除失败");
+                    }
+                }
+            })
+
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            // 科室
+            $.ajax({
+                url: "SystemManagementController/seleDepartment",
+                data: {},
+                type: "post",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    $("#hospital_department_id").empty();
+                    $("#hospital_department_id").prepend('<option value="0">请选择</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        var list = result
+                        $("#hospital_department_id").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                        $("#hospital_department_id1").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                        $("#hospital_department_id2").prepend('<option value="' + list[i].hospitalDepartmentId + '">' + list[i].hospitalDepartmentName + '</option>')
+                    }
+                }
+            })
+
+            // 人员
+            $.ajax({
+                url: "SystemManagementController/seleUser",
+                data: {},
+                type: "post",
+                dataType: "json",
+                success: function (result1) {
+                    console.log(result1);
+                    $("#id").empty();
+                    $("#id").prepend('<option value="0">请选择</option>');
+                    for (var i = 0; i < result1.length; i++) {
+                        var list = result1;
+                        $("#id").prepend('<option value="' + list[i].id + '">' + list[i].userAccount + '</option>');
+                        $("#id1").prepend('<option value="' + list[i].id + '">' + list[i].userAccount + '</option>');
+                        $("#id2").prepend('<option value="' + list[i].id + '">' + list[i].userAccount + '</option>');
+                    }
+                }
+            })
+        })
+
+    </script>
+
+
+    <!--新增-->
+    <script type="text/javascript">
+        function saveUser() {
+
+            var userAccount = $("#id1").val();//name
+            var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
+
+            $.ajax({
+                url: "SystemManagementController/insertUser",
+                type: "post",
+                data:{
+                    "userAccount":userAccount,
+                    "hospitalDepartmentName":hospitalDepartmentName
+                },
+                dataType: "json",
+
+                success: function (insertUser) {
+                    if(insertUser != 0){
+                        alert("添加成功");
+                        window.location.reload();
+                    }else{
+                        alert("添加失败");
+                    }
+                }
+
+            })
+        }
+    </script>
+
+    <!--修改回显-->
+    <script type="text/javascript">
+        function UpdateUser(id){
+            alert(id);
+            $.ajax({
+                url:"SystemManagementController/UpdateUser",
+                type:"post",
+                dataType:"json",
+                data:{
+                    id : id
+                },
+                success:function (UpdateUser) {
+
+                    $("#qqq").val(UpdateUser.id);
+                    $("#user_account2").val(UpdateUser.userAccount);
+                    $("#hospital_department_name2").val(UpdateUser.hospital_department_name);
+                }
+            })
+        }
+
+        /*修改更新*/
+        /*function saveUpdateUser() {
+            $.ajax({
+                url:"SystemManagementController/saveUpdateUser",
+                type:"post",
+                data: $("#yy").serialize(),
+
+                success:function (saveUpdateUser) {
+                    if(saveUpdateUser != 0){
+                        alert("修改成功");
+                        window.location.reload();
+                    }else{
+                        alert("修改失败");
+                    }
+                }
+            })
+        }*/
+    </script>
+
+
+
+
+
 
 </head>
 
@@ -40,7 +221,7 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
                 </td>
                 <td>
-                    <select style="width: 100%;height: 35px;">
+                    <select style="width: 100%;height: 35px;" id="hospital_department_id" name="hospitalDepartmentName">
                         <option value="0">请选择科室</option>
                     </select>
                 </td>
@@ -48,7 +229,7 @@
                 <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">人员名称：</span>
                 </td>
             <td>
-                <select style="width: 100%;height: 35px;">
+                <select style="width: 100%;height: 35px;" id="id" name="userAccount">
                     <option value="0">请选择人员</option>
                 </select>
             </td>
@@ -58,14 +239,15 @@
 </table>
 
 <div style="margin-top: -10px;">
-    <button type="button" class="btn btn-success btn-sm" onclick="">新增</button>
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+            data-target="#editModa2">新增</button>
 
-    <button type="button" class="btn btn-success btn-sm" onclick="">检索</button>
+    <button type="button" class="btn btn-success btn-sm" onclick="retrieval()">检索</button>
 </div>
 
 
 <div style="margin-top: 25px;">
-    <table class="table table-bordered" >
+    <table class="table table-bordered" style="text-align: center;">
         <thead >
         <tr class="info" >
             <th style="text-align: center;" >序号</th>
@@ -74,26 +256,14 @@
             <th style="text-align: center;" >操作</th>
         </tr>
         </thead>
-        <tbody  style="text-align: center;">
+        <tbody id="tbody">
         <tr class="active">
             <td>1</td>
             <td>肿瘤中心</td>
             <td>严医生</td>
             <td>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#editModal" onclick="">编辑</button>
-                <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
-            </td>
-        </tr>
-        <tr class="active">
-            <td>2</td>
-            <td>心研所</td>
-            <td>冯医生</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#editModal" onclick="">编辑</button>
-
-                <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal" onclick="">编辑</button>
+                <button type="button" class="btn btn-success btn-sm" onclick="deleUser()">删除</button>
             </td>
         </tr>
         </tbody>
@@ -101,13 +271,55 @@
 
 </div>
 
+    <!--编辑-->
+<form action="" id="yy" method="post">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">权限管理</h3>
+                </div>
+                <table class="table" style="background:beige;margin-top: 15px;" >
+                    <div>
+                        <tr>
+                            <input type="hidden" id="qqq" name="id">
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
+                            </td>
+                            <td>
+                                <select style="width: 100%;height: 35px;" id="hospital_department_id1" name="hospitalDepartmentName">
+                                    <option value="0">请选择科室</option>
+                                </select>
+                            </td>
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">人员名称：</span>
+                            </td>
+                            <td>
+                                <select style="width: 100%;height: 35px;" id="id1" name="userAccount">
+                                    <option value="0">请选择人员</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="saveUpdateUser()" data-dismiss="modal" >保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+    <!--新增-->
+<div class="modal fade" id="editModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width:80%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">权限管理</h3>
+                <button id="bt2" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabe2">权限管理</h3>
             </div>
             <table class="table" style="background:beige;margin-top: 15px;" >
                 <div>
@@ -116,7 +328,7 @@
                             <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
                         </td>
                         <td>
-                            <select style="width: 100%;height: 35px;" id="hospital_department_name" name="hospitalDepartmentName">
+                            <select style="width: 100%;height: 35px;" id="hospital_department_id2" name="hospitalDepartmentName">
                                 <option value="0">请选择科室</option>
                             </select>
                         </td>
@@ -125,7 +337,7 @@
                             <span style="white-space: nowrap;display: inline-block;color: #0E74B4">人员名称：</span>
                         </td>
                         <td>
-                            <select style="width: 100%;height: 35px;" id="user_account" name="userAccount">
+                            <select style="width: 100%;height: 35px;" id="id2" name="userAccount">
                                 <option value="0">请选择人员</option>
                             </select>
                         </td>
@@ -133,7 +345,7 @@
                 </div>
             </table>
             <div class="modal-footer">
-                <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
+                <button class="btn btn-success" onclick="saveUser()" data-dismiss="modal" >保存</button>
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
             </div>
         </div>
@@ -143,12 +355,12 @@
 <div style="text-align: center">
     <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
+        <li><a href="#" onclick="retrieval(1)">1</a></li>
+        <li><a href="#" onclick="retrieval(2)">2</a></li>
+        <li><a href="#" onclick="retrieval(3)">3</a></li>
+        <li><a href="#" onclick="retrieval(4)">4</a></li>
+        <li><a href="#" onclick="retrieval(5)">5</a></li>
+        <li><a href="#" >&raquo;</a></li>
     </ul>
 </div>
 </table>

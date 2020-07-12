@@ -5,14 +5,7 @@
     <title>用户管理</title>
 
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
-    <!--    <link rel="stylesheet" href="adminLTE/css/AdminLTE.css">
-        <link rel="stylesheet" href="js/adminLTE/css/skins/_all-skins.min.css">-->
-    <!--<link rel="stylesheet" href="css/style.css">-->
-    <!--    <link rel="stylesheet" href="js/angularjs/toaster.min.css">-->
-    <!--<script src="js/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="js/plugins/bootstrap/js/bootstrap.min.js"></script>
--->
+
     <!--联网引入-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -26,6 +19,15 @@
             border: 1px solid #80bdff;
         }
     </style>
+
+    <!--刷新-->
+    <script type="text/javascript">
+
+        function empty() {
+            window.location.reload();
+        }
+
+    </script>
 
 
     <!--查询和模糊查询-->
@@ -85,6 +87,11 @@
                     }
                 }
             })
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
 
             // 科室
             $.ajax({
@@ -104,7 +111,7 @@
                     }
                 }
             })
-        }
+        })
     </script>
 
 
@@ -120,8 +127,6 @@
              var password = $("#password1").val();//密码
              var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
 
-             alert(hospitalDepartmentName);
-
              $.ajax({
                  url: "SystemManagementController/insert",
                  type: "post",
@@ -135,6 +140,7 @@
                      "hospitalDepartmentName":hospitalDepartmentName
                  },
                  dataType: "json",
+
                  success: function (insert) {
                      if(insert != 0){
                          alert("添加成功");
@@ -143,6 +149,7 @@
                          alert("添加失败");
                      }
                  }
+
              })
          }
      </script>
@@ -150,27 +157,28 @@
 
     <!--修改回显-->
     <script type="text/javascript">
-        /*        function seleUpdate(){
-                    $.ajax({
-                        url:"SystemManagementController/seleUpdate",
-                        type:"post",
-                        dataType:"json",
-                        data:{
-                            id : id
-                        },
-                        success:function (seleUpdate) {
+        function seleUpdate(id){
+            alert(id);
+            $.ajax({
+                url:"SystemManagementController/seleUpdate",
+                type:"post",
+                dataType:"json",
+                data:{
+                    id : id
+                },
+                success:function (seleUpdate) {
 
-                            $("#qqq").val(seleUpdate.id);
-                            $("#user_id2").val(seleUpdate.userId);
-                            $("#user_account2").val(seleUpdate.userAccount);
-                            $("#user_sex2").val(seleUpdate.userSex);
-                            $("#user_phone2").val(seleUpdate.userPhone);
-                            $("#user_email2").val(seleUpdate.userEmail);
-                            $("#password2").val(seleUpdate.password);
-                            $("#hospital_department_name2").val(seleUpdate.hospital_department_name);
-                        }
-                    })
-                }*/
+                    $("#qqq").val(seleUpdate.id);
+                    $("#user_id2").val(seleUpdate.userId);
+                    $("#user_account2").val(seleUpdate.userAccount);
+                    $("#user_sex2").val(seleUpdate.userSex);
+                    $("#user_phone2").val(seleUpdate.userPhone);
+                    $("#user_email2").val(seleUpdate.userEmail);
+                    $("#password2").val(seleUpdate.password);
+                    $("#hospital_department_name2").val(seleUpdate.hospital_department_name);
+                }
+            })
+         }
 
         /*修改更新*/
         /*function saveUpdate() {
@@ -191,7 +199,7 @@
         }*/
     </script>
 
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
 
         /*批量删除*/
         function xiaOnclick() {
@@ -225,7 +233,7 @@
                 if (confirm("确定要删除吗?")){
                     $.ajax({
                         type:"GET",
-                        url:"removeByKeys",
+                        url:"SystemManagementController/deleteALL",
                         dataType:"json",
                         data:{"list":list}, // 传输一个list集合包含所选框的id,,,,也可以传一个st到后台data:{"list":st},
                         success:function (result) {
@@ -242,7 +250,7 @@
             }
         }
 
-    </script>-->
+    </script>
 
 </head>
 
@@ -331,10 +339,10 @@
     <!--    <button class="btn btn-info">创建模板</button>-->
     <div style="text-align: left;padding-top: 0px">
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                data-target="#editModal" onclick="">新增</button>
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                data-target="#editModa2" onclick="">修改</button>
-        <button type="button" class="btn btn-success btn-sm" onclick="">删除</button>
+                data-target="#editModal">新增</button>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" onclick="seleUpdate()"
+                data-target="#editModa2">修改</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="deleteALL()">删除</button>
     </div>
     <table class="table table-bordered" style="text-align: center;">
         <thead >
@@ -452,7 +460,7 @@
 
 
     <!--修改-->
-
+<form action="" id="yy" method="post">
     <div class="modal fade" id="editModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:80%;">
             <div class="modal-content">
@@ -463,6 +471,7 @@
                 <table class="table" style="background:beige;" border="0" >
                     <div  class="main-menu" style="text-align: center">
                         <tr>
+                            <input type="hidden" id="qqq" name="id">
                             <td style="text-align: right">
                                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
                             </td>
@@ -524,13 +533,13 @@
 
                 </table>
                 <div class="modal-footer">
-                    <button class="btn btn-success" onclick="baoCun()" id="djh" data-dismiss="modal" >保存修改</button>
+                    <button class="btn btn-success" onclick="saveUpdate()" data-dismiss="modal" >保存修改</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消修改</button>
                 </div>
             </div>
         </div>
     </div>
-
+</form>
 
 
 
