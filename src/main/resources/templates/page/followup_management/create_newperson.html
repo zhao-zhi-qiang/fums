@@ -3,30 +3,47 @@
 <head>
     <meta charset="utf-8">
     <title>新建患者</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+       /* 新建患者*/
+        function addSave(){
+            var form = $("#add_form").serialize();
+            alert(form)
+            $.ajax({
+                url:"addPatient",
+                data:form,
+                dataType:"json",
+                type:"post",
+                traditional:true,
+                async:false,
+                success:function (result) {
+                    location.reload();
+                },error:function () {
+
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <div class="patient_content" style="margin-top: 60px">
     <div class="patient_add" style="margin-left: 150px;">
-        <form class="add_form">
+        <form id="add_form" method="post">
             <table>
                 <tr>
                     <td><label>住院号</label></td>
                     <td >
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="住院号">
+                            <input type="text" class="form-control" placeholder="住院号" name="admissionNumber">
                         </div>
                     </td>
                     <td><label>姓名</label></td>
                     <td >
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="姓名">
+                            <input type="text" class="form-control" placeholder="姓名" name="name">
                         </div>
                     </td>
                 </tr>
@@ -34,22 +51,19 @@
                     <td><label>门诊号</label></td>
                     <td >
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="门诊号">
+                            <input type="text" class="form-control" placeholder="门诊号" name="patientNumber">
                         </div>
                     </td>
                     <td><label>出生日期</label></td>
                     <td >
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="出生日期">
+                            <input type="text" class="form-control" placeholder="出生日期" name="born">
                         </div>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td><button class="btn btn-primary" style="">确定</button></td>
-                </tr> -->
             </table>
-            <button class="btn btn-primary" style="margin-left: 200px;">确定</button>
         </form>
+            <button class="btn btn-primary" style="margin-left: 200px;" onclick="addSave()">确定</button>
     </div>
 </div>
 </body>

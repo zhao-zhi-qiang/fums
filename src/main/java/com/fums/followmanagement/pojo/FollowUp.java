@@ -1,7 +1,6 @@
 package com.fums.followmanagement.pojo;
 
 import java.util.Date;
-
 public class FollowUp {
     private Integer followUpId;
 

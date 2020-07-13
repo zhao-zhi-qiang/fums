@@ -12,6 +12,10 @@
     hospital_department_child_id, hospital_department_child_name, hospital_department_child_state, 
     hospital_department_child_code, hospital_department_code
   </sql>
+    <!--查询所有科室-->
+    <select id="selectDepartmentAll" resultMap="BaseResultMap">
+        select * from hospital_department_child
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
