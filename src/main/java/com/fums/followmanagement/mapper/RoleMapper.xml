@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followmanagement.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="role_state" jdbcType="INTEGER" property="roleState" />
+    <result column="role_create_time" jdbcType="DATE" property="roleCreateTime" />
+    <result column="role_update_time" jdbcType="DATE" property="roleUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_id, role_name, role_desc, role_state, role_create_time, role_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.followmanagement.pojo.Role">
+    insert into role (id, role_id, role_name, 
+      role_desc, role_state, role_create_time, 
+      role_update_time)
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, 
+      #{roleDesc,jdbcType=VARCHAR}, #{roleState,jdbcType=INTEGER}, #{roleCreateTime,jdbcType=DATE}, 
+      #{roleUpdateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.followmanagement.pojo.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleDesc != null">
+        role_desc,
+      </if>
+      <if test="roleState != null">
+        role_state,
+      </if>
+      <if test="roleCreateTime != null">
+        role_create_time,
+      </if>
+      <if test="roleUpdateTime != null">
+        role_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null">
+        #{roleState,jdbcType=INTEGER},
+      </if>
+      <if test="roleCreateTime != null">
+        #{roleCreateTime,jdbcType=DATE},
+      </if>
+      <if test="roleUpdateTime != null">
+        #{roleUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.Role">
+    update role
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null">
+        role_state = #{roleState,jdbcType=INTEGER},
+      </if>
+      <if test="roleCreateTime != null">
+        role_create_time = #{roleCreateTime,jdbcType=DATE},
+      </if>
+      <if test="roleUpdateTime != null">
+        role_update_time = #{roleUpdateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.Role">
+    update role
+    set role_id = #{roleId,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      role_state = #{roleState,jdbcType=INTEGER},
+      role_create_time = #{roleCreateTime,jdbcType=DATE},
+      role_update_time = #{roleUpdateTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
