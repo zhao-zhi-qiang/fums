@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followmanagement.dao.DiseaseCodingMapper">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.DiseaseCoding">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="icd100" jdbcType="VARCHAR" property="icd100" />
+    <result column="fzm000" jdbcType="VARCHAR" property="fzm000" />
+    <result column="jbmc00" jdbcType="VARCHAR" property="jbmc00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, icd100, fzm000, jbmc00
+  </sql>
+    <!--条件查询所有疾病编码-->
+    <select id="selectDiseaseCodingAll" resultMap="BaseResultMap">
+        SELECT * FROM disease_coding
+        <where>
+            <if test="id1 != null and id2 != null">
+                and id BETWEEN #{id1} and #{id2}
+            </if>
+            <if test="jbmc00 != null and jbmc00 != ''">
+                and jbmc00 like CONCAT("%",#{jbmc00},"%")
+            </if>
+        </where>
+    </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from disease_coding
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from disease_coding
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.followmanagement.pojo.DiseaseCoding">
+    insert into disease_coding (id, icd100, fzm000, 
+      jbmc00)
+    values (#{id,jdbcType=INTEGER}, #{icd100,jdbcType=VARCHAR}, #{fzm000,jdbcType=VARCHAR}, 
+      #{jbmc00,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.followmanagement.pojo.DiseaseCoding">
+    insert into disease_coding
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="icd100 != null">
+        icd100,
+      </if>
+      <if test="fzm000 != null">
+        fzm000,
+      </if>
+      <if test="jbmc00 != null">
+        jbmc00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="icd100 != null">
+        #{icd100,jdbcType=VARCHAR},
+      </if>
+      <if test="fzm000 != null">
+        #{fzm000,jdbcType=VARCHAR},
+      </if>
+      <if test="jbmc00 != null">
+        #{jbmc00,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.followmanagement.pojo.DiseaseCoding">
+    update disease_coding
+    <set>
+      <if test="icd100 != null">
+        icd100 = #{icd100,jdbcType=VARCHAR},
+      </if>
+      <if test="fzm000 != null">
+        fzm000 = #{fzm000,jdbcType=VARCHAR},
+      </if>
+      <if test="jbmc00 != null">
+        jbmc00 = #{jbmc00,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.followmanagement.pojo.DiseaseCoding">
+    update disease_coding
+    set icd100 = #{icd100,jdbcType=VARCHAR},
+      fzm000 = #{fzm000,jdbcType=VARCHAR},
+      jbmc00 = #{jbmc00,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.followmanagement.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.fums.followmanagement.pojo.User">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_salt" jdbcType="VARCHAR" property="userSalt" />
+    <result column="user_state" jdbcType="INTEGER" property="userState" />
+    <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
+    <result column="user_create_time" jdbcType="DATE" property="userCreateTime" />
+    <result column="user_update_time" jdbcType="DATE" property="userUpdateTime" />
+        <association property="role" javaType="com.fums.followmanagement.pojo.Role">
+            <id column="rID" jdbcType="INTEGER" property="id" />
+            <result column="role_id" jdbcType="INTEGER" property="roleId" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+            <result column="role_state" jdbcType="INTEGER" property="roleState" />
+            <result column="role_create_time" jdbcType="DATE" property="roleCreateTime" />
+            <result column="role_update_time" jdbcType="DATE" property="roleUpdateTime" />
+            <association property="power" javaType="com.fums.followmanagement.pojo.Power">
+                <id column="pID" jdbcType="INTEGER" property="id" />
+                <result column="power_id" jdbcType="INTEGER" property="powerId" />
+                <result column="power_state" jdbcType="INTEGER" property="powerState" />
+                <result column="power_name" jdbcType="VARCHAR" property="powerName" />
+                <result column="power_desc" jdbcType="VARCHAR" property="powerDesc" />
+            </association>
+        </association>
+      <association property="userRole" javaType="com.fums.followmanagement.pojo.UserRole">
+          <id column="urID" jdbcType="INTEGER" property="id" />
+          <result column="user_id" jdbcType="INTEGER" property="userId" />
+          <result column="role_id" jdbcType="INTEGER" property="roleId" />
+      </association>
+      <association property="rolePower" javaType="com.fums.followmanagement.pojo.RolePower">
+          <id column="rpID" jdbcType="INTEGER" property="id" />
+          <result column="role_id" jdbcType="INTEGER" property="roleId" />
+          <result column="power_id" jdbcType="INTEGER" property="powerId" />
+      </association>
+      <association property="hospitalDepartmentChild" javaType="com.fums.followmanagement.pojo.HospitalDepartmentChild">
+          <id column="hdcID" jdbcType="INTEGER" property="hospitalDepartmentChildId" />
+          <result column="hospital_department_child_name" jdbcType="VARCHAR" property="hospitalDepartmentChildName" />
+          <result column="hospital_department_child_state" jdbcType="INTEGER" property="hospitalDepartmentChildState" />
+          <result column="hospital_department_child_code" jdbcType="VARCHAR" property="hospitalDepartmentChildCode" />
+          <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
+      </association>
+  </resultMap>
+    <!--查询所有角色-->
+    <select id="selectUserInfoAll" resultMap="BaseResultMap">
+        SELECT r.role_desc,r.role_name,u.user_account,p.power_desc
+        FROM role r,user u,user_role ur,power p,role_power rp
+        WHERE ur.role_id = r.role_id
+            and ur.user_id = u.user_id
+            and rp.role_id = r.role_id
+            and rp.power_id = p.power_id
+            <if test="roleName != null and roleName != ''">
+                and r.role_name like CONCAT("%",#{roleName},"%")
+            </if>
+    </select>
+    <!--查询所有用户-->
+    <select id="selectUserAll" resultMap="BaseResultMap">
+        SELECT u.user_account,hdc.hospital_department_child_name,hdc.hospital_department_child_id as hdcID
+        FROM hospital_department_child hdc,`user` u
+        WHERE hdc.hospital_department_child_code = u.hospital_department_child_code
+        <if test="hospitalDepartmentChildName != null and hospitalDepartmentChildName != ''">
+            and hdc.hospital_department_child_name = #{hospitalDepartmentChildName}
+        </if>
+        <if test="userAccount != null and userAccount != ''">
+            and u.user_account like CONCAT ("%",#{userAccount},"%")
+        </if>
+    </select>
+    <!--通过角色查询所有该角色用户-->
+    <select id="selectUserAllByRoleName" resultMap="BaseResultMap">
+        SELECT u.user_id,u.user_account,r.role_name from `user` u,role r,user_role ur
+            WHERE ur.user_id = u.user_id AND ur.role_id = r.role_id
+            <if test="roleName != null and roleName != ''">
+                AND r.role_name = #{roleName}
+            </if>
+    </select>
+  <insert id="insert" parameterType="com.fums.followmanagement.pojo.User">
+    insert into user (id, user_id, user_account, 
+      user_name, password, user_sex, 
+      user_address, user_phone, user_email, 
+      user_salt, user_state, hospital_department_child_code, 
+      user_create_time, user_update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userSalt,jdbcType=VARCHAR}, #{userState,jdbcType=INTEGER}, #{hospitalDepartmentChildCode,jdbcType=INTEGER}, 
+      #{userCreateTime,jdbcType=DATE}, #{userUpdateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.followmanagement.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userSalt != null">
+        user_salt,
+      </if>
+      <if test="userState != null">
+        user_state,
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        hospital_department_child_code,
+      </if>
+      <if test="userCreateTime != null">
+        user_create_time,
+      </if>
+      <if test="userUpdateTime != null">
+        user_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSalt != null">
+        #{userSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        #{userState,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartmentChildCode != null">
+        #{hospitalDepartmentChildCode,jdbcType=INTEGER},
+      </if>
+      <if test="userCreateTime != null">
+        #{userCreateTime,jdbcType=DATE},
+      </if>
+      <if test="userUpdateTime != null">
+        #{userUpdateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>
