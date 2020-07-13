@@ -7,10 +7,6 @@
     <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
     <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
   </resultMap>
-    <!--查询所有科室-->
-    <select id="selectDepartmentAll" resultMap="BaseResultMap">
-        select * from hospital_department_child
-    </select>
   <sql id="Base_Column_List">
     hospital_department_id, hospital_department_name, hospital_department_state, hospital_department_code
   </sql>
