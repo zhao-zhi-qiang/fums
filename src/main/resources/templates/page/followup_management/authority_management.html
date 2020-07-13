@@ -14,6 +14,53 @@
           function changeOps(url) {
               $("#iframe").prop("src",url);
           }
+          $(function () {
+              reloadList();
+          })
+          /**
+           * 查询所有用户角色信息*/
+        function reloadList(pageNum) {
+          $("#tbody").empty();
+          $("#page").empty();
+          var roleName = $("#roleName").val();
+            $.ajax({
+                url:"findUserInfoAll",
+                data:{
+                    "roleName":roleName,
+                    "pageNum":pageNum
+                },
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    result = data.list;
+                    var v = "";
+                    var proxyMonitorStatus = "";
+                    var style = "";
+                    for (var i = 0; i < data.list.length; i++) {
+                        v += "<tr>";
+                        v += '<td><input type="checkbox" value="'+data.list[i].userId+'" name="chose" /></td>'
+                        v += "<td>"+data.list[i].roleDesc+"</td>"
+                        v += "<td>"+data.list[i].role.roleName+"</td>"
+                        v += '<td><span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span></td>'
+                        v += "<td>"+data.list[i].userAccount+"</td>"
+                        v += "<td>"+data.list[i].power.powerDesc+"</td>"
+                        v += "</tr>";
+                    }
+                    $("#tbody").append(v);
+                    var up = data.hasPreviousPage?data.prePage:1;
+                    var down = data.hasNextPage?data.nextPage:data.lastPage;
+                    var p = '<button type="button" onclick="reloadList(1)" class="layui-btn  layui-btn-normal layui-btn-sm">首页</button>';
+                    p += '<button type="button" onclick="reloadList('+up+')" class="layui-btn  layui-btn-normal layui-btn-sm">上一页</button>';
+                    p += '<button type="button" onclick="reloadList('+down+')" class="layui-btn  layui-btn-normal layui-btn-sm">下一页</button>';
+                    p += '<button type="button" onclick="reloadList('+data.lastPage+')" class="layui-btn  layui-btn-normal layui-btn-sm">尾页</button>';
+                    $("#page").append(p);
+                }
+            })
+        }
+          /*清除输入框所有信息*/
+          function clears() {
+              document.getElementById("selectPropertity").reset();
+          }
         </script>
     </head>
 	<body>
@@ -21,35 +68,39 @@
 			<a href="/toFollowupManagement">返回随访组</a>
 			<hr />
 			<div class="authority_head" style="width: 100%; height: 50px; background-color: #B8C1CA;" >
-				<table style="margin-left: 60px;">
-					<tr>
-						<td><label>角色名称</label></td>
-						<td >
-							 <div class="form-group" style="margin-top: 5px">
-							    <input type="text" class="form-control" placeholder="请输入角色名称">
-							  </div>
-						</td>
-						<td><div class="col-lg-2">
-							</div>
-						</td>
-						<td><label>备注</label></td>
-						<td >
-							<div class="form-group" style="margin-top: 5px">
-							   <input type="text" class="form-control" placeholder="备注" style="width: 500px;">
-							 </div>
-						</td>
-                        <td><button class="btn btn-primary btn-sm" style="margin-left: 50px;margin-top: -10px">检索</button></td>
-                        <td><button class="btn btn-primary btn-sm" style="margin-left: 60px;margin-top: -10px">清空</button></td>
-					</tr>
-				</table>
+
+                    <table style="margin-left: 60px;">
+                        <tr>
+                            <form id="selectPropertity">
+                            <td><label>角色名称</label></td>
+                            <td >
+                                <div class="form-group" style="margin-top: 5px">
+                                    <input type="text" class="form-control" placeholder="请输入角色名称" id="roleName">
+                                </div>
+                            </td>
+                            <td><div class="col-lg-2">
+                            </div>
+                            </td>
+                            <td><label>备注</label></td>
+                            <td >
+                                <div class="form-group" style="margin-top: 5px">
+                                    <input type="text" class="form-control" placeholder="备注" style="width: 500px;">
+                                </div>
+                            </td>
+                            </form>
+                            <td><button class="btn btn-primary btn-sm" style="margin-left: 50px;margin-top: -10px" onclick="reloadList()">检索</button></td>
+                            <td><button class="btn btn-primary btn-sm" style="margin-left: 60px;margin-top: -10px" onclick="clears()">清空</button></td>
+                        </tr>
+                    </table>
+
 			</div>
 			<hr />
 			<div class="follow_ops" style="margin-left: 50px;">
 				<table>
 					<tr>
-						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">新增</button></td>
-						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal3">编辑</button></td>
-						<td><button class="btn btn-primary btn-sm">删除</button></td>
+						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2" onclick="addSave()">新增</button></td>
+						<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal3" onclick="editSave(id)">编辑</button></td>
+						<td><button class="btn btn-primary btn-sm" onclick="removeUser(id)">删除</button></td>
 					</tr>
 				</table>
 				
@@ -66,40 +117,28 @@
 						<th>权限</th>
 				      </tr>
 				    </thead>
-				    <tbody>
-				      <tr>
-						<td><input type="checkbox" id="checkbox_style"></td>
+				    <tbody id="tbody">
+				     <!-- <tr>
+						<td><input type="checkbox"></td>
 						<td>II级</td>
 						<td>组长</td>
 						<td><span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span></td>
 						<td>张三</td>
 				        <td>管理随访组</td>
-				      </tr>
-				      <tr>
-				        <td><input type="checkbox" id="checkbox_style"></td>
-				        <td>III级</td>
-				        <td>随访员</td>
-				        <td><span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span></td>
-				        <td>李四</td>
-				        <td>病例管理/数据录入</td>
-				      </tr>
-				      <tr>
-				        <td><input type="checkbox" id="checkbox_style"></td>
-				        <td>III级</td>
-				        <td>医生</td>
-				        <td><span style="color: #007BFF; text-decoration: underline;" data-toggle="modal" data-target="#myModal">设定权限&用户</span></td>
-				        <td>王五</td>
-				        <td>病例查看</td>
-				      </tr>
+				      </tr>-->
 				    </tbody>
 				</table>
 			</div>
+            <!--分页-->
+            <div id="page">
+
+            </div>
             <!-- 模态框（Modal） -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">
+                            <h4 class="modal-title" id="myModalLabel1">
                                 用户权限&设定
                             </h4>
                         </div>
@@ -134,7 +173,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">
+                            <h4 class="modal-title" id="myModalLabel2">
                                 添加页面
                             </h4>
                         </div>
@@ -145,7 +184,7 @@
                                         <td><label>角色级别</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <select name="sex" class="form-control" id="" style="width: 150px; height: 38px;"/>
+                                                <select  class="form-control" name="roleDesc" style="width: 150px; height: 38px;"/>
                                                 <option value="">请选择</option>
                                                 <option value="0">I级</option>
                                                 <option value="1">II级</option>
@@ -157,7 +196,7 @@
                                         <td><label>角色名称</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="输入角色名称" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control" placeholder="输入角色名称" name="roleName"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                         <td><label>权限及用户设定</label></td>
@@ -169,13 +208,13 @@
                                         <td><label>用户</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control"  placeholder="输入用户" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control"  placeholder="输入用户"  name="userAccount"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                         <td><label>权限</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="输入用户权限" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control" placeholder="输入用户权限" name="powerName"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                     </tr>
@@ -198,7 +237,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">
+                            <h4 class="modal-title" id="myModalLabel3">
                                 编辑页面
                             </h4>
                         </div>
@@ -209,19 +248,20 @@
                                         <td><label>角色级别</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <select name="sex" class="form-control" id="" style="width: 150px; height: 38px;"/>
+                                                <select name="roleDesc" class="form-control" id="editRoleDesc" style="width: 150px; height: 38px;"/>
                                                 <option value="">请选择</option>
                                                 <option value="0">I级</option>
                                                 <option value="1">II级</option>
                                                 <option value="1">III级</option>
                                             </div>
+                                            <input id="editserId" name="userId" type="hidden">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label>角色名称</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="输入角色名称" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control" placeholder="输入角色名称" id="editRoleName" name="roleName"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                         <td><label>权限及用户设定</label></td>
@@ -233,13 +273,13 @@
                                         <td><label>用户</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control"  placeholder="输入用户" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control"  placeholder="输入用户" id="editUserAccount" name="userAccount"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                         <td><label>权限</label></td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="输入用户权限" id="" name=""  style="width: 150px; height: 38px;">
+                                                <input type="text" class="form-control" placeholder="输入用户权限" id="editPowerName" name="powerName"  style="width: 150px; height: 38px;">
                                             </div>
                                         </td>
                                     </tr>

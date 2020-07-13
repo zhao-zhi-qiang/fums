@@ -11,6 +11,46 @@
     <script src="js/shuttlebox.js"></script>
     <!--图标调用，可忽略-->
     <script src="js/iconfont.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url:"",
+
+        })
+        function reloadList(pageNum) {
+            $("#tbody").empty();
+            $("#page").empty();
+            var userId = $("#userId").val();
+            var userAccount = $("#userAccount").val();
+            $.ajax({
+                url:"findUserAll",
+                data:{
+                    "userId":userId,
+                    "userAccount":userAccount,
+                    "contactAddress":contactAddress,
+                    "userState":userState,
+                    "pageNum":pageNum
+                },
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    result = data.list;
+                }
+            })
+        }
+        $.ajax({
+            url:"findDepartmentAll",
+            contentType:"application/json",
+            type:"post",
+            dataType:"json",
+            data:{},
+            success: function(data) {
+            var funList = data.funList;
+            for (var i = 0; i < funList.length; i++) {
+                $("#hospitalDepartmentChildName").append((new Option(funList[i].hospitalDepartmentChildCode + " " + funList[i].hospitalDepartmentChildName, funList[i].hospitalDepartmentChildCode)));
+            }
+        }
+        })
+    </script>
 </head>
 <body>
 <div style="margin-top: 5px">
@@ -19,12 +59,12 @@
             <td><label style="margin-left: 5px">科室</label></td>
             <td >
                 <div class="form-group" style="margin-left: 10px">
-                    <select name="userState" class="form-control" style="width: 180px; height: 38px;" />
+                    <select name="userState" class="form-control" style="width: 180px; height: 38px;" id="hospitalDepartmentChildName" />
                     <option value="">请选择科室</option>
-                    <option value="0">男科</option>
+                   <!-- <option value="0">男科</option>
                     <option value="1">女科</option>
                     <option value="1">二科</option>
-                    <option value="1">妇产科</option>
+                    <option value="1">妇产科</option>-->
                 </div>
             </td>
         </tr>
@@ -32,7 +72,7 @@
             <td><label style="margin-left: 5px">姓名</label></td>
             <td >
                 <div class="form-group" style="width: 120px;height: 38px; margin-left: 10px;">
-                    <input type="text" class="form-control" placeholder="姓名">
+                    <input type="text" class="form-control" placeholder="姓名" id="userAccount">
                 </div>
             </td>
             <td><button class="btn btn-primary btn-sm" style="margin-top: -20px;margin-left: -50px;">搜索</button></td>

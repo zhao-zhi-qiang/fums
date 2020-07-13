@@ -9,7 +9,6 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/angularjs/angular.min.js"></script>
     <script type="text/javascript">
         var result = null;
        $(function () {
@@ -76,23 +75,104 @@
                     $("#tbody").append(v);
                     var up = data.hasPreviousPage?data.prePage:1;
                     var down = data.hasNextPage?data.nextPage:data.lastPage;
-                    var p = '<button type="button" onclick="reloadList(1)" class="layui-btn  layui-btn-normal layui-btn-sm">首页</button>';
-                    p += '<button type="button" onclick="reloadList('+up+')" class="layui-btn  layui-btn-normal layui-btn-sm">上一页</button>';
-                    p += '<button type="button" onclick="reloadList('+down+')" class="layui-btn  layui-btn-normal layui-btn-sm">下一页</button>';
-                    p += '<button type="button" onclick="reloadList('+data.lastPage+')" class="layui-btn  layui-btn-normal layui-btn-sm">尾页</button>';
+                    var p = '<button type="button" onclick="reloadList(1)" class="btn btn-primary btn-sm">首页</button>';
+                    p += '<button type="button" onclick="reloadList('+up+')" class="btn btn-primary btn-sm">上一页</button>';
+                    p += '<button type="button" onclick="reloadList('+down+')" class="btn btn-primary btn-sm">下一页</button>';
+                    p += '<button type="button" onclick="reloadList('+data.lastPage+')" class="btn btn-primary btn-sm">尾页</button>';
                     $("#page").append(p);
                 }
             })
         }
-        /*添加随访组*/
-        function addSave(){
+        /*修改随访组数据回显*/
+        function editFollowUp(id) {
+            $("#editFollowUpId").val("");
+            $("#editHospitalId").val("");
+            $("#editHospitalDepartmentChildCode").val("");
+            $("#editFollowUpPrincipal").val("");
+            $("#editFollowUpLevel").val("");
+            $("#editFollowUpName").val("");
+            $("#editFollowUpPhone").val("");
+            $("#editFollowUpStatus").val("");
+            $("#editFollowUpStartTime").val("");
+            $("#editFollowUpEndTime").val("");
+            $("#editFollowUpCode").val("");
+            $("#editFollowUpPatientNumber").val("");
+            $("#editFollowUpControlGroup").val("");
+            $("#editFollowUpBackdrop").val("");
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].followUpId = id){
+                    $("#editFollowUpId").val(result[i].followUpId);
+                    $("#editHospitalId").val(result[i].hospitalId);
+                    $("#editHospitalDepartmentChildCode").val(result[i].hospitalDepartmentChildCode);
+                    $("#editFollowUpPrincipal").val(result[i].followUpPrincipal);
+                    $("#editFollowUpLevel").val(result[i].followUpLevel);
+                    $("#editFollowUpName").val(result[i].followUpName);
+                    $("#editFollowUpPhone").val(result[i].followUpPhone);
+                    $("#editFollowUpStatus").val(result[i].followUpStatus);
+                    $("#editFollowUpStartTime").val(result[i].followUpStartTime);
+                    $("#editFollowUpEndTime").val(result[i].followUpEndTime);
+                    $("#editFollowUpCode").val(result[i].followUpCode);
+                    $("#editFollowUpPatientNumber").val(result[i].followUpPatientNumber);
+                    $("#editFollowUpControlGroup").val(result[i].followUpControlGroup);
+                    $("#editFollowUpBackdrop").val(result[i].followUpBackdrop);
+                    break;
+                }
+            }
+        }
+        /*删除随访组*/
+        function removeFollowUp(id){
             $.ajax({
-                url:"",
+                url:"removeFollowUpInfo",
+                type:"post",
+                dataType:"json",
+                data:{
+                    followUpId:id
+                },
+                success:function(data){
+                    location.reload();
+                }
             })
         }
+        /*清除输入框所有信息*/
+        function clears() {
+            document.getElementById("selectPropertity").reset();
+        }
+        /*添加随访组*/
+        function addSave(){
+            var form = $("#add_form").serialize();
+            $.ajax({
+                url:"addFollowUpInfo",
+                data:form,
+                dataType:"json",
+                type:"post",
+                traditional:true,
+                async:false,
+                success:function (result) {
+                    location.reload();
+                },error:function () {
+                    
+                }
+            })
+        }
+
+        /*编辑随访组*/
+        function editSave() {
+            var form = $("#edit_form").serialize();
+            $.ajax({
+                url:'editFollowUpInfo',
+                data:form,
+                dataType:'json',
+                type:'post',
+                async:false,
+                success:function (data) {
+                    location.reload();
+                }
+            })
+        }
+        /*/!*查询所有科室*!/
         var app = angular.module('myApp',[]);
         app.controller("myController",['$scope','$http',function($scope,$http){
-            /*查询所有科室*/
+            /!*查询所有科室*!/
             $http({
                 method:'get',
                 url:'findDepartmentAll',
@@ -102,7 +182,24 @@
             }).error(function (data) {
 
             });
-        }])
+        }])*/
+        function showDepartmen() {
+            $.ajax({
+               type:"get",
+               url:"findDepartmentAll",
+                dataType:"json",
+                success:function (data) {
+                    var depart_list = data.data;
+                    var opts = "";
+                    for (var depart_index = 0; depart_index < depart_list.length; depart_index++) {
+                        var depart=depart_list[depart_index];
+                        opts += "<option value='"+data[depart_index].hospitalDepartmentChildCode+"'>"+data[depart_index].hospitalDepartmentChildName+"</option>"
+                    }
+                    $("#hospitalDepartmentChildName").append(opts);
+                    $("#hospitalDepartmentChildName").selectpicker("refresh");
+                }
+            })
+        }
     </script>
       <style>
           #header_style li{
@@ -120,7 +217,7 @@
           }
       </style>
 </head>
-<body ng-app = "myApp" ng-controller="myController" data-ng-init = "list()" style="margin: 0; padding: 0;">
+<body style="margin: 0; padding: 0;">
     <div class="group_management">
         <div id="page_top" style="margin-top: -20px">
             <ul id="header_style">
@@ -131,7 +228,7 @@
         <div id="header" style="width: 100%; height: 100px; background-color: #B3D7FF; ">
             <br/>
         <div class="row" style="margin-left: 50px; margin-top: -22px">
-       <form>
+       <form id="selectPropertity">
            <table>
                <tr id="tr_style">
                    <td><label>负责人</label></td>
@@ -143,8 +240,9 @@
                    <td><label style="margin-left: 100px; ">科室</label></td>
                    <td >
                        <div class="form-group" style="margin-left: 10px">
-                           <select name="hospitalDepartmentChildName" class="form-control" style="width: 150px ;height: 38px" id="hospitalDepartmentChildName" ng-model="selectDepartmentAll" ng-options="department.hospitalDepartmentChildId as department.hospitalDepartmentChildName for department in departments"/>
-                           <option value="">请选择科室</option>
+                           <select name="hospitalDepartmentChildName" class="form-control" style="width: 150px ;height: 38px" id="hospitalDepartmentChildName">
+                                 <!--<option value="">请选择科室</option>-->
+                           </select>
                        </div>
                    </td>
                    <td><label style="margin-left: 100px ">状态</label></td>
@@ -174,15 +272,15 @@
        </form>
             <div style="float: right; margin-left: -250px;margin-top: 60px;">
                 <button class="btn btn-primary btn-sm" onclick="reloadList()">检索</button>
-                <button class="btn btn-primary btn-sm" style="margin-left: 20px">清空</button>
+                <button class="btn btn-primary btn-sm" style="margin-left: 20px" onclick="clears()">清空</button>
             </div>
           </div>
         </div><br />
         <div id="show_form" style="text-align: center; margin-left: 50px;">
             <table style="margin-top: -20px">
                 <tr>
-                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">编辑</button></td>
-                    <td><button class="btn btn-primary btn-sm">删除</button></td>
+                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2" onclick="editFollowUp(id)">编辑</button></td>
+                    <td><button class="btn btn-primary btn-sm" onclick="removeFollowUp(id)">删除</button></td>
                 </tr>
             </table>
             <table class="table table-bordered table-hover " style="width: 1200px; height: 100%;">
@@ -222,7 +320,7 @@
                                     <td><label style="width: 70px">责任医院</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select name="" class="form-control" style="width:210px; height: 38px;"/>
+                                            <select name="hospitalId" class="form-control" style="width:210px; height: 38px;"/>
                                             <option value="">请选择医院</option>
                                             <option value="0">北京人民医院</option>
                                             <option value="1">北京协和医院</option>
@@ -231,7 +329,7 @@
                                     <td><label style="width: 70px;margin-left: -290px">责任科室</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
+                                            <select name="hospitalDepartmentChildCode" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
                                             <option value="">请选择科室</option>
                                             <option value="0">心内科</option>
                                             <option value="1">脑外壳</option>
@@ -242,13 +340,13 @@
                                     <td><label style="width: 70px">负责人</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
+                                            <input name="followUpPrincipal" type="text" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">级别</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
+                                            <select name="followUpLevel" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
                                             <option value="">请选择级别</option>
                                             <option value="0">I级</option>
                                             <option value="1">II级</option>
@@ -260,35 +358,21 @@
                                     <td><label style="width: 70px">名称</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
+                                            <input name="followUpName" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
                                         </div>
                                     </td>
                                 </tr>
-                               <!-- <tr>
-                                    <td><label>创建人</label></td>
-                                    <td >
-                                        <div class="form-group">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td><label>创建时间</label></td>
-                                    <td >
-                                        <div class="form-group">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </td>
-                                </tr>-->
                                 <tr>
                                     <td><label style="width: 70px">联系电话</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
+                                            <input name="followUpPhone" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">状态</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select name="" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
+                                            <select name="followUpStatus" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
                                             <option value="">请选择状态</option>
                                             <option value="0">开放</option>
                                             <option value="1">关闭</option>
@@ -299,13 +383,13 @@
                                     <td><label style="width: 70px">开始日期</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
+                                            <input name="followUpStartTime" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">结束日期</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
+                                            <input name="followUpEndTime" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
                                         </div>
                                     </td>
                                 </tr>
@@ -313,13 +397,13 @@
                                     <td><label style="width: 70px">课题编号</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
+                                            <input name="followUpCode" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">患者数量</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
+                                            <input name="followUpPatientNumber" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
                                         </div>
                                     </td>
                                 </tr>
@@ -327,7 +411,7 @@
                                     <td><label style="width: 70px">对照组</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input name="" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
+                                            <input name="followUpControlGroup" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
                                         </div>
                                     </td>
                                 </tr>
@@ -335,7 +419,7 @@
                                     <td><label style="width: 70px">背景</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <textarea name="" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
+                                            <textarea name="followUpBackdrop" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -369,16 +453,17 @@
                                     <td><label style="width: 70px">责任医院</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select id="" name="" class="form-control" style="width:210px; height: 38px;"/>
+                                            <select id="editHospitalId" name="hospitalId" class="form-control" style="width:210px; height: 38px;"/>
                                             <option value="">请选择医院</option>
                                             <option value="0">北京人民医院</option>
                                             <option value="1">北京协和医院</option>
                                         </div>
+                                        <input id="editFollowUpId" name="followUpId" type="hidden">
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">责任科室</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
+                                            <select id="editHospitalDepartmentChildCode" name="hospitalDepartmentChildCode" class="form-control" style="width: 210px; height: 38px; margin-left: -215px"/> >
                                             <option value="">请选择科室</option>
                                             <option value="0">心内科</option>
                                             <option value="1">脑外壳</option>
@@ -389,13 +474,13 @@
                                     <td><label style="width: 70px">负责人</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input type="text" id="" name="" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
+                                            <input type="text" id="editFollowUpPrincipal" name="followUpPrincipal" class="form-control" placeholder="请输入负责人" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">级别</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
+                                            <select id="editFollowUpLevel" name="followUpLevel" class="form-control" style="width: 210px; height: 38px; margin-left: -215px" />
                                             <option value="">请选择级别</option>
                                             <option value="0">I级</option>
                                             <option value="1">II级</option>
@@ -407,35 +492,21 @@
                                     <td><label style="width: 70px">名称</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
+                                            <input id="editFollowUpName" name="followUpName" type="text" class="form-control" placeholder="输入课题名称" style="width: 620px; height: 38px;">
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                     <td><label>创建人</label></td>
-                                     <td >
-                                         <div class="form-group">
-                                             <input type="text" class="form-control">
-                                         </div>
-                                     </td>
-                                     <td><label>创建时间</label></td>
-                                     <td >
-                                         <div class="form-group">
-                                             <input type="text" class="form-control">
-                                         </div>
-                                     </td>
-                                 </tr>-->
                                 <tr>
                                     <td><label style="width: 70px">联系电话</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
+                                            <input id="editFollowUpPhone" name="followUpPhone" type="text" class="form-control" placeholder="输入联系电话" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">状态</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <select id="" name="" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
+                                            <select id="editFollowUpStatus" name="followUpStatus" class="form-control" style="width: 210px; height: 38px;margin-left: -215px"/>
                                             <option value="">请选择状态</option>
                                             <option value="0">开放</option>
                                             <option value="1">关闭</option>
@@ -446,13 +517,13 @@
                                     <td><label style="width: 70px">开始日期</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
+                                            <input id="editFollowUpStartTime" name="followUpStartTime" type="text" class="form-control" placeholder="选择起始日期" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">结束日期</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
+                                            <input id="editFollowUpEndTime" name="followUpEndTime" type="text" class="form-control" placeholder="选择截止日期" style="width: 210px; height: 38px;margin-left: -215px">
                                         </div>
                                     </td>
                                 </tr>
@@ -460,13 +531,13 @@
                                     <td><label style="width: 70px">课题编号</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
+                                            <input id="editFollowUpCode" name="followUpCode" type="text" class="form-control" placeholder="输入课题编号" style="width: 210px; height: 38px;">
                                         </div>
                                     </td>
                                     <td><label style="width: 70px;margin-left: -290px">患者数量</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
+                                            <input id="editFollowUpPatientNumber" name="followUpPatientNumber" type="text" class="form-control" placeholder="输入患者数量" style="width: 210px; height: 38px;margin-left: -215px">
                                         </div>
                                     </td>
                                 </tr>
@@ -474,7 +545,7 @@
                                     <td><label style="width: 70px">对照组</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <input id="" name="" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
+                                            <input id="editFollowUpControlGroup" name="followUpControlGroup" type="text" class="form-control" placeholder="输入对照组" style="width: 620px; height: 38px;">
                                         </div>
                                     </td>
                                 </tr>
@@ -482,7 +553,7 @@
                                     <td><label style="width: 70px">背景</label></td>
                                     <td >
                                         <div class="form-group">
-                                            <textarea id="" name="" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
+                                            <textarea id="editFollowUpBackdrop" name="followUpBackdrop" class="form-control" rows="2" placeholder="输入背景" style="width: 620px"></textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -492,7 +563,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="editSave()">
                             提交
                         </button>
                     </div>
